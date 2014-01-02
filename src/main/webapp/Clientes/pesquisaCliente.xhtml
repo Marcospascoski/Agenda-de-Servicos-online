@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+
+        <ui:composition template="./../WEB-INF/Template/modelo.xhtml">
+
+            <ui:define name="Titulo">
+                Pesquisa de Clientes
+            </ui:define>
+
+            <ui:define name="corpo">
+
+
+                <h:form>    
+                    <h1>Pesquisa de Clientes</h1>
+
+                    <p:toolbar style="margin-top: 20px;">
+                        <p:toolbarGroup>
+                            <p:commandButton value="Pesquisar" icon="ui-icon-search" />
+                        </p:toolbarGroup>
+
+                        <p:toolbarGroup align="right">
+                            <p:button value="Novo" outcome="/Clientes/cadastroCliente.xhtml"/>
+                        </p:toolbarGroup>
+                    </p:toolbar>  
+                </h:form>
+
+                <h:form>
+                    <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo" styleClass="semBorda">
+                        <p:outputLabel value="CPF/CNPJ" for="cpfcnpj"/>
+                        <p:inputText id="cpfcnpj" size="20"/>
+
+                        <p:outputLabel value="Nome" for="nome"/>
+                        <p:inputText id="nome" size="60"/>
+
+                    </p:panelGrid>
+
+                    <p:dataTable id="clientesTable" value="#{pesquisaClientesBean.clientesFiltrados}" var="produto" style="margin-top: 20px" 
+                                 emptyMessage="Nenhum Cliente encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+
+
+                        <p:column headerText="Nome">
+                            <h:outputText value="Bala de Morango"/>
+                        </p:column>
+
+                        <p:column headerText="Tipo" style="width: 100px">
+                            <h:outputText value="Juridica"/> 
+                        </p:column>
+
+                        <p:column headerText="CPF/CNPJ" style=" text-align: right; width: 150px">
+                            <h:outputText value="04.456.789/0001-54"/>
+                        </p:column>
+
+                        <p:column style="width: 100px; text-align: center">
+                            <p:button icon="ui-icon-pencil" title="Editar"/>
+                            <p:commandButton icon="ui-icon-thash" title="Excluir" oncomplete="confirmacaoExclusao.show();"/>
+                        </p:column>
+
+                    </p:dataTable>
+
+                    <p:confirmDialog header="Exclusão de cliente" message="Tem certeza que deseja excluir Este cliente?"
+                                     widgetVar="confirmacaoExclusao">
+                        <p:button value="Não" onclick="confirmacaoExclusao.hide();
+                                return false;"/>
+                        <p:commandButton value="Sim" oncomplete="confirmaçãoExclusao.hide();"/>
+                    </p:confirmDialog>
+
+
+                </h:form>
+
+
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>

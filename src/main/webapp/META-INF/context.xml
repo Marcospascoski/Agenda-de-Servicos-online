@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context antiJARLocking="true" path="/AgendaME">
+  <!-- desativar o armazenamento de sessões através de reinicializações -->
+  <Manager pathname=""/>
+  <Resource auth="Container" factory="org.jboss.weld.resources.ManagerObjectFactory" name="BeanManager" type="javax.enterprise.inject.spi.BeanManager"/>
+ 
+</Context>

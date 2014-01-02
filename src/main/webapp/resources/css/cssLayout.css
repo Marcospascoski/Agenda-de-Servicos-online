@@ -1,0 +1,167 @@
+
+header{
+    padding: 5px 0px;
+    margin-bottom: 20px;
+    height: 30px;
+    background-color: #036fab;
+    color: #ffffff;
+    box-shadow: 0px 2px 2px #ccc
+}
+header > div{
+    margin-left: 8px;
+}
+
+footer{
+    height: 30px;
+    background-color: #036fab;
+    color: #ffffff;
+    padding: 0px 8px;  
+}
+
+#footer > div {
+    position: relative;
+    background-color: #c2dfef;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+#left {
+    float: left;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+#corpo{
+    padding: 0px 8px; 
+}
+
+
+.center_corpo {
+    position: relative;
+    padding: 5px;
+}
+
+.left_corpo {
+    background-color: #dddddd;
+    padding: 5px;
+    margin-left: 170px;
+}
+
+.right_corpo {
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+#login-dailog{
+    width: 290px;
+    margin: auto;
+    margin-top: 150px;
+}
+
+.grid-login{
+    background-color: #f2f2f2;
+    border-radius:  8px;
+    border: 1px solid #ccc;
+    margin-top: 8px;
+    padding: 10px;
+}
+
+.rotulo{
+    width: 130px;
+}
+
+.confAgendaRotulo{
+    width: 165px;
+}
+
+.ui-panelgrid td{
+    height: 34px;
+}
+
+.fontebutlogin{
+    font-size: 26px;
+    font-weight:bold;
+}
+
+.ajax-status{
+    position: fixed;
+    top: 55px;
+    right: 10px;
+    width: 35px;
+    height: 35px;
+}
+
+.ui-selectmanycheckbox td{
+    border-width: 0px !important;
+    padding: 0px !important;
+}
+
+.ui-selectmanycheckbox td label{
+    padding-right: 10px;
+}
+
+.ui-selectOneRadio td{
+    border-width: 0px !important;
+    padding: 0px !important;
+}
+
+.ui-selectOneRadio td label{
+    padding-right: 10px;
+}
+
+.semBorda tr, .semBorda td {  
+    border: none !important;
+    padding: 5px !important;
+}
+
+.alinharBotao{
+    margin-top: 20px;
+    padding: 5px;
+}
+
+.ui-chkbox .ui-chkbox-label {            
+    float: right !important;
+}
+
+#top a:link, #top a:visited {
+    color: white;
+    font-weight : bold;
+    text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+    color: black;
+    font-weight : bold;
+    text-decoration : underline;
+}
+
+/* Menu sistema inicio */
+
+.menu-sistema {
+    border: 0px !important;
+    padding: 0px !important;
+    background: none !important;
+}
+
+.menu-sistema .ui-menu-parent > a .ui-menuitem-text, .menu-sistema >
+.ui-menu-list > .ui-menuitem > a > .ui-menuitem-text {
+    color: #ffffff !important;
+}
+
+.ui-menu.ui-widget a {
+    font-weight: normal;
+}
+
+.menu-sistema .ui-icon-triangle-1-s {
+    background: url("#{resource['images:seta-para-baixo.png']}")no-repeat !important;
+}
+/* Menu sistema fim */
