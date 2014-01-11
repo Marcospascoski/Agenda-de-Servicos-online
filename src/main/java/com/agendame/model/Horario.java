@@ -10,14 +10,20 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author Marcos
  */
-
+@Entity
+@Table(name = "horario")
 public class Horario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -25,8 +31,11 @@ public class Horario implements Serializable {
     private Long id;
     private Time horaInicial;
     private Time horaFinal;
-    private List<Agendamento> agendamentos = new ArrayList<>();
+    private List<Agenda> agendamentos = new ArrayList<>();
 
+    @Id //Chave primária
+    @Column(name = "id_horario")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
     public Long getId() {
         return id;
     }
@@ -35,6 +44,7 @@ public class Horario implements Serializable {
         this.id = id;
     }
 
+    @Column(nullable = false, name = "hora_inicial") // coluna hora_inicial, não pode ser nulo
     public Time getHoraInicial() {
         return horaInicial;
     }
@@ -43,6 +53,7 @@ public class Horario implements Serializable {
         this.horaInicial = horaInicial;
     }
 
+    @Column(nullable = false, name = "hora_final") // coluna hora_final, não pode ser nulo
     public Time getHoraFinal() {
         return horaFinal;
     }
@@ -51,11 +62,12 @@ public class Horario implements Serializable {
         this.horaFinal = horaFinal;
     }
 
-    public List<Agendamento> getAgendamentos() {
+    @OneToMany(mappedBy = "horario") // relacionamentos um para muitos, cada horário pode ter muitos agendamentos
+    public List<Agenda> getAgendamentos() {
         return agendamentos;
     }
 
-    public void setAgendamentos(List<Agendamento> agendamentos) {
+    public void setAgendamentos(List<Agenda> agendamentos) {
         this.agendamentos = agendamentos;
     }
 

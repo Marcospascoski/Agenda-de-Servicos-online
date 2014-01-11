@@ -7,13 +7,24 @@ package com.agendame.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.GenerationTime;
 
 /**
  *
  * @author Marcos
  */
-
-public class Agendamento implements Serializable {
+@Entity
+@Table(name = "agenda") // tabela agendamento
+public class Agenda implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -24,7 +35,9 @@ public class Agendamento implements Serializable {
     private Horario horario;
     private Pessoa pessoa;
 
-
+    @Id // Chave Primária da tabela
+    @Column(name = "id_agenda")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)// valor é gerado automaticamente
     public Long getId() {
         return id;
     }
@@ -33,6 +46,8 @@ public class Agendamento implements Serializable {
         this.id = id;
     }
 
+    @Column(nullable = false) // não pode ser nulo
+    @Temporal(TemporalType.DATE) // guarda dados do tipo Data
     public Date getData() {
         return data;
     }
@@ -41,6 +56,8 @@ public class Agendamento implements Serializable {
         this.data = data;
     }
 
+    @Temporal(TemporalType.DATE) // guarda dados do tipo data
+    @Column(name = "data_reserva", nullable = false) //coluna data_reserva não pode ser nulo
     public Date getDataReserva() {
         return dataReserva;
     }
@@ -49,6 +66,7 @@ public class Agendamento implements Serializable {
         this.dataReserva = dataReserva;
     }
 
+    @ManyToOne // relacionamento muitos para um(tabela possui muitos agendamentos, e cada agendamento possui somente um serviço)
     public Servico getServico() {
         return servico;
     }
@@ -57,6 +75,7 @@ public class Agendamento implements Serializable {
         this.servico = servico;
     }
 
+    @ManyToOne // relacionamento muitos para um(tabela possui muitos agendamentos, e cada agendamento possui um horário)
     public Horario getHorario() {
         return horario;
     }
@@ -65,6 +84,7 @@ public class Agendamento implements Serializable {
         this.horario = horario;
     }
 
+    @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um cliente)
     public Pessoa getPessoa() {
         return pessoa;
     }
@@ -88,7 +108,7 @@ public class Agendamento implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Agendamento other = (Agendamento) obj;
+        final Agenda other = (Agenda) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
             return false;
         }

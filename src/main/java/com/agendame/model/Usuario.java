@@ -7,12 +7,21 @@ package com.agendame.model;
 
 import java.io.Serializable;
 import java.util.Objects;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  *
  * @author Marcos
  */
+@Entity// Entidade JPA
+@Table(name = "usuario") //Tabela usuário
 public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -22,6 +31,9 @@ public class Usuario implements Serializable {
     private String senha;
     private Grupo grupo;
 
+    @Id //Chave primária
+    @Column(name = "id_usuario")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
     public Long getId() {
         return id;
     }
@@ -30,6 +42,7 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
+    @Column(nullable = false, length = 50) //não pode ser nulo, aceita até 50 caracteres
     public String getEmail() {
         return email;
     }
@@ -38,6 +51,7 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
+    @Column(nullable = false, length = 15) //não pode ser nulo, aceita até 15 caracteres
     public String getSenha() {
         return senha;
     }
@@ -46,6 +60,8 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+    @Enumerated(EnumType.STRING) // Salva a String da Classe Grupo na tabela usuário
+    @Column(name = "grupo", nullable = false, length = 15) //não pode ser nulo, aceita até 15 caracteres
     public Grupo getGrupo() {
         return grupo;
     }

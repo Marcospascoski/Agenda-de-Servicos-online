@@ -7,12 +7,20 @@ package com.agendame.model;
 
 import java.io.Serializable;
 import java.util.Objects;
-
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  *
  * @author Marcos
  */
+@Entity // Entidade JPA
+@Table(name = "endereco") //Tabela endereco
 public class Endereco implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,6 +35,9 @@ public class Endereco implements Serializable {
     private String cep;
     private Pessoa pessoa;
 
+    @Id //Chave primária
+    @Column(name = "id_horario")
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
     public Long getId() {
         return id;
     }
@@ -35,6 +46,7 @@ public class Endereco implements Serializable {
         this.id = id;
     }
 
+    @Column(nullable = false, length = 100) //não pode ser nulo, aceita até 100 caracteres
     public String getLogradouro() {
         return logradouro;
     }
@@ -43,14 +55,16 @@ public class Endereco implements Serializable {
         this.logradouro = logradouro;
     }
 
+    @Column(nullable = false, length = 7) // não pode ser nulo, aceita até 7 caracteres
     public String getNumero() {
         return numero;
     }
-    
+
     public void setNumero(String numero) {
         this.numero = numero;
     }
 
+    @Column(length = 60) // aceita nulo, pode ter até 60 caracteres
     public String getComplemento() {
         return complemento;
     }
@@ -58,7 +72,8 @@ public class Endereco implements Serializable {
     public void setComplemento(String complemento) {
         this.complemento = complemento;
     }
-    
+
+    @Column(nullable = false, length = 45) // não pode ser nulo, aceita até 45 caracteres
     public String getBairro() {
         return bairro;
     }
@@ -67,6 +82,7 @@ public class Endereco implements Serializable {
         this.bairro = bairro;
     }
 
+    @Column(nullable = false, length = 25) // não pode ser nulo, aceita até 25 caracteres
     public String getCidade() {
         return cidade;
     }
@@ -74,7 +90,8 @@ public class Endereco implements Serializable {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
-    
+
+    @Column(nullable = false, length = 25) // não pode ser nulo, aceita até 25 caracteres
     public String getUf() {
         return uf;
     }
@@ -83,14 +100,16 @@ public class Endereco implements Serializable {
         this.uf = uf;
     }
 
+    @Column(nullable = false, length = 9) // não pode ser nulo, aceita até 9 caracteres
     public String getCep() {
         return cep;
     }
-    
+
     public void setCep(String cep) {
         this.cep = cep;
     }
 
+    @ManyToOne // relacionamento muitos para um( tabela possui vários endereços, e cada endereço pertence a uma pessoa)
     public Pessoa getPessoa() {
         return pessoa;
     }
