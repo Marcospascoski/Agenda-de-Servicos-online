@@ -6,8 +6,13 @@
 
 package com.agendame.controller;
 
+import com.agendame.model.Usuario;
+import java.io.Serializable;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 
 /**
@@ -15,10 +20,26 @@ import javax.enterprise.context.RequestScoped;
  * @author Marcos-TSI
  */
 @Named(value = "cadastroUsuarioBean")
-@RequestScoped
-public class CadastroUsuarioBean {
+@ViewScoped
+public class CadastroUsuarioBean implements Serializable{
 
-    public void Salvar(){
-        throw new RuntimeException("Teste Exceção");
+    private static final long serialVersionUID = 1L;
+    
+    private Usuario usuario;
+
+    public CadastroUsuarioBean() {
+        this.usuario = new Usuario();
     }
+    
+    public void Salvar(){
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
 }
