@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.agendame.util.jpa;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -20,16 +19,21 @@ import javax.persistence.Persistence;
  */
 @ApplicationScoped
 public class EntityManagerProducer {
-    
-    private final EntityManagerFactory emf = Persistence.createEntityManagerFactory("AgendaMEPU");
-    
-    @Produces @RequestScoped
-    public EntityManager createEntityManager(){
+
+    private final EntityManagerFactory emf;
+
+    public EntityManagerProducer() {
+        emf = Persistence.createEntityManagerFactory("AgendaMEPU");
+    }
+
+    @Produces
+    @RequestScoped
+    public EntityManager createEntityManager() {
         return emf.createEntityManager();
     }
-    
-    public void closeEntityManager(@Disposes EntityManager em){
+
+    public void closeEntityManager(@Disposes EntityManager em) {
         em.close();
     }
-    
+
 }

@@ -15,15 +15,15 @@ import javax.faces.view.ViewScoped;
  *
  * @author Marcos
  */
-@Named(value = "pesquisaClientesBean")
+@Named(value = "pesquisaClienteBean")
 @ViewScoped
-public class PesquisaClientesBean implements Serializable{
+public class PesquisaClienteBean implements Serializable{
 
     private static final long serialVersionUID= 1L;
     
     private final List<Integer> clientesFiltrados;
 
-    public PesquisaClientesBean() {
+    public PesquisaClienteBean() {
         clientesFiltrados = new ArrayList<Integer>();
         for (int i = 0; i < 50; i++) {
             clientesFiltrados.add(i);
