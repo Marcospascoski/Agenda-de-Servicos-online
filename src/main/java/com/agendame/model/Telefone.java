@@ -3,26 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.agendame.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+
+
+
 
 /**
  *
  * @author Marcos
  */
-public class Servico implements Serializable {
+
+public class Telefone implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private String nome;
-    private List<Agendamento> agendamentos = new ArrayList<>();
-
+    private String numero;
+    private Pessoa pessoa;
+    
     public Long getId() {
         return id;
     }
@@ -31,26 +32,28 @@ public class Servico implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+    
+    public Pessoa getPessoa() {
+        return pessoa;
+    }
+    
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public List<Agendamento> getAgendamentos() {
-        return agendamentos;
-    }
 
-    public void setAgendamentos(List<Agendamento> agendamentos) {
-        this.agendamentos = agendamentos;
-    }
-
+  
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.id);
+        hash = 89 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -62,11 +65,14 @@ public class Servico implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Servico other = (Servico) obj;
+        final Telefone other = (Telefone) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
+
+   
+  
 
 }

@@ -3,25 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.agendame.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
+
 
 /**
  *
  * @author Marcos
  */
-public class Servico implements Serializable {
+public class Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private String nome;
-    private List<Agendamento> agendamentos = new ArrayList<>();
+    private String email;
+    private String senha;
+    private Grupo grupo;
 
     public Long getId() {
         return id;
@@ -31,26 +30,34 @@ public class Servico implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getEmail() {
+        return email;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public List<Agendamento> getAgendamentos() {
-        return agendamentos;
+    public String getSenha() {
+        return senha;
     }
 
-    public void setAgendamentos(List<Agendamento> agendamentos) {
-        this.agendamentos = agendamentos;
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public Grupo getGrupo() {
+        return grupo;
+    }
+
+    public void setGrupo(Grupo grupo) {
+        this.grupo = grupo;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.id);
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -62,7 +69,7 @@ public class Servico implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Servico other = (Servico) obj;
+        final Usuario other = (Usuario) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

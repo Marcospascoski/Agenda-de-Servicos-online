@@ -3,24 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.agendame.model;
 
 import java.io.Serializable;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+
 
 /**
  *
  * @author Marcos
  */
-public class Servico implements Serializable {
+
+public class Horario implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private String nome;
+    private Time horaInicial;
+    private Time horaFinal;
     private List<Agendamento> agendamentos = new ArrayList<>();
 
     public Long getId() {
@@ -31,12 +35,20 @@ public class Servico implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public Time getHoraInicial() {
+        return horaInicial;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setHoraInicial(Time horaInicial) {
+        this.horaInicial = horaInicial;
+    }
+
+    public Time getHoraFinal() {
+        return horaFinal;
+    }
+
+    public void setHoraFinal(Time horaFinal) {
+        this.horaFinal = horaFinal;
     }
 
     public List<Agendamento> getAgendamentos() {
@@ -49,8 +61,8 @@ public class Servico implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 61 * hash + Objects.hashCode(this.id);
+        int hash = 5;
+        hash = 97 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -62,7 +74,7 @@ public class Servico implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Servico other = (Servico) obj;
+        final Horario other = (Horario) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
