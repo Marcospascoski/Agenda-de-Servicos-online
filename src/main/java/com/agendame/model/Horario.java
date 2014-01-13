@@ -20,7 +20,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Marcos
+ * @author Marcos-TSI
  */
 @Entity
 @Table(name = "horario")
@@ -31,11 +31,11 @@ public class Horario implements Serializable {
     private Long id;
     private Time horaInicial;
     private Time horaFinal;
-    private List<Agenda> agendamentos = new ArrayList<>();
+    private List<Agenda> agenda = new ArrayList<>();
 
-    @Id //Chave primária
+    @Id //Chave primÃ¡ria
     @Column(name = "id_horario")
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //valor Ã© gerado automaticamente
     public Long getId() {
         return id;
     }
@@ -44,7 +44,7 @@ public class Horario implements Serializable {
         this.id = id;
     }
 
-    @Column(nullable = false, name = "hora_inicial") // coluna hora_inicial, não pode ser nulo
+    @Column(nullable = false, name = "hora_inicial") // coluna hora_inicial, nÃ£o pode ser nulo
     public Time getHoraInicial() {
         return horaInicial;
     }
@@ -53,7 +53,7 @@ public class Horario implements Serializable {
         this.horaInicial = horaInicial;
     }
 
-    @Column(nullable = false, name = "hora_final") // coluna hora_final, não pode ser nulo
+    @Column(nullable = false, name = "hora_final") // coluna hora_final, nÃ£o pode ser nulo
     public Time getHoraFinal() {
         return horaFinal;
     }
@@ -62,13 +62,13 @@ public class Horario implements Serializable {
         this.horaFinal = horaFinal;
     }
 
-    @OneToMany(mappedBy = "horario") // relacionamentos um para muitos, cada horário pode ter muitos agendamentos
-    public List<Agenda> getAgendamentos() {
-        return agendamentos;
+    @OneToMany(mappedBy = "horario") // relacionamentos um para muitos, cada horÃ¡rio pode ter muitos agendamentos
+    public List<Agenda> getAgenda() {
+        return agenda;
     }
 
-    public void setAgendamentos(List<Agenda> agendamentos) {
-        this.agendamentos = agendamentos;
+    public void setAgenda(List<Agenda> agenda) {
+        this.agenda = agenda;
     }
 
     @Override

@@ -8,7 +8,7 @@ package com.agendame.model;
 
 /**
  *
- * @author Marcos
+ * @author Marcos-TSI
  */
 public enum Grupo {
     ADMINISTRADOR, PROFISSIONAL, CLIENTE

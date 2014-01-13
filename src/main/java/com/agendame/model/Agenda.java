@@ -6,7 +6,6 @@
 package com.agendame.model;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,26 +13,22 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 
 /**
  *
- * @author Marcos
+ * @author Marcos-TSI
  */
 @Entity
-@Table(name = "agenda") // tabela agendamento
+@Table(name = "agenda") // tabela agenda
 public class Agenda implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private Date data;
-    private Date dataReserva;
     private Servico servico;
     private Horario horario;
     private Pessoa pessoa;
+    private Usuario Usuario;
 
     @Id // Chave Primária da tabela
     @Column(name = "id_agenda")
@@ -44,26 +39,6 @@ public class Agenda implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    @Column(nullable = false) // não pode ser nulo
-    @Temporal(TemporalType.DATE) // guarda dados do tipo Data
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    @Temporal(TemporalType.DATE) // guarda dados do tipo data
-    @Column(name = "data_reserva", nullable = false) //coluna data_reserva não pode ser nulo
-    public Date getDataReserva() {
-        return dataReserva;
-    }
-
-    public void setDataReserva(Date dataReserva) {
-        this.dataReserva = dataReserva;
     }
 
     @ManyToOne // relacionamento muitos para um(tabela possui muitos agendamentos, e cada agendamento possui somente um serviço)
@@ -93,6 +68,15 @@ public class Agenda implements Serializable {
         this.pessoa = pessoa;
     }
 
+    @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um usuario)
+    public Usuario getUsuario() {
+        return Usuario;
+    }
+
+    public void setUsuario(Usuario Usuario) {
+        this.Usuario = Usuario;
+    }
+   
     @Override
     public int hashCode() {
         int hash = 5;

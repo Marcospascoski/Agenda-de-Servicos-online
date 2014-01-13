@@ -17,7 +17,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Marcos
+ * @author Marcos-TSI
  */
 @Entity // Entidade JPA
 @Table(name = "endereco") //Tabela endereco

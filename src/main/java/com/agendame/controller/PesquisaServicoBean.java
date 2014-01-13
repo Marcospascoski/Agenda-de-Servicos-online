@@ -13,7 +13,7 @@ import javax.faces.view.ViewScoped;
 
 /**
  *
- * @author Marcos
+ * @author Marcos-TSI
  */
 @Named(value = "pesquisaServicoBean")
 @ViewScoped

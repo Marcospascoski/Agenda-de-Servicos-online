@@ -19,7 +19,7 @@ import javax.persistence.Table;
 
 /**
  *
- * @author Marcos
+ * @author Marcos-TSI
  */
 @Entity // Entidade JPA
 @Table(name = "servico") //tabela 'servico'
@@ -29,7 +29,7 @@ public class Servico implements Serializable {
 
     private Long id;
     private String nome;
-    private List<Agenda> agenda = new ArrayList<>();
+    private List<Agenda> agendamentos = new ArrayList<>();
 
     @Id //Chave primária
     @Column(name = "id_servico")
@@ -52,12 +52,12 @@ public class Servico implements Serializable {
     }
 
     @OneToMany(mappedBy = "servico") // relacionamento um para muitos, cada serviço possui muitos agendamentos
-    public List<Agenda> getAgenda() {
-        return agenda;
+    public List<Agenda> getAgendamentos() {
+        return agendamentos;
     }
 
-    public void setAgendamentos(List<Agenda> agenda) {
-        this.agenda = agenda;
+    public void setAgendamentos(List<Agenda> agendamentos) {
+        this.agendamentos = agendamentos;
     }
 
     @Override

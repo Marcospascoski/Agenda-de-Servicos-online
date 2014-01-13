@@ -9,12 +9,11 @@ package com.agendame.controller;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.view.ViewScoped;
 
 /**
  *
- * @author Marcos
+ * @author Marcos-TSI
  */
 @Named(value = "pesquisaUsuariosBean")
 @ViewScoped

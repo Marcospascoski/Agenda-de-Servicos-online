@@ -28,7 +28,7 @@ import javax.persistence.TemporalType;
 
 /**
  *
- * @author Marcos
+ * @author Marcos-TSI
  */
 @Entity //Entidade JPA
 @Table(name = "pessoa") //tabela pessoa
@@ -38,7 +38,6 @@ public class Pessoa implements Serializable {
 
     private Long id;
     private String nome;
-    private String sobrenome;
     private String rg;
     private String cpf;
     private Date dataNascimento;
@@ -67,15 +66,6 @@ public class Pessoa implements Serializable {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    @Column(nullable = false, length = 50)//Não pode ser nulo, aceita até 50 caracteres
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
     }
 
     @Column(nullable = false, length = 10)// não pode ser nulo, aceita até 10 caracteres

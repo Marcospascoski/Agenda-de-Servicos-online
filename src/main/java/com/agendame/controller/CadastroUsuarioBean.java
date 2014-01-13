@@ -6,9 +6,11 @@
 
 package com.agendame.controller;
 
+import com.agendame.model.Usuario;
+import com.agendame.service.CadastroUsuarioService;
+import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -26,8 +28,31 @@ public class CadastroUsuarioBean implements Serializable{
     
     @Inject
     private EntityManager em;
+    @Inject
+    private CadastroUsuarioService cadastroUsuarioService;
     
-    public void Salvar(){
-        throw new RuntimeException("Teste Exceção");
+    private Usuario usuario;
+
+    public CadastroUsuarioBean() {
+        limpar();
     }
+        
+    public void Salvar(){
+        this.cadastroUsuarioService.Salvar(usuario);
+        limpar();
+        FacesUtil.addInfoMessage("Usuario Salvo com Sucesso");
+    }
+    
+    private void limpar(){
+        this.usuario = new Usuario();
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+      
 }

@@ -6,7 +6,9 @@
 package com.agendame.model;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -14,11 +16,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
  *
- * @author Marcos
+ * @author Marcos-TSI
  */
 @Entity// Entidade JPA
 @Table(name = "usuario") //Tabela usuário
@@ -27,9 +30,11 @@ public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
+    private String nome;
     private String email;
     private String senha;
     private Grupo grupo;
+    private List<Agenda> agenda;
 
     @Id //Chave primária
     @Column(name = "id_usuario")
@@ -40,6 +45,15 @@ public class Usuario implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Column(nullable = false, length = 50) //não pode ser nulo, aceita até 50 caracteres
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Column(nullable = false, length = 50) //não pode ser nulo, aceita até 50 caracteres
@@ -68,6 +82,15 @@ public class Usuario implements Serializable {
 
     public void setGrupo(Grupo grupo) {
         this.grupo = grupo;
+    }
+
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    public List<Agenda> getAgenda() {
+        return agenda;
+    }
+
+    public void setAgenda(List<Agenda> agenda) {
+        this.agenda = agenda;
     }
 
     @Override
