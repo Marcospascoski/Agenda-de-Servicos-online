@@ -31,8 +31,8 @@ import javax.persistence.TemporalType;
  * @author Marcos-TSI
  */
 @Entity //Entidade JPA
-@Table(name = "pessoa") //tabela pessoa
-public class Pessoa implements Serializable {
+@Table(name = "cliente") //tabela cliente
+public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -49,7 +49,7 @@ public class Pessoa implements Serializable {
     private Usuario usuario;
 
     @Id //Chave primária
-    @Column(name = "id_pessoa")
+    @Column(name = "id_cliente")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
     public Long getId() {
         return id;
@@ -105,7 +105,7 @@ public class Pessoa implements Serializable {
         this.sexo = sexo;
     }
 
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)// relacionamento um para muitos
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)// relacionamento um para muitos
     public List<Endereco> getEnderecos() {
         return enderecos;
     }
@@ -170,7 +170,7 @@ public class Pessoa implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Pessoa other = (Pessoa) obj;
+        final Cliente other = (Cliente) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }

@@ -11,13 +11,17 @@
         <ui:composition template="./../WEB-INF/Template/modelo.xhtml">
 
             <ui:define name="Titulo">
-                Novo Usuário
+                #{cadastroUsuarioBean.estaEditando ? 'Edição de Usuário' : 'Novo Usuário'}
             </ui:define>
 
             <ui:define name="corpo">
-                <h1>Novo Usuário</h1>
+
+
+              
                 <h:form>    
 
+                    <h1>#{cadastroUsuarioBean.estaEditando ? 'Edição de Usuário' : 'Novo Usuário'}</h1>
+                    
                     <p:toolbar style="margin-top: 20px;">
                         <p:toolbarGroup>
                             <p:button value="Novo" outcome="/Usuarios/cadastroUsuario.xhtml" icon="ui-icon-document"/>
@@ -57,15 +61,15 @@
                     </p:panelGrid>
 
                     <p:dialog header="Inclusão de Grupo" widgetVar="inclusaoGrupo">
-                        
+
                         <p:panelGrid columns="2" styleClass="semBorda">
                             <p:outputLabel value="Nome do grupo:" for="nomegrupo"/>
                             <p:inputText id="nomegrupo" style="width: 200px"/>
-                            
+
                             <h:outputText value=""/>
                             <p:commandButton value="Incluir" />
                         </p:panelGrid> 
-                        
+
                     </p:dialog> 
 
                     <p:dataTable value="#{pesquisaUsuariosBean.usuarioFiltrados}" var="usuario" style="margin-top: 3px" 
@@ -88,10 +92,10 @@
                                 return false;"/>
                         <p:commandButton value="Sim" oncomplete="confirmaçãoExclusao.hide();"/>
                     </p:confirmDialog>
-                    
-                    
-                    
-                    
+
+
+
+
                 </h:form>
 
             </ui:define>

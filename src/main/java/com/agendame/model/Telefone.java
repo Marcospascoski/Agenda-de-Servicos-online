@@ -27,7 +27,7 @@ public class Telefone implements Serializable {
 
     private Long id;
     private String numero;
-    private Pessoa pessoa;
+    private Cliente cliente;
 
     @Id //Chave primária
     @Column(name = "id_telefone")
@@ -49,13 +49,13 @@ public class Telefone implements Serializable {
         this.numero = numero;
     }
 
-    @OneToOne(mappedBy = "telefone") //relacionamento um para um( um telefone pertence a uma pessoa)
-    public Pessoa getPessoa() {
-        return pessoa;
+    @OneToOne(mappedBy = "telefone") //relacionamento um para um( um telefone pertence a uma cliente)
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override

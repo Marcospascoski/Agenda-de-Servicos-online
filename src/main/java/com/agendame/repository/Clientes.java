@@ -5,8 +5,8 @@
  */
 package com.agendame.repository;
 
-import com.agendame.model.Usuario;
-import com.agendame.repository.filter.UsuarioFilter;
+import com.agendame.model.Cliente;
+import com.agendame.repository.filter.ClienteFilter;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -23,35 +23,39 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Marcos-TSI
  */
-public class Usuarios implements Serializable {
+public class Clientes implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Inject
     private EntityManager em;
 
-    public Usuario guardar(Usuario usuario) {
-        return em.merge(usuario);
+    public Cliente guardar(Cliente cliente) {
+        EntityTransaction et = em.getTransaction();
+        et.begin();
+        cliente = em.merge(cliente);
+        et.commit();
+        return cliente;
     }
 
-    public List<Usuario> raizes() {
-        return em.createNamedQuery("from Usuario", Usuario.class).getResultList();
+    public List<Cliente> raizes() {
+        return em.createNamedQuery("from Clientes", Cliente.class).getResultList();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Usuario> filtrados(UsuarioFilter usuarioFilter) {
+    public List<Cliente> filtrados(ClienteFilter clienteFilter) {
         Session session = em.unwrap(Session.class);
-        Criteria criteria = session.createCriteria(Usuario.class);
-        
+        Criteria criteria = session.createCriteria(Cliente.class);
+
         // where nome like '%marcos%'
-        if (StringUtils.isNotBlank(usuarioFilter.getNome())) {
-            criteria.add(Restrictions.ilike("nome", usuarioFilter.getNome(), MatchMode.ANYWHERE));
+        if (StringUtils.isNotBlank(clienteFilter.getNome())) {
+            criteria.add(Restrictions.ilike("nome", clienteFilter.getNome(), MatchMode.ANYWHERE));
         }
         return criteria.addOrder(Order.asc("nome")).list();
     }
 
-    public Usuario porId(Long id) {
-        return em.find(Usuario.class, id);
+    public Cliente porId(Long id) {
+        return em.find(Cliente.class, id);
     }
 
 }

@@ -6,8 +6,8 @@
 
 package com.agendame.controller;
 
-import com.agendame.model.Usuario;
-import com.agendame.service.CadastroUsuarioService;
+import com.agendame.model.Servico;
+import com.agendame.service.CadastroServicoService;
 import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
 import javax.inject.Named;
@@ -20,43 +20,43 @@ import javax.persistence.EntityManager;
  *
  * @author Marcos-TSI
  */
-@Named(value = "cadastroUsuarioBean")
+@Named(value = "cadastroServicoBean")
 @ViewScoped
-public class CadastroUsuarioBean implements Serializable{
+public class CadastroServicoBean implements Serializable{
 
     private static final long serialVersionUID = 1L;
     
     @Inject
     private EntityManager em;
     @Inject
-    private CadastroUsuarioService cadastroUsuarioService;
+    private CadastroServicoService cadastroServicoService;
     
-    private Usuario usuario;
+    private Servico servico;
 
-    public CadastroUsuarioBean() {
+    public CadastroServicoBean() {
         limpar();
     }
         
     public void Salvar(){
-        this.cadastroUsuarioService.Salvar(usuario);
+        this.cadastroServicoService.Salvar(servico);
         limpar();
-        FacesUtil.addInfoMessage("Usuario Salvo com Sucesso");
+        FacesUtil.addInfoMessage("Servico Salvo com Sucesso");
     }
     
     public boolean estaEditando(){
-        return this.usuario.getId() != null;
+        return this.servico.getId() != null;
     }
     
     private void limpar(){
-        this.usuario = new Usuario();
+        this.servico = new Servico();
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Servico getServico() {
+        return servico;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
       
 }

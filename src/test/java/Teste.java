@@ -3,7 +3,7 @@ import com.agendame.model.Agenda;
 import com.agendame.model.Endereco;
 import com.agendame.model.Grupo;
 import com.agendame.model.Horario;
-import com.agendame.model.Pessoa;
+import com.agendame.model.Cliente;
 import com.agendame.model.Servico;
 import com.agendame.model.Telefone;
 import com.agendame.model.TipoPessoa;
@@ -27,7 +27,7 @@ import javax.persistence.Persistence;
  */
 public class Teste {
     
-    private static Pessoa pessoa;
+    private static Cliente cliente;
     private static Usuario usuario;
     private static Telefone telefone;
     private static Endereco endereco;
@@ -46,14 +46,14 @@ public class Teste {
         
         et.begin();
         System.out.println("Iniciando a criação das tabelas");
-        pessoa = new Pessoa();
-        pessoa.setNome("Marcos Pascoski");
-        pessoa.setRg("1234567894");
-        pessoa.setCpf("123456789");
-        pessoa.setSexo("Masculino");
-        pessoa.setTelefone(telefone);
-        pessoa.setTipo(TipoPessoa.FISICA);
-        pessoa.setAgenda(listaAgenda);
+        cliente = new Cliente();
+        cliente.setNome("Marcos Pascoski");
+        cliente.setRg("1234567894");
+        cliente.setCpf("123456789");
+        cliente.setSexo("Masculino");
+        cliente.setTelefone(telefone);
+        cliente.setTipo(TipoPessoa.FISICA);
+        cliente.setAgenda(listaAgenda);
         
         usuario = new Usuario();
         usuario.setEmail("marcospascoski@gmail.com");
@@ -63,7 +63,7 @@ public class Teste {
 
         telefone = new Telefone();
         telefone.setNumero("6635562871");
-        telefone.setPessoa(pessoa);
+        telefone.setCliente(cliente);
         
         endereco = new Endereco();
         endereco.setLogradouro("Rua Marilia");
@@ -73,7 +73,7 @@ public class Teste {
         endereco.setCep("78575-000");
         endereco.setCidade("Juara");
         endereco.setUf("MT");
-        endereco.setPessoa(pessoa);
+        endereco.setCliente(cliente);
         
         servico.setNome("formatacao");
         servico.setAgendamentos(listaAgenda);
@@ -81,18 +81,18 @@ public class Teste {
         horario.setHoraInicial(Time.valueOf("08:00"));
         horario.setHoraFinal(Time.valueOf("08:30"));
         
-        agenda.setPessoa(pessoa);
+        agenda.setCliente(cliente);
         agenda.setUsuario(usuario);
         agenda.setServico(servico);
         agenda.setHorario(horario);
         
-        pessoa.getEnderecos().add(endereco);
+        cliente.getEnderecos().add(endereco);
         usuario.getAgenda().add(agenda);
         horario.getAgenda().add(agenda);
         servico.getAgendamentos().add(agenda);
         
         
-        em.persist(pessoa);
+        em.persist(cliente);
         em.persist(usuario);
         em.persist(telefone);
         em.persist(endereco);

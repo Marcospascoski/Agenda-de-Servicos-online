@@ -17,13 +17,13 @@
         <ui:composition template="./../WEB-INF/Template/modelo.xhtml">
 
             <ui:define name="Titulo">
-                Novo Cliente
+                #{cadastroUsuarioBean.estaEditando ? 'Edição de Cliente' : 'Novo Cliente'}
             </ui:define>
 
             <ui:define name="corpo">
 
                 <h:form>    
-                    <h1>Novo Cliente</h1>
+                    <h1>#{cadastroUsuarioBean.estaEditando ? 'Edição de Cliente' : 'Novo Cliente'}</h1>
 
                     <p:toolbar style="margin-top: 20px;">
                         <p:toolbarGroup>

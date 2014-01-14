@@ -15,13 +15,13 @@
         <ui:composition template="./../WEB-INF/Template/modelo.xhtml">
 
             <ui:define name="Titulo">
-                Novo Serviço
+                #{cadastroUsuarioBean.estaEditando ? 'Edição de Serviço' : 'Novo Serviço'}
             </ui:define>
 
             <ui:define name="corpo">
 
                 <h:form>    
-                    <h1>Novo Serviço</h1>
+                    <h1>#{cadastroUsuarioBean.estaEditando ? 'Edição de Serviço' : 'Novo Serviço'}</h1>
 
                     <p:toolbar style="margin-top: 20px;">
                         <p:toolbarGroup>
@@ -47,7 +47,7 @@
 
                     </p:panelGrid>
 
-                    <p:dataTable value="#{pesquisaServicoBean.servicosFiltrados}" var="servico" style="margin-top: 20px" 
+                    <p:dataTable value="#{pesquisaServicoBean.servicoFiltrados}" var="servico" style="margin-top: 20px" 
                                  emptyMessage="Nenhum serviço encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false"  paginatorPosition="bottom">
 
                         <p:column headerText="SKU" style="width: 100px;">

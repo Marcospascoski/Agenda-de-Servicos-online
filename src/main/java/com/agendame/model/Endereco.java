@@ -33,7 +33,7 @@ public class Endereco implements Serializable {
     private String cidade;
     private String uf;
     private String cep;
-    private Pessoa pessoa;
+    private Cliente cliente;
 
     @Id //Chave primária
     @Column(name = "id_horario")
@@ -109,13 +109,13 @@ public class Endereco implements Serializable {
         this.cep = cep;
     }
 
-    @ManyToOne // relacionamento muitos para um( tabela possui vários endereços, e cada endereço pertence a uma pessoa)
-    public Pessoa getPessoa() {
-        return pessoa;
+    @ManyToOne // relacionamento muitos para um( tabela possui vários endereços, e cada endereço pertence a um cliente)
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @Override

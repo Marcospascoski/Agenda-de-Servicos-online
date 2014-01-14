@@ -27,7 +27,7 @@ public class Agenda implements Serializable {
     private Long id;
     private Servico servico;
     private Horario horario;
-    private Pessoa pessoa;
+    private Cliente cliente;
     private Usuario Usuario;
 
     @Id // Chave Primária da tabela
@@ -60,12 +60,12 @@ public class Agenda implements Serializable {
     }
 
     @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um cliente)
-    public Pessoa getPessoa() {
-        return pessoa;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um usuario)
