@@ -14,6 +14,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -40,6 +43,8 @@ public class Telefone implements Serializable {
         this.id = id;
     }
 
+    @NotBlank //Não pode estar em branco
+    @Size(max = 16, min = 10)//Tamanho máximo de 16 e mínimo de 10 caracteres
     @Column(nullable = false, length = 16) //não pode ser nulo, aceita até 16 caracteres
     public String getNumero() {
         return numero;
@@ -49,6 +54,7 @@ public class Telefone implements Serializable {
         this.numero = numero;
     }
 
+    @NotNull //Não pode ser nulo
     @OneToOne(mappedBy = "telefone") //relacionamento um para um( um telefone pertence a uma cliente)
     public Cliente getCliente() {
         return cliente;

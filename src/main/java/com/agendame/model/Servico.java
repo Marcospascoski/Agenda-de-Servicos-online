@@ -16,6 +16,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -42,6 +45,8 @@ public class Servico implements Serializable {
         this.id = id;
     }
 
+    @NotBlank // não pode estar em branco
+    @Size(max = 45) //Tamanho máximo de 45 caracteres
     @Column(nullable = false, length = 45) // não pode ser nulo, aceita até 45 caracteres
     public String getNome() {
         return nome;
@@ -51,6 +56,7 @@ public class Servico implements Serializable {
         this.nome = nome;
     }
 
+    @NotNull //Valor não pode ser nulo
     @OneToMany(mappedBy = "servico") // relacionamento um para muitos, cada serviço possui muitos agendamentos
     public List<Agenda> getAgendamentos() {
         return agendamentos;

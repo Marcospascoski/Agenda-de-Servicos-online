@@ -14,6 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -46,6 +50,9 @@ public class Endereco implements Serializable {
         this.id = id;
     }
 
+    @NotBlank //Não pode estar em branco
+    @Min(7) // Mínimo 7 caracteres
+    @Size(max = 100) // Tamanho Máximo de 100 caracteres
     @Column(nullable = false, length = 100) //não pode ser nulo, aceita até 100 caracteres
     public String getLogradouro() {
         return logradouro;
@@ -55,6 +62,8 @@ public class Endereco implements Serializable {
         this.logradouro = logradouro;
     }
 
+    @NotBlank //Não pode estar em branco
+    @Size(max = 7) //Tamanho Máximo 7 caracteres
     @Column(nullable = false, length = 7) // não pode ser nulo, aceita até 7 caracteres
     public String getNumero() {
         return numero;
@@ -64,6 +73,7 @@ public class Endereco implements Serializable {
         this.numero = numero;
     }
 
+    @Size(max = 60) //Tamanho Máximo de 60 caracteres
     @Column(length = 60) // aceita nulo, pode ter até 60 caracteres
     public String getComplemento() {
         return complemento;
@@ -73,6 +83,9 @@ public class Endereco implements Serializable {
         this.complemento = complemento;
     }
 
+    @NotBlank //Não pode estar em branco
+    @Min(4) // mínimo de 4 caracteres
+    @Size(max = 45) // Tamanho máximo de 45 caracteres
     @Column(nullable = false, length = 45) // não pode ser nulo, aceita até 45 caracteres
     public String getBairro() {
         return bairro;
@@ -82,6 +95,9 @@ public class Endereco implements Serializable {
         this.bairro = bairro;
     }
 
+    @NotBlank //Não pode estar em branco
+    @Min(4) //Mínimo de 4 caracteres
+    @Size(max = 40) // Tamanho Máximo de 40 caracteres
     @Column(nullable = false, length = 25) // não pode ser nulo, aceita até 25 caracteres
     public String getCidade() {
         return cidade;
@@ -91,6 +107,9 @@ public class Endereco implements Serializable {
         this.cidade = cidade;
     }
 
+    @NotBlank //Não pode estar em branco
+    @Min(4) //mínimo de 4 caracteres
+    @Size(max = 40) //Tamanho máximo de 40 caracteres
     @Column(nullable = false, length = 25) // não pode ser nulo, aceita até 25 caracteres
     public String getUf() {
         return uf;
@@ -100,6 +119,9 @@ public class Endereco implements Serializable {
         this.uf = uf;
     }
 
+    @NotBlank //Não pode estar em branco
+    @Min(8) //Mínimo de 8 caracteres
+    @Size(max = 9) //Tamanho máximo de 9 caracteres
     @Column(nullable = false, length = 9) // não pode ser nulo, aceita até 9 caracteres
     public String getCep() {
         return cep;
@@ -109,6 +131,7 @@ public class Endereco implements Serializable {
         this.cep = cep;
     }
 
+    @NotNull //Não pode ser nulo
     @ManyToOne // relacionamento muitos para um( tabela possui vários endereços, e cada endereço pertence a um cliente)
     public Cliente getCliente() {
         return cliente;

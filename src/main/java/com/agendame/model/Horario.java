@@ -17,6 +17,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -44,6 +45,7 @@ public class Horario implements Serializable {
         this.id = id;
     }
 
+    @NotNull //Não pode ser nulo
     @Column(nullable = false, name = "hora_inicial") // coluna hora_inicial, nÃ£o pode ser nulo
     public Time getHoraInicial() {
         return horaInicial;
@@ -53,6 +55,7 @@ public class Horario implements Serializable {
         this.horaInicial = horaInicial;
     }
 
+    @NotNull //Não pode ser nulo
     @Column(nullable = false, name = "hora_final") // coluna hora_final, nÃ£o pode ser nulo
     public Time getHoraFinal() {
         return horaFinal;
@@ -62,6 +65,7 @@ public class Horario implements Serializable {
         this.horaFinal = horaFinal;
     }
 
+    @NotNull //Não pode ser nulo
     @OneToMany(mappedBy = "horario") // relacionamentos um para muitos, cada horÃ¡rio pode ter muitos agendamentos
     public List<Agenda> getAgenda() {
         return agenda;

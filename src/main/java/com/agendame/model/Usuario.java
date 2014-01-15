@@ -18,6 +18,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -47,6 +51,8 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
+    @NotBlank //Não pode estar em Branco
+    @Size(max = 50, min = 5) //Tamanho máximo de 50 e mínimo de 5 caracteres
     @Column(nullable = false, length = 50) //não pode ser nulo, aceita até 50 caracteres
     public String getNome() {
         return nome;
@@ -56,6 +62,9 @@ public class Usuario implements Serializable {
         this.nome = nome;
     }
 
+    @NotBlank //Não pode estar em Branco
+    @Email //Tem que ser um email válido
+    @Size(max = 50, min = 10) //Tamanho máximo de 50 e mínimo de 10 caracteres
     @Column(nullable = false, length = 50) //não pode ser nulo, aceita até 50 caracteres
     public String getEmail() {
         return email;
@@ -65,6 +74,8 @@ public class Usuario implements Serializable {
         this.email = email;
     }
 
+    @NotBlank //Não pode estar em branco
+    @Size(max = 15, min = 6) //Tamanho máximo de 15 e mínimo de 6 caracteres
     @Column(nullable = false, length = 15) //não pode ser nulo, aceita até 15 caracteres
     public String getSenha() {
         return senha;
@@ -74,6 +85,7 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+    @NotNull //Não pode ser nulo
     @Enumerated(EnumType.STRING) // Salva a String da Classe Grupo na tabela usuário
     @Column(name = "grupo", nullable = false, length = 15) //não pode ser nulo, aceita até 15 caracteres
     public Grupo getGrupo() {
@@ -84,6 +96,7 @@ public class Usuario implements Serializable {
         this.grupo = grupo;
     }
 
+    @NotNull// Não pode ser nulo
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     public List<Agenda> getAgenda() {
         return agenda;
