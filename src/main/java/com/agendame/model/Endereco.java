@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
@@ -133,6 +134,7 @@ public class Endereco implements Serializable {
 
     @NotNull //Não pode ser nulo
     @ManyToOne // relacionamento muitos para um( tabela possui vários endereços, e cada endereço pertence a um cliente)
+    @JoinColumn(nullable = false)
     public Cliente getCliente() {
         return cliente;
     }

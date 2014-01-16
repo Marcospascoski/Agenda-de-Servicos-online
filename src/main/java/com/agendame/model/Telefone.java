@@ -55,7 +55,7 @@ public class Telefone implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    @OneToOne(mappedBy = "telefone") //relacionamento um para um( um telefone pertence a uma cliente)
+    @OneToOne(mappedBy = "telefone") //relacionamento um para um( a chave extrangeira ficara somente na tabela Cliente)
     public Cliente getCliente() {
         return cliente;
     }

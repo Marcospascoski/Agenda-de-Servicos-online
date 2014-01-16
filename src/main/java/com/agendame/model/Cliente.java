@@ -67,7 +67,7 @@ public class Cliente implements Serializable {
 
     @NotBlank // Não pode estar em branco
     @Size(max = 50) //Tamanho máximo de 50 caracteres
-    @Column(nullable = false, length = 20)// não pode ser nulo, aceita até 20 caracteres
+    @Column(nullable = false, length = 50)// não pode ser nulo, aceita até 50 caracteres
     public String getNome() {
         return nome;
     }
@@ -124,7 +124,7 @@ public class Cliente implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)// relacionamento um para muitos
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)// relacionamento um para muitos(chave extrangeira fica na tabela "Endereco")
     public List<Endereco> getEnderecos() {
         return enderecos;
     }
@@ -134,9 +134,8 @@ public class Cliente implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    @OneToOne(cascade = CascadeType.ALL)//relacionamento um para um
+    @OneToOne //Relacionamento um para um
     @JoinColumn(nullable = false)//não pode ser nulo
-    @PrimaryKeyJoinColumn//chave primária da tabela telefone é igual chave extrangeira que está na tebela pessoa
     public Telefone getTelefone() {
         return telefone;
     }
@@ -157,9 +156,8 @@ public class Cliente implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    @OneToOne(cascade = CascadeType.ALL)//relacionamento um para um
+    @OneToOne//relacionamento um para um
     @JoinColumn(nullable = false)//não pode ser nulo
-    @PrimaryKeyJoinColumn//chave primária de usuário é igual a chave extrangeira que está na tabela pessoa
     public Usuario getUsuario() {
         return usuario;
     }
@@ -169,7 +167,7 @@ public class Cliente implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    @OneToMany(mappedBy = "pessoa", cascade = CascadeType.ALL)//relacionamento um para muitos
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)//relacionamento um para muitos(Chave extrangeira fica na tabela "Agenda")
     public List<Agenda> getAgenda() {
         return agenda;
     }

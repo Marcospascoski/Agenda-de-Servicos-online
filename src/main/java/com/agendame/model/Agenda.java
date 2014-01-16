@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Future;
@@ -45,6 +46,7 @@ public class Agenda implements Serializable {
 
     @NotNull // Não pode ser nulo
     @ManyToOne // relacionamento muitos para um(tabela possui muitos agendamentos, e cada agendamento possui somente um serviço)
+    @JoinColumn(nullable = false) // Não pode ser nulo
     public Servico getServico() {
         return servico;
     }
@@ -56,6 +58,7 @@ public class Agenda implements Serializable {
     @NotNull //Não pode ser nulo
     @Future // O campo deve ser uma data no futuro
     @ManyToOne // relacionamento muitos para um(tabela possui muitos agendamentos, e cada agendamento possui um horário)
+    @JoinColumn(nullable = false) // Não pode ser nulo
     public Horario getHorario() {
         return horario;
     }
@@ -66,6 +69,7 @@ public class Agenda implements Serializable {
 
     @NotNull //Não pode ser nulo
     @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um cliente)
+    @JoinColumn(nullable = false) // Não pode ser nulo
     public Cliente getCliente() {
         return cliente;
     }
