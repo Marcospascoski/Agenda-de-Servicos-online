@@ -1,14 +1,14 @@
 
 import com.agendame.model.Agenda;
+import com.agendame.model.Cliente;
 import com.agendame.model.Endereco;
 import com.agendame.model.Grupo;
 import com.agendame.model.Horario;
-import com.agendame.model.Cliente;
 import com.agendame.model.Servico;
-import com.agendame.model.Telefone;
 import com.agendame.model.TipoPessoa;
 import com.agendame.model.Usuario;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -28,12 +28,12 @@ public class Teste {
 
     private static Cliente cliente;
     private static Usuario usuario;
-    private static Telefone telefone;
     private static Endereco endereco;
     private static Servico servico;
     private static Horario horario;
+    private static List<Servico> servicos;
+    private static List<Horario> horarios;
     private static Agenda agenda;
-    private static List<Agenda> listaAgenda;
 
     public static void main(String[] args) {
 
@@ -51,19 +51,16 @@ public class Teste {
         cliente.setRg("20485476");
         cliente.setCpf("02569456160");
         cliente.setSexo("Masculino");
-        cliente.setTelefone(telefone);
+        cliente.setTelefone("(66)9919-3444");
         cliente.setTipo(TipoPessoa.FISICA);
-        cliente.setAgenda(listaAgenda);
+        cliente.setUsuario(usuario);
 
         usuario = new Usuario();
+        usuario.setNome("Marcos");
         usuario.setEmail("marcospascoski@gmail.com");
         usuario.setSenha("123456");
         usuario.setGrupo(Grupo.ADMINISTRADOR);
-        usuario.setAgenda(listaAgenda);
-
-        telefone = new Telefone();
-        telefone.setNumero("6635562871");
-        telefone.setCliente(cliente);
+        usuario.setCliente(cliente);
 
         endereco = new Endereco();
         endereco.setLogradouro("Rua Marilia");
@@ -75,26 +72,39 @@ public class Teste {
         endereco.setUf("MT");
         endereco.setCliente(cliente);
 
-        servico.setNome("formatacao");
-        servico.setAgendamentos(listaAgenda);
-
-        horario.setHoraInicial(Time.valueOf("08:00"));
-        horario.setHoraFinal(Time.valueOf("08:30"));
-
+        horarios = new ArrayList();
+        horarios.add(horario);
+        
+        agenda = new Agenda();
         agenda.setCliente(cliente);
         agenda.setUsuario(usuario);
-        agenda.setServico(servico);
-        agenda.setHorario(horario);
-
+        agenda.setDescrisao("preciso colocar um novo hd no pc também");
+        agenda.setHorarios(horarios);
+        
+        servico = new Servico();
+        servico.setNome("formatacaoc/backup");
+        
+        servicos = new ArrayList();
+        servicos.add(servico);
+        
+        horario = new Horario();
+        horario.setHoraInicial(Time.valueOf("00:30:00"));
+        horario.setHoraFinal(Time.valueOf("00:30:00"));
+        horario.setAgenda(agenda);
+        horario.setServicos(servicos);
+        
         cliente.getEnderecos().add(endereco);
-        usuario.getAgenda().add(agenda);
-        horario.getAgenda().add(agenda);
-        servico.getAgendamentos().add(agenda);
+        servico.getHorarios().add(horario);
+        horario.getServicos().add(servico);
+        agenda.getHorarios().add(horario);
+        cliente.getAgendamentos().add(agenda);
 
         em.persist(cliente);
         em.persist(usuario);
-        em.persist(telefone);
         em.persist(endereco);
+        em.persist(horario);
+        em.persist(servico);
+        em.persist(agenda);
 
         et.commit();
         System.out.println("Tabelas criadas com sucesso");

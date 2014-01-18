@@ -14,6 +14,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -32,7 +35,7 @@ public class Servico implements Serializable {
 
     private Long id;
     private String nome;
-    private List<Agenda> agendamentos = new ArrayList<>();
+    private List<Horario> horarios = new ArrayList<>();
 
     @Id //Chave primária
     @Column(name = "id_servico")
@@ -56,14 +59,14 @@ public class Servico implements Serializable {
         this.nome = nome;
     }
 
-    @NotNull //Valor não pode ser nulo
-    @OneToMany(mappedBy = "servico") // relacionamento um para muitos, cada serviço possui muitos agendamentos
-    public List<Agenda> getAgendamentos() {
-        return agendamentos;
+    @ManyToMany
+    @JoinTable(name="horario_has_Servicos", joinColumns={@JoinColumn(name="horario_id")}, inverseJoinColumns={@JoinColumn(name="servico_id")})
+    public List<Horario> getHorarios() {
+        return horarios;
     }
 
-    public void setAgendamentos(List<Agenda> agendamentos) {
-        this.agendamentos = agendamentos;
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
     }
 
     @Override

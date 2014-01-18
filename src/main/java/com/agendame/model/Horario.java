@@ -6,8 +6,8 @@
 package com.agendame.model;
 
 import java.io.Serializable;
-import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -15,8 +15,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -30,13 +34,14 @@ public class Horario implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private Time horaInicial;
-    private Time horaFinal;
-    private List<Agenda> agenda = new ArrayList<>();
+    private Date horaInicial;
+    private Date horaFinal;
+    private Agenda agenda;
+    private List<Servico> servicos = new ArrayList<>();
 
-    @Id //Chave primÃ¡ria
+    @Id //Chave primaria
     @Column(name = "id_horario")
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //valor Ã© gerado automaticamente
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
     public Long getId() {
         return id;
     }
@@ -46,33 +51,48 @@ public class Horario implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    @Column(nullable = false, name = "hora_inicial") // coluna hora_inicial, nÃ£o pode ser nulo
-    public Time getHoraInicial() {
+    @Temporal(TemporalType.TIME)
+    @Column(nullable = false, name = "hora_inicial") // coluna hora_inicial, não pode ser nulo
+    public Date getHoraInicial() {
         return horaInicial;
     }
 
-    public void setHoraInicial(Time horaInicial) {
+    public void setHoraInicial(Date horaInicial) {
         this.horaInicial = horaInicial;
     }
+    
 
     @NotNull //Não pode ser nulo
-    @Column(nullable = false, name = "hora_final") // coluna hora_final, nÃ£o pode ser nulo
-    public Time getHoraFinal() {
+    @Temporal(TemporalType.TIME)
+    @Column(nullable = false, name = "hora_final") // coluna hora_final, não pode ser nulo
+    public Date getHoraFinal() {
         return horaFinal;
     }
 
-    public void setHoraFinal(Time horaFinal) {
+
+    public void setHoraFinal(Date horaFinal) {
         this.horaFinal = horaFinal;
     }
 
     @NotNull //Não pode ser nulo
-    @OneToMany(mappedBy = "horario") // relacionamentos um para muitos, cada horÃ¡rio pode ter muitos agendamentos
-    public List<Agenda> getAgenda() {
+    @ManyToOne
+    @JoinColumn(name = "id_agenda")
+    public Agenda getAgenda() {
         return agenda;
     }
 
-    public void setAgenda(List<Agenda> agenda) {
+    public void setAgenda(Agenda agenda) {
         this.agenda = agenda;
+    }
+
+    //@NotNull // Não pode ser nulo
+    @ManyToMany(mappedBy="horarios")
+    public List<Servico> getServicos() {
+        return servicos;
+    }
+
+    public void setServicos(List<Servico> servicos) {
+        this.servicos = servicos;
     }
 
     @Override
@@ -81,7 +101,7 @@ public class Horario implements Serializable {
         hash = 97 * hash + Objects.hashCode(this.id);
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

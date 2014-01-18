@@ -6,6 +6,7 @@
 package com.agendame.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -16,7 +17,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -38,8 +41,8 @@ public class Usuario implements Serializable {
     private String email;
     private String senha;
     private Grupo grupo;
-    private List<Agenda> agenda;
-
+    private Cliente cliente;
+    
     @Id //Chave primária
     @Column(name = "id_usuario")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
@@ -95,16 +98,17 @@ public class Usuario implements Serializable {
     public void setGrupo(Grupo grupo) {
         this.grupo = grupo;
     }
-
-    @NotNull// Não pode ser nulo
-    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
-    public List<Agenda> getAgenda() {
-        return agenda;
+    @NotNull
+    @OneToOne
+    @JoinColumn(name = "id_cliente", nullable = false)
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setAgenda(List<Agenda> agenda) {
-        this.agenda = agenda;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
+
 
     @Override
     public int hashCode() {

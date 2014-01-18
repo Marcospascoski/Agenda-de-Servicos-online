@@ -52,7 +52,6 @@ public class Endereco implements Serializable {
     }
 
     @NotBlank //Não pode estar em branco
-    @Min(7) // Mínimo 7 caracteres
     @Size(max = 100) // Tamanho Máximo de 100 caracteres
     @Column(nullable = false, length = 100) //não pode ser nulo, aceita até 100 caracteres
     public String getLogradouro() {
@@ -85,7 +84,6 @@ public class Endereco implements Serializable {
     }
 
     @NotBlank //Não pode estar em branco
-    @Min(4) // mínimo de 4 caracteres
     @Size(max = 45) // Tamanho máximo de 45 caracteres
     @Column(nullable = false, length = 45) // não pode ser nulo, aceita até 45 caracteres
     public String getBairro() {
@@ -97,9 +95,8 @@ public class Endereco implements Serializable {
     }
 
     @NotBlank //Não pode estar em branco
-    @Min(4) //Mínimo de 4 caracteres
     @Size(max = 40) // Tamanho Máximo de 40 caracteres
-    @Column(nullable = false, length = 25) // não pode ser nulo, aceita até 25 caracteres
+    @Column(nullable = false, length = 40) // não pode ser nulo, aceita até 25 caracteres
     public String getCidade() {
         return cidade;
     }
@@ -109,9 +106,8 @@ public class Endereco implements Serializable {
     }
 
     @NotBlank //Não pode estar em branco
-    @Min(4) //mínimo de 4 caracteres
-    @Size(max = 40) //Tamanho máximo de 40 caracteres
-    @Column(nullable = false, length = 25) // não pode ser nulo, aceita até 25 caracteres
+    @Size(max = 2) //Tamanho máximo de 2 caracteres
+    @Column(nullable = false, length = 2) // não pode ser nulo, aceita até 25 caracteres
     public String getUf() {
         return uf;
     }
@@ -121,7 +117,6 @@ public class Endereco implements Serializable {
     }
 
     @NotBlank //Não pode estar em branco
-    @Min(8) //Mínimo de 8 caracteres
     @Size(max = 9) //Tamanho máximo de 9 caracteres
     @Column(nullable = false, length = 9) // não pode ser nulo, aceita até 9 caracteres
     public String getCep() {
@@ -134,7 +129,7 @@ public class Endereco implements Serializable {
 
     @NotNull //Não pode ser nulo
     @ManyToOne // relacionamento muitos para um( tabela possui vários endereços, e cada endereço pertence a um cliente)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name="id_cliente", nullable = false)
     public Cliente getCliente() {
         return cliente;
     }

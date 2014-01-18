@@ -7,7 +7,6 @@ package com.agendame.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -19,15 +18,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
@@ -46,12 +42,11 @@ public class Cliente implements Serializable {
     private String nome;
     private String rg;
     private String cpf;
-    private Date dataNascimento;
     private String sexo;
-    private Telefone telefone;
+    private String telefone;
     private List<Endereco> enderecos = new ArrayList<>();
     private TipoPessoa tipo;
-    private List<Agenda> agenda;
+    private List<Agenda> agendamentos = new ArrayList<>();
     private Usuario usuario;
 
     @Id //Chave primária
@@ -101,18 +96,6 @@ public class Cliente implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    @Past //Deve ser uma data no passado
-    @Column(nullable = false, name = "data_nascimento")// coluna data_nascimento, não pode ser nulo
-    @Temporal(TemporalType.DATE)// guarda dados do tipo Data
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
-    @NotNull //Não pode ser nulo
     @Size(max = 9, min = 8) //Tamanho máximo de 9 e no minimo 8 caracteres
     @Column(nullable = false, length = 9)// não pode ser nulo, aceita até 9 caracteres
     public String getSexo() {
@@ -124,24 +107,23 @@ public class Cliente implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)// relacionamento um para muitos(chave extrangeira fica na tabela "Endereco")
+    @Column(nullable = false, length = 13)// não pode ser nulo, aceita até 13 caracteres
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    @NotNull //Não pode ser nulo
+    @OneToMany(mappedBy = "cliente", targetEntity = Endereco.class, cascade = CascadeType.ALL)// relacionamento um para muitos(chave extrangeira fica na tabela "Endereco")
     public List<Endereco> getEnderecos() {
         return enderecos;
     }
 
     public void setEnderecos(List<Endereco> enderecos) {
         this.enderecos = enderecos;
-    }
-
-    @NotNull //Não pode ser nulo
-    @OneToOne //Relacionamento um para um
-    @JoinColumn(nullable = false)//não pode ser nulo
-    public Telefone getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(Telefone telefone) {
-        this.telefone = telefone;
     }
 
     @NotNull //Não pode ser nulo
@@ -155,25 +137,23 @@ public class Cliente implements Serializable {
         this.tipo = tipo;
     }
 
-    @NotNull //Não pode ser nulo
-    @OneToOne//relacionamento um para um
-    @JoinColumn(nullable = false)//não pode ser nulo
+    @NotNull
+    @OneToMany(mappedBy = "cliente", targetEntity = Agenda.class, cascade = CascadeType.ALL)// relacionamento um para muitos(chave extrangeira fica na tabela "Agenda")
+    public List<Agenda> getAgendamentos() {
+        return agendamentos;
+    }
+
+    public void setAgendamentos(List<Agenda> agendamentos) {
+        this.agendamentos = agendamentos;
+    }
+    
+    @OneToOne(mappedBy = "cliente", targetEntity = Usuario.class, cascade = CascadeType.ALL) //relacionamento um para um
     public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    @NotNull //Não pode ser nulo
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)//relacionamento um para muitos(Chave extrangeira fica na tabela "Agenda")
-    public List<Agenda> getAgenda() {
-        return agenda;
-    }
-
-    public void setAgenda(List<Agenda> agenda) {
-        this.agenda = agenda;
     }
 
     @Override
