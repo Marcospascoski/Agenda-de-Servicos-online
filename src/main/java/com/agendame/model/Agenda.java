@@ -18,7 +18,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -58,7 +57,6 @@ public class Agenda implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    //@Future // O campo deve ser uma data no futuro
     @OneToMany(mappedBy = "agenda", targetEntity = Horario.class, cascade = CascadeType.ALL)// relacionamento um para muitos(chave extrangeira fica na tabela "Endereco")
     public List<Horario> getHorarios() {
         return horarios;
@@ -68,7 +66,7 @@ public class Agenda implements Serializable {
         this.horarios = horarios;
     }
 
-    //@NotNull //Não pode ser nulo
+    
     @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um usuario)
     public Usuario getUsuario() {
         return profissional;
@@ -78,7 +76,7 @@ public class Agenda implements Serializable {
         this.profissional = profissional;
     }
 
-    //@NotNull //Não pode ser nulo
+    
     @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um cliente)
     @JoinColumn(name = "id_cliente") // Não pode ser nulo
     public Cliente getCliente() {
