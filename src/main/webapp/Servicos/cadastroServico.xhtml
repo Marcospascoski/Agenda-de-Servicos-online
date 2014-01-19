@@ -15,19 +15,20 @@
         <ui:composition template="./../WEB-INF/Template/modelo.xhtml">
 
             <ui:define name="Titulo">
-                #{cadastroUsuarioBean.estaEditando ? 'Edição de Serviço' : 'Novo Serviço'}
+                Novo Serviço
             </ui:define>
 
             <ui:define name="corpo">
 
                 <h:form>    
-                    <h1>#{cadastroUsuarioBean.estaEditando ? 'Edição de Serviço' : 'Novo Serviço'}</h1>
+                    <h1>Novo Serviço</h1>
 
                     <p:toolbar style="margin-top: 20px;">
                         <p:toolbarGroup>
                             <p:button value="Novo" outcome="/Servicos/cadastroServico.xhtml" icon="ui-icon-document"/>
                             <p:separator/>
-                            <p:commandButton value="Salvar" id="botaoSalvar" icon="ui-icon-disk" />
+                            <p:commandButton value="Salvar" id="botaoSalvar" icon="ui-icon-disk" 
+                                             action="#{cadastroServicoBean.salvar}"/>
                         </p:toolbarGroup>
 
                         <p:toolbarGroup align="right">
@@ -43,7 +44,8 @@
                     <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
                                  columnClasses="rotulo, campo" >
                         <p:outputLabel value="Nome:" for="nome"/>
-                        <p:inputText id="nome" size="60" maxlength="80"/>
+                        <p:inputText id="nome" size="60" maxlength="80"
+                                     value="#{cadastroServicoBean.servico.nome}"/>
 
                     </p:panelGrid>
 
@@ -51,11 +53,12 @@
                                  emptyMessage="Nenhum serviço encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false"  paginatorPosition="bottom">
 
                         <p:column headerText="SKU" style="width: 100px;">
-                            <h:outputText value="123"/>
+                            <h:outputText value="#{servico.id}"
+                                          />
                         </p:column>
 
                         <p:column headerText="Nome">
-                            <h:outputText value="Formatação PC"/>
+                            <h:outputText value="#{servico.nome}"/>
                         </p:column>
 
                         <p:column style="width: 100px; text-align: center">
@@ -71,7 +74,7 @@
                                 return false;"/>
                         <p:commandButton value="Sim" oncomplete="confirmaçãoExclusao.hide();"/>
                     </p:confirmDialog>
-                    
+
                 </h:form>
 
             </ui:define>
