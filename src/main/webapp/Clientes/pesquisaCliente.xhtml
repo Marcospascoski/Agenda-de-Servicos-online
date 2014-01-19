@@ -34,27 +34,27 @@
                 <h:form>
                     <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo" styleClass="semBorda">
                         <p:outputLabel value="CPF/CNPJ" for="cpfcnpj"/>
-                        <p:inputText id="cpfcnpj" size="20"/>
+                        <p:inputText id="cpfcnpj" value="#{cadastroClienteBean.cliente.cpf}" size="20"/>
 
                         <p:outputLabel value="Nome" for="nome"/>
-                        <p:inputText id="nome" size="60"/>
+                        <p:inputText id="nome" value="#{cadastroClienteBean.cliente.nome}"size="60"/>
 
                     </p:panelGrid>
 
-                    <p:dataTable id="clientesTable" value="#{pesquisaClienteBean.clienteFiltrados}" var="produto" style="margin-top: 20px" 
+                    <p:dataTable id="clientesTable" value="#{pesquisaClienteBean.clienteFiltrados}" var="cliente" style="margin-top: 20px" 
                                  emptyMessage="Nenhum Cliente encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 
 
                         <p:column headerText="Nome">
-                            <h:outputText value="Bala de Morango"/>
+                            <h:outputText value="#{cliente.nome}"/>
                         </p:column>
 
                         <p:column headerText="Tipo" style="width: 100px">
-                            <h:outputText value="Juridica"/> 
+                            <h:outputText value="#{cliente.tipo}"/> 
                         </p:column>
 
                         <p:column headerText="CPF/CNPJ" style=" text-align: right; width: 150px">
-                            <h:outputText value="04.456.789/0001-54"/>
+                            <h:outputText value="#{cliente.cpf}"/>
                         </p:column>
 
                         <p:column style="width: 100px; text-align: center">

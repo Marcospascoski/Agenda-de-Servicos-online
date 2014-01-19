@@ -8,8 +8,8 @@
 
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<h:outputScript name="locale-primefaces.js" library="js" />
-       
+        <h:outputScript name="locale-primefaces.js" library="js" />
+
     </h:head>
 
     <h:body>
@@ -17,19 +17,20 @@
         <ui:composition template="./../WEB-INF/Template/modelo.xhtml">
 
             <ui:define name="Titulo">
-                #{cadastroUsuarioBean.estaEditando ? 'Edição de Cliente' : 'Novo Cliente'}
+                Novo Cliente
             </ui:define>
 
             <ui:define name="corpo">
 
                 <h:form>    
-                    <h1>#{cadastroUsuarioBean.estaEditando ? 'Edição de Cliente' : 'Novo Cliente'}</h1>
+                    <h1>Novo Cliente</h1>
 
                     <p:toolbar style="margin-top: 20px;">
                         <p:toolbarGroup>
                             <p:button value="Novo" outcome="/Clientes/cadastroCliente.xhtml" icon="ui-icon-document"/>
                             <p:separator/>
-                            <p:commandButton value="Salvar" id="botaoSalvar" icon="ui-icon-disk" />
+                            <p:commandButton value="Salvar" id="botaoSalvar" icon="ui-icon-disk" 
+                                             action="#{cadastroClienteBean.salvar}"/>
                         </p:toolbarGroup>
 
                         <p:toolbarGroup align="right">
@@ -45,65 +46,63 @@
                     <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
                                  columnClasses="rotulo, campo" >
                         <p:outputLabel value="Nome:" for="nome"/>
-                        <p:inputText id="nome" size="60" maxlength="80"/>
+                        <p:inputText id="nome" size="60" maxlength="80"
+                                     value="#{cadastroClienteBean.cliente.nome}"/>
 
                         <p:outputLabel value="Tipo:" for="tpcliente"/>
-                        <p:selectOneRadio id="tpcliente" styleClass="semBorda">  
-                            <f:selectItem itemLabel="Física"/>
-                            <f:selectItem itemLabel="Jurídica"/>
+                        <p:selectOneRadio id="tpcliente" value="#{cadastroClienteBean.cliente.tipo}" styleClass="semBorda">  
+                            <f:selectItem itemLabel="Física"itemValue="Física"/>
+                            <f:selectItem itemLabel="Jurídica"itemValue="Jurídica"/>
                         </p:selectOneRadio> 
 
                         <p:outputLabel value="Data de Nasc.:" for="dataNascimento"/>
                         <p:calendar id="dataNascimento" pattern="dd/MM/yyyy" readonlyInput="true" navigator="false"
                                     pages="1" mode="popup" locale="pt" />
 
-                        <p:outputLabel value="Sexo:" for="sexo"/>
-                        <p:selectOneRadio id="sexo" styleClass="semBorda">  
-                            <f:selectItem itemLabel="Masculino"/>
-                            <f:selectItem itemLabel="Feminino"/>
-                        </p:selectOneRadio>
-
                         <p:outputLabel value="CNPJ/CPF:" for="cnpjcpf" />
                         <p:inputMask mask="#{tipoCliente.retornarMascara()}" id="cnpjcpf" value="#{cliente.cnpjcpf}" label="CNPJ - CPF" size="30" maxlength="40" >  
                         </p:inputMask> 
 
-                        <p:outputLabel value="Telefone" for="telefone"/>
+                        <p:outputLabel value="Telefone" value="#{cadastroClienteBean.cliente.telefone}"for="telefone"/>
                         <p:inputMask id="telefone" mask="(99)9999-9999" size="30" maxlength="40"/>
-                        
-                        <p:outputLabel value="E-mail" for="email"/>
-                        <p:inputText id="email" size="50" maxlength="70"/>
-                        
+
+
                     </p:panelGrid>
 
                     <p:commandButton value="Adicionar Endereço" style="margin-top: 20px" oncomplete="adicionarEndereco.show();"/>
 
-                    <p:dataTable value="#{pesquisaClientesBean.clientesFiltrados}" var="produto" style="margin-top: 20px" 
+                    <p:dataTable value="#{pesquisaenderecoBean.enderecoFiltrados}" var="endereco" style="margin-top: 20px" 
                                  emptyMessage="Nenhum Cliente encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false"  paginatorPosition="bottom">
 
 
                         <p:column headerText="Logradouro">
-                            <h:outputText value="Rua marilia"/>
+                            <h:outputText value="#{endereco.logradouro}"/>
                         </p:column>
 
                         <p:column headerText="Número" style="text-align: left; width: 100px">
-                            <h:outputText value="123"/>
+                            <h:outputText value="#{endereco.numero}"/>
                         </p:column>
 
                         <p:column headerText="Complento" style=" text-align: left; width: 150px">
-                            <h:outputText value="W"/>
+                            <h:outputText value="#{endereco.complemento}"/>
                         </p:column>
-                        
+
                         <p:column headerText="Bairro" style=" text-align: left; width: 150px">
-                            <h:outputText value="centro"/>
+                            <h:outputText value="#{endereco.bairro}"/>
                         </p:column>
 
                         <p:column headerText="CEP" style=" text-align: left; width: 150px">
-                            <h:outputText value="78575-000"/>
+                            <h:outputText value="#{endereco.cep}"/>
                         </p:column>
 
-                        <p:column headerText="Cidade/UF" style=" text-align: left; width: 150px">
-                            <h:outputText value="Juara/MT"/>
+                        <p:column headerText="Cidade" style=" text-align: left; width: 150px">
+                            <h:outputText value="endereco.cidade"/>
                         </p:column>
+                        
+                        <p:column headerText="UF" style=" text-align: left; width: 150px">
+                            <h:outputText value="endereco.uf"/>
+                        </p:column>
+
 
                         <p:column style="width: 100px; text-align: center">
                             <p:button icon="ui-icon-pencil" title="Editar"/>
@@ -125,29 +124,29 @@
 
                         <p:panelGrid columns="2" styleClass="semBorda">
                             <p:outputLabel value="Logradouro:" for="logradouro"/>
-                            <p:inputText id="logradouro" style="width: 300px"/>
+                            <p:inputText id="logradouro" value="#{cadastroEnderecoBean.endereco.logradouro}"style="width: 300px"/>
 
                             <p:outputLabel value="Numero:" for="numero"/>
-                            <p:inputText id="numero" style="width: 70px"/>
+                            <p:inputText id="numero" value="#{cadastroEnderecoBean.endereco.numero}" style="width: 70px"/>
 
                             <p:outputLabel value="Complemento:" for="complemento"/>
-                            <p:inputText id="complemento" style="width: 150px"/>
+                            <p:inputText id="complemento" value="#{cadastroEnderecoBean.endereco.complemento}"style="width: 150px"/>
 
                             <p:outputLabel value="Bairro:" for="bairro"/>
-                            <p:inputText id="bairro" style="width: 150px"/>
+                            <p:inputText id="bairro" value="#{cadastroEnderecoBean.endereco.bairro}"style="width: 150px"/>
 
-                            
+
                             <p:outputLabel value="CEP:" for="cep"/>
-                            <p:inputMask id="cep" mask="99999-999" style="width: 100px"/>
+                            <p:inputMask id="cep" value="#{cadastroEnderecoBean.endereco.cep}" mask="99999-999" style="width: 100px"/>
 
                             <p:outputLabel value="Cidade:" for="cidade"/>
                             <h:panelGroup style="float: left">
 
-                                <p:inputText id="cidade" style="width: 150px"/>
+                                <p:inputText id="cidade" value="#{cadastroEnderecoBean.endereco.cidade}" style="width: 150px"/>
 
                                 <p:outputLabel value="UF:" for="uf" style="padding-left: 15px; padding-right: 10px"/>
                                 <h:panelGroup>
-                                    <p:inputText id="uf" style="width: 50px"/>
+                                    <p:inputText id="uf" value="#{cadastroEnderecoBean.endereco.uf}"style="width: 50px"/>
                                 </h:panelGroup>
 
                             </h:panelGroup>
@@ -157,8 +156,8 @@
 
                         </p:panelGrid>
                     </p:dialog>
-                    
-                    
+
+
                 </h:form>
 
             </ui:define>
