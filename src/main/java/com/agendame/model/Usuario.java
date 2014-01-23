@@ -18,6 +18,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -40,9 +42,8 @@ public class Usuario implements Serializable {
     private String nome;
     private String email;
     private String senha;
-    private Grupo grupo;
-    private Cliente cliente;
-    
+    private List<Grupo> grupos;
+
     @Id //Chave primária
     @Column(name = "id_usuario")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
@@ -88,27 +89,15 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    @NotNull //Não pode ser nulo
-    @Enumerated(EnumType.STRING) // Salva a String da Classe Grupo na tabela usuário
-    @Column(name = "grupo", nullable = false, length = 15) //não pode ser nulo, aceita até 15 caracteres
-    public Grupo getGrupo() {
-        return grupo;
+    @ManyToMany
+    @JoinTable(name = "usuario_has_grupos", joinColumns = {@JoinColumn(name = "usuario_id")}, inverseJoinColumns = {@JoinColumn(name = "grupo_id")})
+    public List<Grupo> getGrupos() {
+        return grupos;
     }
 
-    public void setGrupo(Grupo grupo) {
-        this.grupo = grupo;
+    public void setGrupos(List<Grupo> grupos) {
+        this.grupos = grupos;
     }
-    @NotNull
-    @OneToOne
-    @JoinColumn(name = "id_cliente", nullable = false)
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
-    }
-
 
     @Override
     public int hashCode() {

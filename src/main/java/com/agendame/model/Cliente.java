@@ -47,7 +47,7 @@ public class Cliente implements Serializable {
     private List<Endereco> enderecos = new ArrayList<>();
     private TipoPessoa tipo;
     private List<Agenda> agendamentos = new ArrayList<>();
-    private Usuario usuario;
+    
 
     @Id //Chave primária
     @Column(name = "id_cliente")
@@ -147,15 +147,6 @@ public class Cliente implements Serializable {
         this.agendamentos = agendamentos;
     }
     
-    @OneToOne(mappedBy = "cliente", targetEntity = Usuario.class, cascade = CascadeType.ALL) //relacionamento um para um
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;

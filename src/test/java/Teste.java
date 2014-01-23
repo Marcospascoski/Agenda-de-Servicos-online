@@ -28,11 +28,14 @@ public class Teste {
 
     private static Cliente cliente;
     private static Usuario usuario;
+    private static Grupo grupo;
     private static Endereco endereco;
     private static Servico servico;
     private static Horario horario;
     private static List<Servico> servicos;
     private static List<Horario> horarios;
+    private static List<Grupo> grupos;
+    private static List<Usuario> usuarios;
     private static Agenda agenda;
 
     public static void main(String[] args) {
@@ -53,15 +56,23 @@ public class Teste {
         cliente.setSexo("Masculino");
         cliente.setTelefone("(66)9919-3444");
         cliente.setTipo(TipoPessoa.FISICA);
-        cliente.setUsuario(usuario);
-
+        
+        usuarios = new ArrayList();
+        usuarios.add(usuario);
+        
+        grupos = new ArrayList();
+        grupos.add(grupo);
+        
         usuario = new Usuario();
         usuario.setNome("Marcos");
         usuario.setEmail("marcospascoski@gmail.com");
         usuario.setSenha("123456");
-        usuario.setGrupo(Grupo.ADMINISTRADOR);
-        usuario.setCliente(cliente);
-
+        usuario.setGrupos(grupos);
+        
+        grupo = new Grupo();
+        grupo.setNome("Administrador");
+        grupo.setUsuarios(usuarios);
+        
         endereco = new Endereco();
         endereco.setLogradouro("Rua Marilia");
         endereco.setNumero("70");
@@ -95,12 +106,15 @@ public class Teste {
         
         cliente.getEnderecos().add(endereco);
         servico.getHorarios().add(horario);
+        grupo.getUsuarios().add(usuario);
+        usuario.getGrupos().add(grupo);
         horario.getServicos().add(servico);
         agenda.getHorarios().add(horario);
         cliente.getAgendamentos().add(agenda);
 
         em.persist(cliente);
         em.persist(usuario);
+        em.persist(grupo);
         em.persist(endereco);
         em.persist(horario);
         em.persist(servico);
