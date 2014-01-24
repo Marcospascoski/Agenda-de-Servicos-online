@@ -1,18 +1,12 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<ui:composition template="./../WEB-INF/Template/modelo.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
 
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    </h:head>
-
-    <h:body>
-
-        <ui:composition template="./../WEB-INF/Template/modelo.xhtml">
 
             <ui:define name="Titulo">
                 Novo Serviço
@@ -28,7 +22,7 @@
                             <p:button value="Novo" outcome="/Servicos/cadastroServico.xhtml" icon="ui-icon-document"/>
                             <p:separator/>
                             <p:commandButton value="Salvar" id="botaoSalvar" icon="ui-icon-disk" 
-                                             action="#{cadastroServicoBean.salvar}"/>
+                                             action="#{cadastroServicoBean.salvar}" update="@form"/>
                         </p:toolbarGroup>
 
                         <p:toolbarGroup align="right">
@@ -36,11 +30,8 @@
                         </p:toolbarGroup>
 
                     </p:toolbar>  
-                </h:form>
-
-
-                <h:form id="frm">
-
+                
+                    
                     <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
                                  columnClasses="rotulo, campo" >
                         <p:outputLabel value="Nome:" for="nome"/>
@@ -80,5 +71,3 @@
             </ui:define>
 
         </ui:composition>
-    </h:body>
-</html>
