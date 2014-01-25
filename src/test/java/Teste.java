@@ -71,6 +71,7 @@ public class Teste {
         
         grupo = new Grupo();
         grupo.setNome("Administrador");
+        grupo.setDescricao("Administrador da agenda");
         grupo.setUsuarios(usuarios);
         
         endereco = new Endereco();
@@ -106,8 +107,8 @@ public class Teste {
         
         cliente.getEnderecos().add(endereco);
         servico.getHorarios().add(horario);
-        grupo.getUsuarios().add(usuario);
-        usuario.getGrupos().add(grupo);
+        //grupo.getUsuarios().add(usuario);
+        //usuario.getGrupos().add(grupo);
         horario.getServicos().add(servico);
         agenda.getHorarios().add(horario);
         cliente.getAgendamentos().add(agenda);

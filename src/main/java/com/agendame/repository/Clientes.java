@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -39,7 +39,7 @@ public class Clientes implements Serializable {
     }
 
     public List<Cliente> raizes() {
-        return em.createNamedQuery("from Clientes", Cliente.class).getResultList();
+        return em.createQuery("from Clientes", Cliente.class).getResultList();
     }
 
     @SuppressWarnings("unchecked")

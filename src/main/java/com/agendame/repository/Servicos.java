@@ -40,7 +40,7 @@ public class Servicos implements Serializable{
     }
     
     public List<Servico> raizes(){
-        return em.createNamedQuery("from Servico", Servico.class).getResultList();    
+        return em.createQuery("from Servico", Servico.class).getResultList();    
     }
     
         @SuppressWarnings("unchecked")

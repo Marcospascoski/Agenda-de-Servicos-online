@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.agendame.model;
 
 import java.io.Serializable;
@@ -30,18 +29,9 @@ public class Grupo implements Serializable {
 
     private Long id;
     private String nome;
+    private String descricao;
 
     private List<Usuario> usuarios;
-
-
-    @ManyToMany(mappedBy = "grupos")
-    public List<Usuario> getUsuarios() {
-        return usuarios;
-    }
-
-    public void setUsuarios(List<Usuario> usuarios) {
-        this.usuarios = usuarios;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,6 +55,26 @@ public class Grupo implements Serializable {
         this.nome = nome;
     }
 
+    @NotNull
+    @Size(min = 1, max = 50)
+    @Column(name = "descricao")
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    @ManyToMany(mappedBy = "grupos")
+    public List<Usuario> getUsuarios() {
+        return usuarios;
+    }
+
+    public void setUsuarios(List<Usuario> usuarios) {
+        this.usuarios = usuarios;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -86,4 +96,3 @@ public class Grupo implements Serializable {
     }
 
 }
-

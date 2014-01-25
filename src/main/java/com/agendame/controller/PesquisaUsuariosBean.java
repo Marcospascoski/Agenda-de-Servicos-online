@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.agendame.controller;
 
 import com.agendame.model.Usuario;
 import com.agendame.repository.Usuarios;
 import com.agendame.repository.filter.UsuarioFilter;
+import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,31 +22,49 @@ import javax.inject.Inject;
  */
 @Named(value = "pesquisaUsuariosBean")
 @ViewScoped
-public class PesquisaUsuariosBean implements Serializable{
+public class PesquisaUsuariosBean implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    
+
     @Inject
     private Usuarios usuarios;
-    
-    private UsuarioFilter usuarioFilter;
-    
+
+    private UsuarioFilter filtro;
+
     private List<Usuario> usuarioFiltrados;
 
-    public PesquisaUsuariosBean(){
-        usuarioFilter = new UsuarioFilter();
+    private Usuario usuarioSelecionado;
+
+    public PesquisaUsuariosBean() {
+        filtro = new UsuarioFilter();
     }
-    
-    public void  pesquisar(){
-        usuarioFiltrados = usuarios.filtrados(usuarioFilter);
+
+    public void excluir() {
+        usuarios.remover(usuarioSelecionado);
+        usuarioFiltrados.remove(usuarioSelecionado);
+
+        FacesUtil.addInfoMessage("Usuario " + usuarioSelecionado.getNome()
+                + " excluído com sucesso.");
     }
-    
+
+    public void pesquisar() {
+        usuarioFiltrados = usuarios.filtrados(filtro);
+    }
+
     public List<Usuario> getUsuarioFiltrados() {
         return usuarioFiltrados;
     }
 
-    public UsuarioFilter getUsuarioFilter() {
-        return usuarioFilter;
+    public UsuarioFilter getFiltro() {
+        return filtro;
     }
-    
+
+    public Usuario getUsuarioSelecionado() {
+        return usuarioSelecionado;
+    }
+
+    public void setUsuarioSelecionado(Usuario usuarioSelecionado) {
+        this.usuarioSelecionado = usuarioSelecionado;
+    }
+
 }

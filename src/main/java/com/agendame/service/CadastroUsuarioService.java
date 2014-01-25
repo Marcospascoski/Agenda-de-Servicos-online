@@ -7,7 +7,6 @@ package com.agendame.service;
 
 import com.agendame.model.Usuario;
 import com.agendame.repository.Usuarios;
-import com.agendame.util.jpa.Transactional;
 import java.io.Serializable;
 import javax.inject.Inject;
 
@@ -22,14 +21,8 @@ public class CadastroUsuarioService implements Serializable {
     @Inject
     private Usuarios usuarios;
 
-    @Transactional
-    public Usuario Salvar(Usuario usuario) {
-        Usuario usuarioExiste = usuarios.porId(usuario.getId());
-
-        if (usuarioExiste != null && !usuarioExiste.equals(usuario)) {
-            throw new NegocioException("Ja existe um usuario com o Codigo Informado");
-        }
-
+    
+    public Usuario salvar(Usuario usuario) {
         return usuarios.guardar(usuario);
     }
 

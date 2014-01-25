@@ -33,7 +33,7 @@ public class Horarios implements Serializable{
     }
     
     public List<Horario> raizes(){
-        return em.createNamedQuery("from Horario", Horario.class).getResultList();    
+        return em.createQuery("from Horario", Horario.class).getResultList();    
     }
     
     

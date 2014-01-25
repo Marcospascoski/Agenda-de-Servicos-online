@@ -33,7 +33,7 @@ public class Enderecos implements Serializable{
     }
     
     public List<Endereco> raizes(){
-        return em.createNamedQuery("from Endereco", Endereco.class).getResultList();    
+        return em.createQuery("from Endereco", Endereco.class).getResultList();    
     }
     
     

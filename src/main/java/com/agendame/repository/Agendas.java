@@ -33,7 +33,7 @@ public class Agendas implements Serializable{
     }
     
     public List<Agenda> raizes(){
-        return em.createNamedQuery("from Agenda", Agenda.class).getResultList();    
+        return em.createQuery("from Agenda", Agenda.class).getResultList();    
     }
     
     

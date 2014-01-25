@@ -33,9 +33,11 @@ public class Grupos implements Serializable{
     }
     
     public List<Grupo> raizes(){
-        return em.createNamedQuery("from Grupo", Grupo.class).getResultList();    
+        return em.createQuery("from Grupo", Grupo.class).getResultList();    
     }
     
-    
+    public Grupo porId(Long id) {
+        return em.find(Grupo.class, id);
+    }
     
 }

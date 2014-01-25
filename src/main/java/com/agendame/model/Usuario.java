@@ -55,6 +55,7 @@ public class Usuario implements Serializable {
         this.id = id;
     }
 
+    @NotNull
     @NotBlank //Não pode estar em Branco
     @Size(max = 50, min = 5) //Tamanho máximo de 50 e mínimo de 5 caracteres
     @Column(nullable = false, length = 50) //não pode ser nulo, aceita até 50 caracteres
@@ -89,7 +90,7 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "usuario_has_grupos", joinColumns = {@JoinColumn(name = "usuario_id")}, inverseJoinColumns = {@JoinColumn(name = "grupo_id")})
     public List<Grupo> getGrupos() {
         return grupos;
