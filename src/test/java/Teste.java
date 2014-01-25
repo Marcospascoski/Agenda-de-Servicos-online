@@ -51,9 +51,11 @@ public class Teste {
 
         cliente = new Cliente();
         cliente.setNome("Marcos Pascoski");
-        cliente.setRg("20485476");
-        cliente.setCpf("02569456160");
-        cliente.setSexo("Masculino");
+
+        cliente.setDocReceitaFederal("02569456160");
+//
+  //      
+        
         cliente.setTelefone("(66)9919-3444");
         cliente.setTipo(TipoPessoa.FISICA);
         
@@ -107,8 +109,8 @@ public class Teste {
         
         cliente.getEnderecos().add(endereco);
         servico.getHorarios().add(horario);
-        //grupo.getUsuarios().add(usuario);
-        //usuario.getGrupos().add(grupo);
+        grupo.getUsuarios().add(usuario);
+        usuario.getGrupos().add(grupo);
         horario.getServicos().add(servico);
         agenda.getHorarios().add(horario);
         cliente.getAgendamentos().add(agenda);

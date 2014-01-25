@@ -40,9 +40,8 @@ public class Cliente implements Serializable {
 
     private Long id;
     private String nome;
-    private String rg;
-    private String cpf;
-    private String sexo;
+    private String docReceitaFederal;
+    
     private String telefone;
     private List<Endereco> enderecos = new ArrayList<>();
     private TipoPessoa tipo;
@@ -59,7 +58,9 @@ public class Cliente implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-
+ 
+    
+    
     @NotBlank // Não pode estar em branco
     @Size(max = 50) //Tamanho máximo de 50 caracteres
     @Column(nullable = false, length = 50)// não pode ser nulo, aceita até 50 caracteres
@@ -71,39 +72,17 @@ public class Cliente implements Serializable {
         this.nome = nome;
     }
 
-    @NotBlank //Não pode estar em branco
-    @Min(6) //Mínimo de 6 caracteres
-    @Size(max = 10) //Tamanho máximo de 10 caracteres
-    @Column(nullable = false, length = 10)// não pode ser nulo, aceita até 10 caracteres
-    public String getRg() {
-        return rg;
-    }
 
-    public void setRg(String rg) {
-        this.rg = rg;
-    }
-
-    @NotBlank //Não pode estar em branco
-    @CPF //Deve ser um CPF Válido
-    @Size(max = 14) //Tamanho Máximo de 14 caracteres
+   
+@NotBlank
+    @Size(max = 14, min = 11) //Tamanho Máximo de 14 caracteres
     @Column(nullable = false, length = 14)// não pode ser nulo, aceita até 14 caracteres
-    public String getCpf() {
-        return cpf;
+    public String getDocReceitaFederal() {
+        return docReceitaFederal;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    @NotNull //Não pode ser nulo
-    @Size(max = 9, min = 8) //Tamanho máximo de 9 e no minimo 8 caracteres
-    @Column(nullable = false, length = 9)// não pode ser nulo, aceita até 9 caracteres
-    public String getSexo() {
-        return sexo;
-    }
-
-    public void setSexo(String sexo) {
-        this.sexo = sexo;
+    public void setDocReceitaFederal(String docReceitaFederal) {
+        this.docReceitaFederal = docReceitaFederal;
     }
 
     @NotNull //Não pode ser nulo
