@@ -54,7 +54,7 @@
                             value="#{cadastroUsuarioBean.usuario.senha}"/>
 
                 <p:outputLabel value="Grupo" for="grupo"/>
-                <p:selectOneMenu id="grupo" value="#{cadastroUsuarioBean.grupoPai}" style="margin-top: 3px; margin-left: -9px">
+                <p:selectOneMenu id="grupo" value="#{cadastroUsuarioBean.grupoPai}">
                     <f:selectItem itemLabel="Selecione o grupo"/>
                     <f:selectItems value="#{cadastroUsuarioBean.gruposRaizes}" var="grupo"
                                    itemValue="#{grupo}" itemLabel="#{grupo.nome}" />
