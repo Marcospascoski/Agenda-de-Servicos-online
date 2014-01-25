@@ -53,36 +53,22 @@
                 <p:password id="senha" size="20" maxlength="30" 
                             value="#{cadastroUsuarioBean.usuario.senha}"/>
 
-            </p:panelGrid>
-
-            <p:panelGrid columns="2" style="margin-top: 20px" styleClass="semBorda">
-
-                <p:selectOneMenu value="#{cadastroUsuarioBean.grupoPai}" style="margin-top: 3px; margin-left: -9px">
+                <p:outputLabel value="Grupo" for="grupo"/>
+                <p:selectOneMenu id="grupo" value="#{cadastroUsuarioBean.grupoPai}" style="margin-top: 3px; margin-left: -9px">
                     <f:selectItem itemLabel="Selecione o grupo"/>
                     <f:selectItems value="#{cadastroUsuarioBean.gruposRaizes}" var="grupo"
                                    itemValue="#{grupo}" itemLabel="#{grupo.nome}" />
                 </p:selectOneMenu>
 
-                <p:commandButton value="Adicionar Grupo" style="height: 27px; margin-left: -3px"
-                                 oncomplete="inclusaoGrupo.show()"/>
+               
+
 
             </p:panelGrid>
-
-            <p:dialog header="Inclusão de Grupo" widgetVar="inclusaoGrupo">
-
-                <p:panelGrid columns="2" styleClass="semBorda">
-                    <p:outputLabel value="Nome do grupo:" for="nomegrupo"/>
-                    <p:inputText id="nomegrupo" style="width: 200px"/>
-
-                    <h:outputText value=""/>
-                    <p:commandButton value="Incluir" />
-                </p:panelGrid> 
-
-            </p:dialog> 
 
             <p:dataTable value="#{pesquisaUsuariosBean.usuarioFiltrados}" var="grupo" style="margin-top: 3px" 
                          emptyMessage="Nenhum Usuario encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 
+                
 
                 <p:column headerText="Grupo" style="text-align: left">
                     <h:outputText value="Auxiliares"/>
