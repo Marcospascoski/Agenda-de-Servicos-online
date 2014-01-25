@@ -49,11 +49,11 @@
                             pages="1" mode="popup" locale="pt" />
 
                 <p:outputLabel value="CNPJ/CPF:" for="cnpjcpf" />
-                <p:inputMask mask="#{tipoCliente.retornarMascara()}" id="cnpjcpf" value="#{cliente.cnpjcpf}" label="CNPJ - CPF" size="30" maxlength="40" >  
+                <p:inputMask mask="#{tipoCliente.retornarMascara()}" id="cnpjcpf" value="#{cliente.cnpjcpf}" label="CNPJ - CPF" size="30" maxlength="14" >  
                 </p:inputMask> 
 
                 <p:outputLabel value="Telefone" for="telefone"/>
-                <p:inputMask id="telefone" value="#{cadastroClienteBean.cliente.telefone}" mask="(99)9999-9999" size="30" maxlength="40"/>
+                <p:inputMask id="telefone" value="#{cadastroClienteBean.cliente.telefone}" mask="(99)9999-9999" size="30" maxlength="11"/>
 
             </p:panelGrid>
 
@@ -112,29 +112,28 @@
 
                 <p:panelGrid columns="2" styleClass="semBorda">
                     <p:outputLabel value="Logradouro:" for="logradouro"/>
-                    <p:inputText id="logradouro" value="#{cadastroEnderecoBean.endereco.logradouro}" style="width: 300px"/>
+                    <p:inputText id="logradouro" value="#{cadastroEnderecoBean.endereco.logradouro}" style="width: 300px"maxlength="100"/>
 
                     <p:outputLabel value="Numero:" for="numero"/>
-                    <p:inputText id="numero" value="#{cadastroEnderecoBean.endereco.numero}" style="width: 70px"/>
+                    <p:inputText id="numero" value="#{cadastroEnderecoBean.endereco.numero}" style="width: 70px"maxlength="7"/>
 
                     <p:outputLabel value="Complemento:" for="complemento"/>
-                    <p:inputText id="complemento" value="#{cadastroEnderecoBean.endereco.complemento}" style="width: 150px"/>
+                    <p:inputText id="complemento" value="#{cadastroEnderecoBean.endereco.complemento}" style="width: 150px"maxlength="60"/>
 
                     <p:outputLabel value="Bairro:" for="bairro"/>
-                    <p:inputText id="bairro" value="#{cadastroEnderecoBean.endereco.bairro}" style="width: 150px"/>
+                    <p:inputText id="bairro" value="#{cadastroEnderecoBean.endereco.bairro}" style="width: 150px"maxlength="45"/>
 
 
                     <p:outputLabel value="CEP:" for="cep"/>
-                    <p:inputMask id="cep" value="#{cadastroEnderecoBean.endereco.cep}" mask="99999-999" style="width: 100px"/>
+                    <p:inputMask id="cep" value="#{cadastroEnderecoBean.endereco.cep}" mask="99999-999" style="width: 100px"maxlength="9"/>
 
                     <p:outputLabel value="Cidade:" for="cidade"/>
-                    <h:panelGroup style="float: left">
 
-                        <p:inputText id="cidade" value="#{cadastroEnderecoBean.endereco.cidade}" style="width: 150px"/>
+                    <p:inputText id="cidade" value="#{cadastroEnderecoBean.endereco.cidade}" style="width: 150px"maxlength="40"/>
 
                         <p:outputLabel value="UF:" for="uf" style="padding-left: 15px; padding-right: 10px"/>
                         <h:panelGroup>
-                            <p:inputText id="uf" value="#{cadastroEnderecoBean.endereco.uf}" style="width: 50px"/>
+                            <p:inputText id="uf" value="#{cadastroEnderecoBean.endereco.uf}" style="width: 50px"maxlength="2"/>
                         </h:panelGroup>
 
                     </h:panelGroup>
