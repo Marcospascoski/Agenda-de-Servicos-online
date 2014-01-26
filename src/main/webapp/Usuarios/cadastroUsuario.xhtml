@@ -9,7 +9,7 @@
                 xmlns:o="http://omnifaces.org/ui">
 
 
-    <ui:define name="Titulo">
+    <ui:define name="Titulo">#{cadastroUsuarioBean.estaEditando ? 'Edição de Usuário' : 'Novo Usuário'}
         Novo Usuário
     </ui:define>
 
@@ -22,7 +22,7 @@
 
         <h:form>    
 
-            <h1>Novo Usuário</h1>
+            <h1>#{cadastroUsuarioBean.estaEditando ? 'Edição de Usuário' : 'Novo Usuário'}</h1>
 
             <p:messages autoUpdate="true" closable="true"/>
 
