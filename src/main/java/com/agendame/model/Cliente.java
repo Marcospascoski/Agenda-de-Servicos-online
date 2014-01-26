@@ -25,6 +25,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -46,12 +47,10 @@ public class Cliente implements Serializable {
     private String nome;
     private Date dataNascimento;
     private String docReceitaFederal;
-    
     private String telefone;
     private List<Endereco> enderecos = new ArrayList<>();
     private TipoPessoa tipo;
     private List<Agenda> agendamentos = new ArrayList<>();
-    
 
     @Id //Chave primária
     @Column(name = "id_cliente")
@@ -63,9 +62,7 @@ public class Cliente implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
- 
-    
-    
+
     @NotBlank // Não pode estar em branco
     @Size(max = 80, min = 8) //Tamanho máximo de 80 caracteres
     @Column(nullable = false, length = 80)// não pode ser nulo, aceita até 80 caracteres
@@ -78,9 +75,8 @@ public class Cliente implements Serializable {
     }
 
     @NotNull
-    @Size (max = 10)
-    @Column (nullable = false, name = "data_nascimento")
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false, name = "data_nascimento")
     public Date getDataNascimento() {
         return dataNascimento;
     }
@@ -88,8 +84,8 @@ public class Cliente implements Serializable {
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-   
-@NotBlank
+
+    @NotBlank
     @Size(max = 18, min = 11) //Tamanho Máximo de 18 caracteres
     @Column(nullable = false, length = 18)// não pode ser nulo, aceita até 18 caracteres
     public String getDocReceitaFederal() {
@@ -101,7 +97,7 @@ public class Cliente implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    @Size (max = 11, min = 8)
+    @Size(max = 11, min = 8)
     @Column(nullable = false, length = 11)// não pode ser nulo, aceita até 11 caracteres
     public String getTelefone() {
         return telefone;
@@ -141,7 +137,7 @@ public class Cliente implements Serializable {
     public void setAgendamentos(List<Agenda> agendamentos) {
         this.agendamentos = agendamentos;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
@@ -163,7 +159,5 @@ public class Cliente implements Serializable {
         }
         return true;
     }
-
-    
 
 }
