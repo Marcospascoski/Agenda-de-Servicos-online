@@ -7,7 +7,7 @@ import com.agendame.model.Horario;
 import com.agendame.model.Servico;
 import com.agendame.model.TipoPessoa;
 import com.agendame.model.Usuario;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,13 +52,12 @@ public class Teste {
         et.begin();
         System.out.println("Iniciando a criação das tabelas");
 
+        Date date = new SimpleDateFormat("dd/MM/yyyy").parse("16/11/1984");
+
         cliente = new Cliente();
         cliente.setNome("Marcos Pascoski");
-
         cliente.setDocReceitaFederal("02569456160");
-
-        java.util.Date d = new SimpleDateFormat("dd/MM/yyyy").parse("01/01/2005");
-        cliente.setDataNascimento(d);
+        cliente.setDataNascimento(date);
         cliente.setTelefone("6699193444");
         cliente.setTipo(TipoPessoa.FISICA);
 
