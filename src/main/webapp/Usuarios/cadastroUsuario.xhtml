@@ -5,13 +5,10 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:o="http://omnifaces.org/ui">
+                xmlns:p="http://primefaces.org/ui">
 
 
-    <ui:define name="Titulo">#{cadastroUsuarioBean.estaEditando ? 'Edição de Usuário' : 'Novo Usuário'}
-        Novo Usuário
-    </ui:define>
+    <ui:define name="Titulo">#{cadastroUsuarioBean.editando != null ? 'Edição de Usuário' : 'Novo Usuário'}</ui:define>
 
     <ui:define name="corpo">
 
@@ -22,7 +19,7 @@
 
         <h:form>    
 
-            <h1>#{cadastroUsuarioBean.estaEditando ? 'Edição de Usuário' : 'Novo Usuário'}</h1>
+            <h1>#{cadastroUsuarioBean.editando ? 'Edição de Usuário' : 'Novo Usuário'}</h1>
 
             <p:messages autoUpdate="true" closable="true"/>
 

@@ -55,7 +55,7 @@ public class CadastroUsuarioBean implements Serializable {
         }
     }
 
-    public boolean estaEditando() {
+    public boolean isEditando() {
         return this.usuario.getId() != null;
     }
 
