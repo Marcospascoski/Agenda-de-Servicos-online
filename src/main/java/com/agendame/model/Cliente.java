@@ -7,6 +7,7 @@ package com.agendame.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -22,8 +23,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.br.CPF;
@@ -40,6 +44,7 @@ public class Cliente implements Serializable {
 
     private Long id;
     private String nome;
+    private Date dataNascimento;
     private String docReceitaFederal;
     
     private String telefone;
@@ -62,8 +67,8 @@ public class Cliente implements Serializable {
     
     
     @NotBlank // Não pode estar em branco
-    @Size(max = 50) //Tamanho máximo de 50 caracteres
-    @Column(nullable = false, length = 50)// não pode ser nulo, aceita até 50 caracteres
+    @Size(max = 80, min = 8) //Tamanho máximo de 80 caracteres
+    @Column(nullable = false, length = 80)// não pode ser nulo, aceita até 80 caracteres
     public String getNome() {
         return nome;
     }
@@ -72,11 +77,21 @@ public class Cliente implements Serializable {
         this.nome = nome;
     }
 
+    @NotNull
+    @Size (max = 10)
+    @Column (nullable = false, name = "data_nascimento")
+    @Temporal(TemporalType.DATE)
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
 
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
    
 @NotBlank
-    @Size(max = 14, min = 11) //Tamanho Máximo de 14 caracteres
-    @Column(nullable = false, length = 14)// não pode ser nulo, aceita até 14 caracteres
+    @Size(max = 18, min = 11) //Tamanho Máximo de 18 caracteres
+    @Column(nullable = false, length = 18)// não pode ser nulo, aceita até 18 caracteres
     public String getDocReceitaFederal() {
         return docReceitaFederal;
     }
@@ -86,7 +101,8 @@ public class Cliente implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    @Column(nullable = false, length = 13)// não pode ser nulo, aceita até 13 caracteres
+    @Size (max = 11, min = 8)
+    @Column(nullable = false, length = 11)// não pode ser nulo, aceita até 11 caracteres
     public String getTelefone() {
         return telefone;
     }
@@ -147,5 +163,7 @@ public class Cliente implements Serializable {
         }
         return true;
     }
+
+    
 
 }
