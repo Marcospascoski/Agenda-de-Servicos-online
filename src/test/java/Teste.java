@@ -7,6 +7,7 @@ import com.agendame.model.Horario;
 import com.agendame.model.Servico;
 import com.agendame.model.TipoPessoa;
 import com.agendame.model.Usuario;
+import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +52,8 @@ public class Teste {
 
         cliente = new Cliente();
         cliente.setNome("Marcos Pascoski");
-
         cliente.setDocReceitaFederal("02569456160");
-//
-  //      
-        
+        cliente.setDataNascimento(Date.valueOf("1984-11-16"));
         cliente.setTelefone("(66)9919-3444");
         cliente.setTipo(TipoPessoa.FISICA);
         
