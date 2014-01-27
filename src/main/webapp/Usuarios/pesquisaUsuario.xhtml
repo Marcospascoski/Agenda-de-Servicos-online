@@ -47,13 +47,13 @@
                 <p:column headerText="E-Mail" style="width: 100px">
                     <h:outputText value="#{usuario.email}"/> 
                 </p:column>
-             
+
                 <p:column style="width: 100px; text-align: center">
                     <p:button outcome="/Usuarios/cadastroUsuario" icon="ui-icon-pencil" title="Editar">
                         <f:param name="usuario" value="#{usuario.id}" />
                     </p:button>
-                    
-                    <p:commandButton icon="ui-icon-closethick" title="Excluir" oncomplete="confirmacaoExclusao.show();"
+
+                    <p:commandButton icon="ui-icon-closethick" title="Excluir" oncomplete="confirmacaoExclusao.show()"
                                      immediate="true" process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
                         <f:setPropertyActionListener target="#{pesquisaUsuariosBean.usuarioSelecionado}" value="#{usuario}" />
                     </p:commandButton>
@@ -62,11 +62,9 @@
             </p:dataTable>
 
             <p:confirmDialog header="Exclusão de usuario" message="Tem certeza que deseja excluir este usuario
-                             #{pesquisaUsuariosBean.usuarioSelecionado}?"
+                             #{pesquisaUsuariosBean.usuarioSelecionado.nome}?"
                              widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
-                
                 <p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;"/>
-                
                 <p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();" immediate="true"
                                  action="#{pesquisaUsuariosBean.excluir}" process="@this"
                                  update=":frmPesquisa:usuariosTable" />

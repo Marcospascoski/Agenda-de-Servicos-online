@@ -42,7 +42,7 @@ public class Usuarios implements Serializable {
     @Transactional
     public void remover(Usuario usuario) {
         try {
-            usuario = porNome(usuario.getNome());
+            usuario = porId(usuario.getId());
             em.remove(usuario);
             em.flush();
         } catch (PersistenceException e) {
