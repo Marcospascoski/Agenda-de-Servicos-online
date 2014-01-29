@@ -46,45 +46,24 @@
                 <p:inputText id="email" size="40" maxlength="50"
                              value="#{cadastroUsuarioBean.usuario.email}"/>
 
-                <p:outputLabel value="Senha" for="senha"/>
-                <p:password id="senha" size="20" maxlength="30" 
-                            value="#{cadastroUsuarioBean.usuario.senha}"/>
+                <p:outputLabel value="Senha" for="senha" />
+                <p:password id="senha" value="#{cadastroUsuarioBean.usuario.senha}" 
+                            feedback="true" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"
+                            promptLabel="Informe uma senha" />
 
-                <p:outputLabel value="Grupo" for="grupo"/>
-                <p:selectOneMenu id="grupo" value="#{cadastroUsuarioBean.grupoPai}">
-                    <f:selectItem itemLabel="Selecione o grupo"/>
-                    <f:selectItems value="#{cadastroUsuarioBean.gruposRaizes}" var="grupo"
-                                   itemValue="#{grupo}" itemLabel="#{grupo.nome}" />
-                </p:selectOneMenu>
-
-
-
-
+                
             </p:panelGrid>
 
-            <p:dataTable value="#{pesquisaUsuariosBean.usuarioFiltrados}" var="grupo" style="margin-top: 3px" 
-                         emptyMessage="Nenhum Usuario encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+            <p:panelGrid columns="2" style="margin-top: 20px" styleClass="semBorda">
+                <p:selectOneMenu id="grupo" value="#{cadastroUsuarioBean.grupoSelecionado}">
+                    <f:selectItem itemLabel="Selecione o grupo" />
+                    <f:selectItems value="#{cadastroUsuarioBean.gruposRaizes}" var="grupo"
+                                   itemValue="#{grupo}" itemLabel="#{grupo.descricao}" />
+                </p:selectOneMenu>
 
-
-
-                <p:column headerText="Grupo" style="text-align: left">
-                    <h:outputText value="Auxiliares"/>
-                </p:column>
-
-                <p:column style="width: 100px; text-align: center">
-                    <p:commandButton icon="ui-icon-thash" title="Excluir" oncomplete="confirmacaoExclusao.show()"/>
-                </p:column>
-
-            </p:dataTable>
-
-            <p:confirmDialog header="Exclusão de grupo" message="Tem certeza que deseja excluir este grupo
-                             #{pesquisaUsuariosBean.usuarioSelecionado.id}?" widgetVar="confirmacaoExclusao">
-                <p:button value="Não" onclick="confirmacaoExclusao.hide();
-                        return false;"/>
-                <p:commandButton value="Sim" oncomplete="confirmaçãoExclusao.hide();"/>
-            </p:confirmDialog>
-
-
+                <p:commandButton value="Adicionar Grupo" id="buttonGrupo" icon="ui-icon-plus" style="height: 27px; margin-left: -3px"
+                                 action="#{cadastroUsuarioBean.adicionaGrupo}"/>
+            </p:panelGrid>
 
 
         </h:form>

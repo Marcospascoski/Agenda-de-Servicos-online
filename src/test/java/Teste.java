@@ -72,7 +72,7 @@ public class Teste {
         usuario.setEmail("marcospascoski@gmail.com");
         usuario.setSenha("123456");
         usuario.setGrupos(grupos);
-
+        
         grupo = new Grupo();
         grupo.setNome("Administrador");
         grupo.setDescricao("Administrador da agenda");

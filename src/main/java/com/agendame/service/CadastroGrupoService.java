@@ -22,14 +22,7 @@ public class CadastroGrupoService implements Serializable {
     @Inject
     private Grupos grupos;
 
-    @Transactional
     public Grupo salvar(Grupo grupo) {
-        /*Grupo grupoExiste = grupos.porId(grupo.getId());
-
-        if (grupoExiste != null && !grupoExiste.equals(grupo)) {
-            throw new NegocioException("Ja existe um grupo com o Codigo Informado");
-        }*/
-
         return grupos.guardar(grupo);
     }
 

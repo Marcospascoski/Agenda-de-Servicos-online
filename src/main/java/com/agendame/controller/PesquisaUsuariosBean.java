@@ -10,7 +10,6 @@ import com.agendame.repository.Usuarios;
 import com.agendame.repository.filter.UsuarioFilter;
 import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;

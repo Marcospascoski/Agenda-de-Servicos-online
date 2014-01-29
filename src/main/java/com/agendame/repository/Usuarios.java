@@ -63,15 +63,27 @@ public class Usuarios implements Serializable {
         if (StringUtils.isNotBlank(filtro.getNome())) {
             criteria.add(Restrictions.ilike("nome", filtro.getNome(), MatchMode.ANYWHERE));
         }
+
+        if (StringUtils.isNotBlank(filtro.getEmail())) {
+            criteria.add(Restrictions.ilike("email", filtro.getEmail(), MatchMode.ANYWHERE));
+        }
         return criteria.addOrder(Order.asc("nome")).list();
     }
 
     public Usuario porId(Long id) {
         return em.find(Usuario.class, id);
     }
-    
-    public Usuario porNome(String nome){
-        return em.find(Usuario.class, nome);
-    }
 
+    public Usuario porEmail(String email) {
+        Usuario usuario = null;
+
+        try {
+            usuario = this.em.createQuery("from Usuario where lower(email) = :email", Usuario.class)
+                    .setParameter("email", email.toLowerCase()).getSingleResult();
+        } catch (NoResultException e) {
+            // nenhum usuário encontrado com o e-mail informado
+        }
+
+        return usuario;
+    }
 }

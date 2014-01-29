@@ -8,11 +8,14 @@ package com.agendame.controller;
 import com.agendame.model.Grupo;
 import com.agendame.model.Usuario;
 import com.agendame.repository.Grupos;
+import com.agendame.service.CadastroGrupoService;
 import com.agendame.service.CadastroUsuarioService;
+import com.agendame.service.NegocioException;
 import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -32,10 +35,13 @@ public class CadastroUsuarioBean implements Serializable {
     private CadastroUsuarioService cadastroUsuarioService;
 
     @Inject
+    private CadastroGrupoService cadastroGrupoService;
+
+    @Inject
     private Grupos grupos;
 
     private Usuario usuario;
-    private Grupo grupoPai;
+    private Grupo grupoSelecionado;
 
     private List<Grupo> gruposRaizes;
 
@@ -44,7 +50,9 @@ public class CadastroUsuarioBean implements Serializable {
     }
 
     public void salvar() {
-        this.cadastroUsuarioService.salvar(usuario);
+        System.out.println("Grupo selecionado:" + grupoSelecionado.getDescricao());
+        this.cadastroUsuarioService.salvar(this.usuario);
+        
         limpar();
         FacesUtil.addInfoMessage("Usuario Salvo com Sucesso");
     }
@@ -61,16 +69,20 @@ public class CadastroUsuarioBean implements Serializable {
 
     private void limpar() {
         this.usuario = new Usuario();
-        gruposRaizes = new ArrayList<>();
+        gruposRaizes = null;
     }
 
     @NotNull
-    public Grupo getGrupoPai() {
-        return grupoPai;
+    public Grupo getGrupoSelecionado() {
+        return grupoSelecionado;
     }
 
-    public void setGrupoPai(Grupo grupoPai) {
-        this.grupoPai = grupoPai;
+    public void setGrupoSelecionado(Grupo grupoSelecionado) {
+        this.grupoSelecionado = grupoSelecionado;
+    }
+
+    public void adicionaGrupo() {
+        this.usuario.getGrupos().add(this.grupoSelecionado);
     }
 
     public List<Grupo> getGruposRaizes() {
