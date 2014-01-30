@@ -7,7 +7,6 @@ package com.agendame.service;
 
 import com.agendame.model.Servico;
 import com.agendame.repository.Servicos;
-import com.agendame.util.jpa.Transactional;
 import java.io.Serializable;
 import javax.inject.Inject;
 
@@ -22,13 +21,12 @@ public class CadastroServicoService implements Serializable {
     @Inject
     private Servicos servicos;
 
-    @Transactional
-    public Servico Salvar(Servico servico) {
-        Servico servicoExiste = servicos.porId(servico.getId());
+    public Servico salvar(Servico servico) {
+        /*Servico servicoExiste = servicos.porId(servico.getId());
 
         if (servicoExiste != null && !servicoExiste.equals(servico)) {
             throw new NegocioException("Ja existe um servico com o Codigo Informado");
-        }
+        }*/
 
         return servicos.guardar(servico);
     }

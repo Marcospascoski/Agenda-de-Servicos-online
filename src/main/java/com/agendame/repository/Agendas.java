@@ -7,6 +7,7 @@
 package com.agendame.repository;
 
 import com.agendame.model.Agenda;
+import com.agendame.util.jpa.Transactional;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -24,18 +25,17 @@ public class Agendas implements Serializable{
     @Inject
     private EntityManager em;
     
+    @Transactional
     public Agenda guardar(Agenda agenda){
-        EntityTransaction et = em.getTransaction();
-        et.begin();
-        agenda = em.merge(agenda);
-        et.commit();
-        return agenda;
+        return em.merge(agenda);
     }
     
     public List<Agenda> raizes(){
         return em.createQuery("from Agenda", Agenda.class).getResultList();    
     }
     
-    
+        public Agenda porId(Long id) {
+        return em.find(Agenda.class, id);
+    }
     
 }

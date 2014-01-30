@@ -8,68 +8,45 @@
                 xmlns:p="http://primefaces.org/ui">
 
 
-            <ui:define name="Titulo">
-                Novo Serviço
-            </ui:define>
+    <ui:define name="Titulo">#{cadastroServicoBean.editando ? 'Edição de Serviço' : 'Novo Serviço'}</ui:define>
 
-            <ui:define name="corpo">
+    <ui:define name="corpo">
 
-                <h:form>    
-                    <h1>Novo Serviço</h1>
-                    
-                    <p:messages autoUpdate="true" closable="true"/>
+        <f:metadata>
+            <f:viewParam  name="servico"  value="#{cadastroServicoBean.servico}" /> 
+            <f:event listener="#{cadastroServicoBean.inicializar}" type="preRenderView"/>
+        </f:metadata>
 
-                    <p:toolbar style="margin-top: 20px;">
-                        <p:toolbarGroup>
-                            <p:button value="Novo" outcome="/Servicos/cadastroServico.xhtml" icon="ui-icon-document"/>
-                            <p:separator/>
-                            <p:commandButton value="Salvar" id="botaoSalvar" icon="ui-icon-disk" 
-                                             action="#{cadastroServicoBean.salvar}" update="@form"/>
-                        </p:toolbarGroup>
+        <h:form>    
+            <h1>#{cadastroServicoBean.editando ? 'Edição de Serviço' : 'Novo Serviço'}</h1>
 
-                        <p:toolbarGroup align="right">
-                            <p:button value="Pesquisa"  icon="ui-icon-search" outcome="/Servicos/pesquisaServico.xhtml"/>
-                        </p:toolbarGroup>
+            <p:messages autoUpdate="true" closable="true"/>
 
-                    </p:toolbar>  
-                
-                    
-                    <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
-                                 columnClasses="rotulo, campo" >
-                        <p:outputLabel value="Nome:" for="nome"/>
-                        <p:inputText id="nome" size="60" maxlength="80"
-                                     value="#{cadastroServicoBean.servico.nome}"/>
+            <p:toolbar style="margin-top: 20px;">
+                <p:toolbarGroup>
+                    <p:button value="Novo" outcome="/Servicos/cadastroServico.xhtml" icon="ui-icon-document"/>
+                    <p:separator/>
+                    <p:commandButton value="Salvar" id="botaoSalvar" icon="ui-icon-disk" 
+                                     action="#{cadastroServicoBean.salvar}" update="@form"/>
+                </p:toolbarGroup>
 
-                    </p:panelGrid>
+                <p:toolbarGroup align="right">
+                    <p:button value="Pesquisa"  icon="ui-icon-search" outcome="/Servicos/pesquisaServico.xhtml"/>
+                </p:toolbarGroup>
 
-                    <p:dataTable value="#{pesquisaServicoBean.servicoFiltrados}" var="servico" style="margin-top: 20px" 
-                                 emptyMessage="Nenhum serviço encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false"  paginatorPosition="bottom">
+            </p:toolbar>  
 
-                        <p:column headerText="Código" style="width: 100px;">
-                            <h:outputText value="#{servico.id}"
-                                          />
-                        </p:column>
 
-                        <p:column headerText="Nome">
-                            <h:outputText value="#{servico.nome}"/>
-                        </p:column>
+            <p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px"
+                         columnClasses="rotulo, campo" >
+                <p:outputLabel value="Nome:" for="nome"/>
+                <p:inputText id="nome" size="60" maxlength="80"
+                             value="#{cadastroServicoBean.servico.nome}"/>
 
-                        <p:column style="width: 100px; text-align: center">
-                            <p:button icon="ui-icon-pencil" title="Editar"/>
-                            <p:commandButton icon="ui-icon-thash" title="Excluir" oncomplete="confirmacaoExclusao.show();"/>
-                        </p:column>
+            </p:panelGrid>
 
-                    </p:dataTable>
+        </h:form>
 
-                    <p:confirmDialog header="Exclusão de Serviço" message="Tem certeza que deseja excluir este Serviço?"
-                                     widgetVar="confirmacaoExclusao">
-                        <p:button value="Não" onclick="confirmacaoExclusao.hide();
-                                return false;"/>
-                        <p:commandButton value="Sim" oncomplete="confirmaçãoExclusao.hide();"/>
-                    </p:confirmDialog>
+    </ui:define>
 
-                </h:form>
-
-            </ui:define>
-
-        </ui:composition>
+</ui:composition>

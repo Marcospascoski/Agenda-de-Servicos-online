@@ -37,8 +37,7 @@ public class Horario implements Serializable {
     private Date horaInicial;
     private Date horaFinal;
     private Agenda agenda;
-    private List<Servico> servicos = new ArrayList<>();
-
+    
     @Id //Chave primaria
     @Column(name = "id_horario")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
@@ -74,7 +73,7 @@ public class Horario implements Serializable {
         this.horaFinal = horaFinal;
     }
 
-    @NotNull //Não pode ser nulo
+    //@NotNull //Não pode ser nulo
     @ManyToOne
     @JoinColumn(name = "id_agenda")
     public Agenda getAgenda() {
@@ -83,16 +82,6 @@ public class Horario implements Serializable {
 
     public void setAgenda(Agenda agenda) {
         this.agenda = agenda;
-    }
-
-    //@NotNull // Não pode ser nulo
-    @ManyToMany(mappedBy="horarios")
-    public List<Servico> getServicos() {
-        return servicos;
-    }
-
-    public void setServicos(List<Servico> servicos) {
-        this.servicos = servicos;
     }
 
     @Override

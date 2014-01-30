@@ -127,7 +127,7 @@ public class Endereco implements Serializable {
         this.cep = cep;
     }
 
-    @NotNull //Não pode ser nulo
+    //@NotNull //Não pode ser nulo
     @ManyToOne // relacionamento muitos para um( tabela possui vários endereços, e cada endereço pertence a um cliente)
     @JoinColumn(name="id_cliente", nullable = false)
     public Cliente getCliente() {

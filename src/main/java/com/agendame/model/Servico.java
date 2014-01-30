@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -35,7 +36,7 @@ public class Servico implements Serializable {
 
     private Long id;
     private String nome;
-    private List<Horario> horarios = new ArrayList<>();
+    private Agenda agenda;
 
     @Id //Chave primária
     @Column(name = "id_servico")
@@ -59,14 +60,15 @@ public class Servico implements Serializable {
         this.nome = nome;
     }
 
-    @ManyToMany
-    @JoinTable(name="horario_has_Servicos", joinColumns={@JoinColumn(name="horario_id")}, inverseJoinColumns={@JoinColumn(name="servico_id")})
-    public List<Horario> getHorarios() {
-        return horarios;
+    //@NotNull //Não pode ser nulo
+    @ManyToOne
+    @JoinColumn(name = "id_agenda")
+    public Agenda getAgenda() {
+        return agenda;
     }
 
-    public void setHorarios(List<Horario> horarios) {
-        this.horarios = horarios;
+    public void setAgenda(Agenda agenda) {
+        this.agenda = agenda;
     }
 
     @Override

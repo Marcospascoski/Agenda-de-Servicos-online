@@ -13,12 +13,12 @@
 
     <ui:define name="corpo">
 
-        <h:form>    
+        <h:form id="frmPesquisa">    
             <h1>Pesquisa de Serviços</h1>
 
             <p:toolbar style="margin-top: 20px;">
                 <p:toolbarGroup>
-                    <p:commandButton value="Pesquisar" icon="ui-icon-search" />
+                    <p:commandButton value="Pesquisar" icon="ui-icon-search" action="#{pesquisaServicosBean.pesquisar}" update="@form" />
                 </p:toolbarGroup>
 
                 <p:toolbarGroup align="right">
@@ -30,11 +30,11 @@
                          columnClasses="rotulo, campo" >
                 <p:outputLabel value="Nome:" for="nome"/>
                 <p:inputText id="nome" size="60" maxlength="80"
-                             value="#{pesquisaServicoBean.servicoFilter.nome}"/>
+                             value="#{pesquisaServicosBean.filtro.nome}"/>
 
             </p:panelGrid>
 
-            <p:dataTable value="#{pesquisaServicoBean.servicosFiltrados}" var="servico" style="margin-top: 20px" 
+            <p:dataTable id="servicosTable" value="#{pesquisaServicosBean.servicoFiltrados}" var="servico" style="margin-top: 20px" 
                          emptyMessage="Nenhum serviço encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false"  paginatorPosition="bottom">
 
                 <p:column headerText="Código" style="width: 100px;">
@@ -46,18 +46,37 @@
                 </p:column>
 
                 <p:column style="width: 100px; text-align: center">
-                    <p:button icon="ui-icon-pencil" title="Editar"/>
-                    <p:commandButton icon="ui-icon-thash" title="Excluir" oncomplete="confirmacaoExclusao.show();"/>
+                    <p:button outcome="/Servicos/cadastroServico" icon="ui-icon-pencil" title="Editar">
+                        <f:param name="servico" value="#{servico.id}" />
+                    </p:button>
+
+                    <p:commandButton ajax="true" icon="ui-icon-closethick" title="Excluir" oncomplete="confirmacaoExclusao.show()"
+                                     immediate="true" process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
+                        <f:setPropertyActionListener value="#{servico}" target="#{pesquisaServicosBean.servicoSelecionado}"/>
+                    </p:commandButton>
                 </p:column>
 
             </p:dataTable>
 
-            <p:confirmDialog header="Exclusão de Serviço" message="Tem certeza que deseja excluir este Serviço?"
-                             widgetVar="confirmacaoExclusao">
+            <p:confirmDialog header="Exclusão de usuario" message="Tem certeza que deseja excluir este usuario
+                             #{pesquisaUsuariosBean.usuarioSelecionado.nome}?"
+                             widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
                 <p:button value="Não" onclick="confirmacaoExclusao.hide();
                         return false;"/>
-                <p:commandButton value="Sim" oncomplete="confirmaçãoExclusao.hide();"/>
+                <p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();" immediate="true"
+                                 action="#{pesquisaUsuariosBean.excluir}" process="@this"
+                                 update=":frmPesquisa:servicosTable" />
             </p:confirmDialog>
+
+
+
+
+
+
+
+
+
+
 
         </h:form>
 

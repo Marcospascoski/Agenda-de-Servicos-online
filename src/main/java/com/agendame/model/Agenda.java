@@ -33,6 +33,7 @@ public class Agenda implements Serializable {
     private Long id;
     private String descrisao;
     private List<Horario> horarios = new ArrayList<>();
+    private List<Servico> servicos = new ArrayList<>();
     private Usuario profissional;
     private Cliente cliente;
 
@@ -57,7 +58,7 @@ public class Agenda implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    @OneToMany(mappedBy = "agenda", targetEntity = Horario.class, cascade = CascadeType.ALL)// relacionamento um para muitos(chave extrangeira fica na tabela "Endereco")
+    @OneToMany(mappedBy = "agenda", targetEntity = Horario.class, cascade = CascadeType.ALL)
     public List<Horario> getHorarios() {
         return horarios;
     }
@@ -65,8 +66,16 @@ public class Agenda implements Serializable {
     public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
     }
+    @NotNull //Não pode ser nulo
+    @OneToMany(mappedBy = "agenda", targetEntity = Servico.class, cascade = CascadeType.ALL)
+    public List<Servico> getServicos() {
+        return servicos;
+    }
 
-    
+    public void setServicos(List<Servico> servicos) {
+        this.servicos = servicos;
+    }
+
     @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um usuario)
     public Usuario getUsuario() {
         return profissional;

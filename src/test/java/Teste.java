@@ -60,7 +60,7 @@ public class Teste {
         cliente.setDataNascimento(date);
         cliente.setTelefone("6699193444");
         cliente.setTipo(TipoPessoa.FISICA);
-
+        
         usuarios = new ArrayList();
         usuarios.add(usuario);
 
@@ -88,34 +88,31 @@ public class Teste {
         endereco.setUf("MT");
         endereco.setCliente(cliente);
 
-        horarios = new ArrayList();
-        horarios.add(horario);
-
         agenda = new Agenda();
         agenda.setCliente(cliente);
-        agenda.setUsuario(usuario);
         agenda.setDescrisao("preciso colocar um novo hd no pc também");
-        agenda.setHorarios(horarios);
-
+        
         servico = new Servico();
         servico.setNome("formatacaoc/backup");
-
+        servico.setAgenda(agenda);
+        
         servicos = new ArrayList();
         servicos.add(servico);
-
+        
+        horarios = new ArrayList();
+        horarios.add(horario);
+       
         horario = new Horario();
         horario.setHoraInicial(Time.valueOf("00:30:00"));
         horario.setHoraFinal(Time.valueOf("00:30:00"));
         horario.setAgenda(agenda);
-        horario.setServicos(servicos);
-
+        
         cliente.getEnderecos().add(endereco);
-        servico.getHorarios().add(horario);
         grupo.getUsuarios().add(usuario);
         usuario.getGrupos().add(grupo);
-        horario.getServicos().add(servico);
-        agenda.getHorarios().add(horario);
         cliente.getAgendamentos().add(agenda);
+        agenda.getHorarios().add(horario);
+        
 
         em.persist(cliente);
         em.persist(usuario);

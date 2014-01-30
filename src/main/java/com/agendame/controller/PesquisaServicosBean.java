@@ -8,7 +8,9 @@ package com.agendame.controller;
 import com.agendame.model.Servico;
 import com.agendame.repository.Servicos;
 import com.agendame.repository.filter.ServicoFilter;
+import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -18,7 +20,7 @@ import javax.inject.Inject;
  *
  * @author Marcos-TSI
  */
-@Named(value = "pesquisaServicoBean")
+@Named(value = "pesquisaServicosBean")
 @ViewScoped
 public class PesquisaServicosBean implements Serializable {
 
@@ -27,24 +29,45 @@ public class PesquisaServicosBean implements Serializable {
     @Inject
     private Servicos servicos;
 
-    private ServicoFilter servicoFilter;
+    private ServicoFilter filtro;
 
     private List<Servico> servicoFiltrados;
+    
+    private Servico servicoSelecionado;
 
     public PesquisaServicosBean() {
-        servicoFilter = new ServicoFilter();
+        filtro = new ServicoFilter();
+        servicoFiltrados = new ArrayList<>();
     }
 
+    public void excluir() {
+            servicos.remover(servicoSelecionado);
+            servicoFiltrados.remove(servicoSelecionado);
+
+            FacesUtil.addInfoMessage("Servico " + servicoSelecionado.getNome()
+                    + " excluído com sucesso.");
+        }
+
+    
+
     public void pesquisar() {
-        servicoFiltrados = servicos.filtrados(servicoFilter);
+        servicoFiltrados = servicos.filtrados(filtro);
     }
 
     public List<Servico> getServicoFiltrados() {
         return servicoFiltrados;
     }
 
-    public ServicoFilter getServicoFilter() {
-        return servicoFilter;
+    public ServicoFilter getFiltro() {
+        return filtro;
+    }
+
+    public Servico getServicoSelecionado() {
+        return servicoSelecionado;
+    }
+
+    public void setServicoSelecionado(Servico servicoSelecionado) {
+        this.servicoSelecionado = servicoSelecionado;
     }
 
 }
