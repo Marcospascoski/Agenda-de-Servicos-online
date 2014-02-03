@@ -14,11 +14,16 @@
 
     <ui:define name="corpo">
 
+        <f:metadata>
+            <f:viewParam  name="agenda"  value="#{AgendaBean.agenda}" /> 
+            <f:event listener="#{AgendaBean.inicializar}" type="preRenderView"/>
+        </f:metadata>
+
         <h:form>
             <h1>Agendamento</h1>
 
             <p:messages autoUpdate="true" closable="true"/>
-            
+
             <ui:include src="/WEB-INF/Template/Agenda/scheduleAgendamento.xhtml"/>
 
         </h:form>

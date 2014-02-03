@@ -10,7 +10,6 @@ import com.agendame.model.Endereco;
 import com.agendame.model.TipoPessoa;
 import com.agendame.repository.Enderecos;
 import com.agendame.service.CadastroClienteService;
-import com.agendame.service.CadastroEnderecoService;
 import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.util.List;

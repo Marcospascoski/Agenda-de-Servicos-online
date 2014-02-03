@@ -73,7 +73,7 @@ public class Horario implements Serializable {
         this.horaFinal = horaFinal;
     }
 
-    //@NotNull //Não pode ser nulo
+    @NotNull //Não pode ser nulo
     @ManyToOne
     @JoinColumn(name = "id_agenda")
     public Agenda getAgenda() {

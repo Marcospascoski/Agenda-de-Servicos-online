@@ -1,60 +1,61 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
 
     <h:form id="form">  
 
         <p:messages id="mensagens" showDetail="true" />
 
-        <p:schedule widgetVar="agenda" value="#{agendaScheduleBean.eventModel}" style="margin-top: 20px" view="agendaWeek"
+        <p:schedule widgetVar="agenda" value="#{AgendaBean.eventoModel}" style="margin-top: 20px" view="agendaWeek"
                     aspectRatio="3" slotMinutes="60" draggable="false" timeZone="UTC" axisFormat="HH:mm" locale="pt">
 
-            <!-- eventos -->
-            <p:ajax event="dateSelect" listener="#{agendaScheduleBean.quandoNovo}" 
-                    update="eventDetails" oncomplete="caixaDialogo.show()"/>  
-            <p:ajax event="eventSelect" listener="#{agendaScheduleBean.quandoSelecionado}" 
-                    update="eventDetails" oncomplete="caixaDialogo.show()"/>  
-            <p:ajax event="eventMove" listener="#{agendaScheduleBean.quandoMovido}" 
-                    update="mensagens" oncomplete="meucalendario.update()"/>  
-            <p:ajax event="eventResize" listener="#{agendaScheduleBean.quandoRedimensionado}" 
-                    update="mensagens" oncomplete="meucalendario.update()"/>  
+            <!-- aqui são os eventos -->
+            <p:ajax event="dateSelect" listener="#{AgendaBean.isNovo}" 
+                    update="detalheAgendamento" oncomplete="agendaDialog.show()"/>  
+            <p:ajax event="eventSelect" listener="#{AgendaBean.isSelecionado}" 
+                    update="detalheAgendamento" oncomplete="agendaDialog.show()"/>  
+            <p:ajax event="eventMove" listener="#{AgendaBean.isMovido}" 
+                    update="mensagens" oncomplete="calendario.update()"/>  
+            <p:ajax event="eventResize" listener="#{AgendaBean.isRedimensionado}" 
+                    update="mensagens" oncomplete="calendario.update()"/>  
 
         </p:schedule>
 
-        <p:dialog widgetVar="caixaDialogo" 
-                  header="Evento"  width="500"
+        <p:dialog widgetVar="agendaDialog" 
+                  header="Agendamento"  width="500"
                   resizable="false" modal="true">  
 
-            <p:outputPanel 
-                id="eventDetails">
+            <p:outputPanel id="detalheAgendamento">
 
                 <p:panelGrid columns="2" styleClass="semBorda">  
 
-                    <p:outputLabel value="Serviço:" for="servico" /> 
-                    <p:selectOneMenu id="servico" value="#{agendaScheduleBean.servico}">
-                        <f:selectItem itemLabel="Selecione"/>
+                    <p:outputLabel value="Serviço" for="servico" /> 
+                    <p:selectOneMenu id="servico" value="#{AgendaBean.servicoSelecionado}">
+                        <f:selectItem itemLabel="Selecione o serviço" />
+                        <f:selectItems value="#{AgendaBean.servicosRaizes}" var="servico"
+                                       itemValue="#{servico}" itemLabel="#{servico.nome}" />
                     </p:selectOneMenu>
 
-                    <p:outputLabel value="Descrição:" for="descricao"/> 
-                    <p:inputText id="descricao" maxlength="60"/>  
-
-                    <h:outputLabel for="inicio" value="Início:" />  
-                    <p:calendar id="inicio" pattern="dd/MM/yyyy HH:mm" locale="pt"/>
-
-                    <p:outputLabel for="fim" value="Fim:" />  
-                    <p:calendar id="fim" value="#{agendaScheduleBean.agenda.dataFim}" 
-                                pattern="dd/MM/yyyy HH:mm" locale="pt"/>
-
-                    <p:outputLabel for="diaTodo" value="Dia todo?:" />  
-                    <p:selectBooleanCheckbox id="diaTodo" />  
+                    <p:outputLabel value="Descrição:" for="descricao" style="alignment-adjust: auto"/> 
+                    <p:inputText id="descricao" value="#{AgendaBean.agenda.descricao}" maxlength="60" style="width: 300px;"/>  
+ 
+                     <h:outputLabel for="inicio" value="Início:" />  
+                     <p:calendar id="inicio" value="#{AgendaBean.agenda.dataInicio}" pattern="dd/MM/yyyy" locale="pt"/>
+ 
+                     <p:outputLabel for="fim" value="Fim:" />  
+                     <p:calendar id="fim" value="#{AgendaBean.agenda.dataFim}" pattern="dd/MM/yyyy" locale="pt"/>
+ 
+                     <p:outputLabel for="diaTodo" value="Dia todo?:" />  
+                     <p:selectBooleanCheckbox id="diaTodo" value="#{AgendaBean.agenda.diaTodo}" />
 
                 </p:panelGrid>  
 
                 <p:separator/>
 
-                <p:commandButton value="Salvar" oncomplete="meucalendario.update();caixaDialogo.hide();" update="mensagens" />  
+                <p:commandButton value="Agendar" action="#{AgendaBean.salvar}" oncomplete="calendario.update() agendaDialog.hide();" update="mensagens @form"  />  
 
             </p:outputPanel>
 

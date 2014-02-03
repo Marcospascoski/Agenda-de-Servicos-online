@@ -7,6 +7,7 @@ package com.agendame.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +19,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -31,7 +34,10 @@ public class Agenda implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Long id;
-    private String descrisao;
+    private Date dataInicio;
+    private Date dataFim;
+    private String descricao;
+    private boolean diaTodo;
     private List<Horario> horarios = new ArrayList<>();
     private List<Servico> servicos = new ArrayList<>();
     private Usuario profissional;
@@ -47,14 +53,46 @@ public class Agenda implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
     @NotNull
     @Column(name = "descrisao_agenda")
-    public String getDescrisao() {
-        return descrisao;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setDescrisao(String descrisao) {
-        this.descrisao = descrisao;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    @Column(name = "diaTodo_agenda", nullable = false)
+    public boolean isDiaTodo() {
+        return diaTodo;
+    }
+
+    public void setDiaTodo(boolean diaTodo) {
+        this.diaTodo = diaTodo;
+    }
+    
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    @Column(name = "dataInicio_agenda")
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    @NotNull
+    @Temporal(TemporalType.DATE)
+    @Column(name = "dataFim_agenda")
+    public Date getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
     }
 
     @NotNull //Não pode ser nulo
@@ -66,6 +104,7 @@ public class Agenda implements Serializable {
     public void setHorarios(List<Horario> horarios) {
         this.horarios = horarios;
     }
+
     @NotNull //Não pode ser nulo
     @OneToMany(mappedBy = "agenda", targetEntity = Servico.class, cascade = CascadeType.ALL)
     public List<Servico> getServicos() {
@@ -85,7 +124,6 @@ public class Agenda implements Serializable {
         this.profissional = profissional;
     }
 
-    
     @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um cliente)
     @JoinColumn(name = "id_cliente") // Não pode ser nulo
     public Cliente getCliente() {

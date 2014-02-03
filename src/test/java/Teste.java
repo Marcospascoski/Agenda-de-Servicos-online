@@ -89,8 +89,11 @@ public class Teste {
         endereco.setCliente(cliente);
 
         agenda = new Agenda();
+        agenda.setDataInicio(date);
+        agenda.setDataFim(date);
+        agenda.setDescricao("preciso colocar um novo hd no pc também");
+        agenda.setDiaTodo(false);
         agenda.setCliente(cliente);
-        agenda.setDescrisao("preciso colocar um novo hd no pc também");
         
         servico = new Servico();
         servico.setNome("formatacaoc/backup");
