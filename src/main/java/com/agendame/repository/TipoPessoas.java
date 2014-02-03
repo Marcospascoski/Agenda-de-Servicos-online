@@ -1,27 +1,31 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.agendame.service;
+package com.agendame.repository;
 
-import com.agendame.model.Servico;
-import com.agendame.repository.Servicos;
+import com.agendame.model.TipoPessoa;
 import java.io.Serializable;
+import java.util.List;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+
 
 /**
  *
  * @author Marcos-TSI
  */
-public class CadastroServicoService implements Serializable {
+public class TipoPessoas implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Inject
-    private Servicos servicos;
+    private EntityManager em;
 
-    public Servico salvar(Servico servico) {
-        return servicos.guardar(servico);
+    public List<TipoPessoa> raizes() {
+        return em.createQuery("from TipoPessoa", TipoPessoa.class).getResultList();
     }
+
+    
 }

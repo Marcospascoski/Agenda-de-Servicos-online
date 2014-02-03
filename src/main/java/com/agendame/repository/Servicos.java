@@ -41,7 +41,7 @@ public class Servicos implements Serializable{
     @Transactional
     public void remover(Servico servico) {
         try {
-            servico = porId(servico.getId());
+            servico = porNome(servico.getNome());
             em.remove(servico);
             em.flush();
         } catch (PersistenceException e) {
@@ -67,6 +67,10 @@ public class Servicos implements Serializable{
 
     public Servico porId(Long id) {
         return em.find(Servico.class, id);
+    }
+    
+    public Servico porNome(String nome){
+        return  em.find(Servico.class, nome);
     }
     
 }

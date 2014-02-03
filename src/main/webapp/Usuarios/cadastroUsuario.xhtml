@@ -65,7 +65,24 @@
                                  action="#{cadastroUsuarioBean.adicionaGrupo}"/>
             </p:panelGrid>
 
+            <p:dataTable value="#{cadastroUsuarioBean.gruposRaizes}" var="grupo" style="margin-top: 3px" 
+                         emptyMessage="Nenhum Usuario encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 
+
+
+                <p:column headerText="Grupo" style="text-align: left">
+                    <h:outputText value="#{grupo.nome}"/>
+                </p:column>
+                
+                <p:column headerText="Descrição" style="text-align: left">
+                    <h:outputText value="#{grupo.descricao}"/>
+                </p:column>
+
+            </p:dataTable>
+            
+            
+            
+            
         </h:form>
 
     </ui:define>

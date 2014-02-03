@@ -31,11 +31,13 @@ public class CadastroServicoBean implements Serializable {
     private CadastroServicoService cadastroServicoService;
 
     @Inject
-    private Agendas agendas;
+    private Servicos servicos;
 
     private Servico servico;
+    
+    private Servico servicoSelecionado;
 
-    private List<Agenda> agendaRaizes;
+    private List<Servico> servicosRaizes;
 
     public CadastroServicoBean() {
         limpar();
@@ -43,7 +45,7 @@ public class CadastroServicoBean implements Serializable {
 
     public void inicializar() {
         if (FacesUtil.isNotPostback()) {
-            agendaRaizes = agendas.raizes();
+            servicosRaizes = servicos.raizes();
         }
     }
 
@@ -53,6 +55,13 @@ public class CadastroServicoBean implements Serializable {
         limpar();
         FacesUtil.addInfoMessage("Serviço Salvo com Sucesso");
     }
+    
+    public void excluir() {
+        servicosRaizes.remove(servicoSelecionado);
+        FacesUtil.addInfoMessage("Servico " + servico.getNome().toString()
+                + " excluído com sucesso.");
+    }
+    
 
     public boolean isEditando() {
         return this.servico.getId() != null;
@@ -62,8 +71,8 @@ public class CadastroServicoBean implements Serializable {
         this.servico = new Servico();
     }
 
-    public List<Agenda> getAgendaRaizes() {
-        return agendaRaizes;
+    public List<Servico> getServicosRaizes() {
+        return servicosRaizes;
     }
 
     public Servico getServico() {
@@ -74,4 +83,13 @@ public class CadastroServicoBean implements Serializable {
         this.servico = servico;
     }
 
+    public CadastroServicoService getCadastroServicoService() {
+        return cadastroServicoService;
+    }
+
+    public void setCadastroServicoService(CadastroServicoService cadastroServicoService) {
+        this.cadastroServicoService = cadastroServicoService;
+    }
+
+    
 }

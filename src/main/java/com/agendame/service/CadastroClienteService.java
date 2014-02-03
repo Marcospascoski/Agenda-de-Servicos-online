@@ -8,7 +8,6 @@ package com.agendame.service;
 
 import com.agendame.model.Cliente;
 import com.agendame.repository.Clientes;
-import com.agendame.util.jpa.Transactional;
 import java.io.Serializable;
 import javax.inject.Inject;
 
@@ -26,14 +25,7 @@ public class CadastroClienteService implements Serializable{
     @Inject
     private Clientes clientes;
     
-    @Transactional
-    public Cliente Salvar(Cliente cliente) {
-        Cliente clienteExiste = clientes.porId(cliente.getId());
-
-        if (clienteExiste != null && !clienteExiste.equals(cliente)) {
-            throw new NegocioException("Ja existe um cliente com o Codigo Informado");
-        }
-
+    public Cliente salvar(Cliente cliente) {
         return clientes.guardar(cliente);
     }
     

@@ -17,7 +17,7 @@
             <f:event listener="#{cadastroServicoBean.inicializar}" type="preRenderView"/>
         </f:metadata>
 
-        <h:form>    
+        <h:form id="frmServico">    
             <h1>#{cadastroServicoBean.editando ? 'Edição de Serviço' : 'Novo Serviço'}</h1>
 
             <p:messages autoUpdate="true" closable="true"/>
@@ -44,6 +44,41 @@
                              value="#{cadastroServicoBean.servico.nome}"/>
 
             </p:panelGrid>
+
+            <p:dataTable id="servicosTable" value="#{cadastroServicoBean.servicosRaizes}" var="servico" style="margin-top: 20px" 
+                         emptyMessage="Nenhum serviço encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false"  paginatorPosition="bottom">
+
+                <p:column headerText="Codigo" style="width: 100px;">
+                    <h:outputText value="#{servico.id}"/>
+                </p:column>
+
+                <p:column headerText="Nome">
+                    <h:outputText value="#{servico.nome}"/>
+                </p:column>
+
+                <p:column style="width: 100px; text-align: center">
+                    <p:button  outcome="/Servicos/cadastroServico" icon="ui-icon-pencil" title="Editar">
+                        <f:param name="servico" value="#{servico.id}" />
+                    </p:button>
+
+                    <p:commandButton icon="ui-icon-closethick" title="excluir" oncomplete="confirmacaoExclusaoCliente.show()"
+                                     process="@this" update=":frmServico:confirmacaoExclusaoDialog">
+                        <f:setPropertyActionListener target="#{cadastroServicoBean.servico}" value="#{servico}"/>
+                    </p:commandButton>
+                </p:column>
+
+            </p:dataTable>
+
+            <p:confirmDialog header="Exclusão de Cliente" message="tem certeza que deseja excluir o serviço #{cadastroServicoBean.servico.nome}?"
+                             widgetVar="confirmacaoExclusaoCliente" id="confirmacaoExclusaoDialog">
+                <p:button value="Não" onclick="confirmacaoExclusaoCliente.hide();
+                        return false;"/>
+                <p:commandButton value="Sim" oncomplete="confirmacaoExclusaoCliente.hide();" 
+                                 process="@this" action="#{cadastroClienteBean.excluir}" update=":frmServico:servicosTable"> 
+                </p:commandButton>
+            </p:confirmDialog>	
+
+
 
         </h:form>
 

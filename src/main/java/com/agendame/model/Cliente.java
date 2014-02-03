@@ -18,20 +18,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.br.CPF;
+
 
 /**
  *
@@ -63,8 +57,8 @@ public class Cliente implements Serializable {
         this.id = id;
     }
 
-    @NotBlank // Não pode estar em branco
-    @Size(max = 80, min = 8) //Tamanho máximo de 80 caracteres
+    //@NotBlank // Não pode estar em branco
+    //@Size(max = 80, min = 8) //Tamanho máximo de 80 caracteres
     @Column(nullable = false, length = 80)// não pode ser nulo, aceita até 80 caracteres
     public String getNome() {
         return nome;
@@ -97,7 +91,7 @@ public class Cliente implements Serializable {
     }
 
     @NotNull //Não pode ser nulo
-    @Size(max = 11, min = 8)
+    @Size(max = 13, min = 8)
     @Column(nullable = false, length = 11)// não pode ser nulo, aceita até 11 caracteres
     public String getTelefone() {
         return telefone;
@@ -119,7 +113,7 @@ public class Cliente implements Serializable {
 
     @NotNull //Não pode ser nulo
     @Enumerated(EnumType.STRING)//salva a String da classe TipoPessoa na coluna tipo
-    @Column(name = "tipo", nullable = false, length = 10)//não pode ser nulo, aceita até 10 caracteres
+    @Column(name = "tipo", nullable = false)//não pode ser nulo,
     public TipoPessoa getTipo() {
         return tipo;
     }

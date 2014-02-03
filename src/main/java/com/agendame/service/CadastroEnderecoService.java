@@ -25,7 +25,6 @@ public class CadastroEnderecoService implements Serializable{
     @Inject
     private Enderecos enderecos;
     
-    @Transactional
     public Endereco salvar(Endereco endereco){
         return enderecos.guardar(endereco);
     }
