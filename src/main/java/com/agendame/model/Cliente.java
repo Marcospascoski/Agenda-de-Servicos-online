@@ -57,8 +57,8 @@ public class Cliente implements Serializable {
         this.id = id;
     }
 
-    //@NotBlank // Não pode estar em branco
-    //@Size(max = 80, min = 8) //Tamanho máximo de 80 caracteres
+    @NotBlank // Não pode estar em branco
+    @Size(max = 80, min = 4) //Tamanho máximo de 80 caracteres
     @Column(nullable = false, length = 80)// não pode ser nulo, aceita até 80 caracteres
     public String getNome() {
         return nome;
