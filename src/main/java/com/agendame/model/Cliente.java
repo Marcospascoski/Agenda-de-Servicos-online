@@ -47,7 +47,7 @@ public class Cliente implements Serializable {
     private List<Agenda> agendamentos = new ArrayList<>();
 
     @Id //Chave primária
-    @Column(name = "id_cliente")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
     public Long getId() {
         return id;

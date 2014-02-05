@@ -39,7 +39,7 @@ public class Servico implements Serializable {
     private Agenda agenda;
 
     @Id //Chave primária
-    @Column(name = "id_servico")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
     public Long getId() {
         return id;
@@ -62,7 +62,7 @@ public class Servico implements Serializable {
 
     //@NotNull //Não pode ser nulo
     @ManyToOne
-    @JoinColumn(name = "id_agenda")
+    @JoinColumn(name = "agenda_id")
     public Agenda getAgenda() {
         return agenda;
     }
