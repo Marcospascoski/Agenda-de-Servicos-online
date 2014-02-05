@@ -35,7 +35,7 @@ import org.hibernate.validator.constraints.NotBlank;
 @Table(name = "cliente") //tabela cliente
 public class Cliente implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L; 
 
     private Long id;
     private String nome;
