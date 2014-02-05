@@ -41,7 +41,7 @@ public class Endereco implements Serializable {
     private Cliente cliente;
 
     @Id //Chave primária
-    @Column(name = "id")
+    @Column(name = "id_horario")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
     public Long getId() {
         return id;
@@ -129,7 +129,7 @@ public class Endereco implements Serializable {
 
     //@NotNull //Não pode ser nulo
     @ManyToOne // relacionamento muitos para um( tabela possui vários endereços, e cada endereço pertence a um cliente)
-    @JoinColumn(name="cliente_id", nullable = false)
+    @JoinColumn(name="id_cliente", nullable = false)
     public Cliente getCliente() {
         return cliente;
     }

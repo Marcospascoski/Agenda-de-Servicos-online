@@ -44,7 +44,7 @@ public class Agenda implements Serializable {
     private Cliente cliente;
 
     @Id // Chave Primária da tabela
-    @Column(name = "id")
+    @Column(name = "id_agenda")
     @GeneratedValue(strategy = GenerationType.IDENTITY)// valor é gerado automaticamente
     public Long getId() {
         return id;
@@ -116,7 +116,6 @@ public class Agenda implements Serializable {
     }
 
     @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um usuario)
-    @JoinColumn(name = "usuario_id")
     public Usuario getUsuario() {
         return profissional;
     }
@@ -126,7 +125,7 @@ public class Agenda implements Serializable {
     }
 
     @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um cliente)
-    @JoinColumn(name = "cliente_id") // Não pode ser nulo
+    @JoinColumn(name = "id_cliente") // Não pode ser nulo
     public Cliente getCliente() {
         return cliente;
     }

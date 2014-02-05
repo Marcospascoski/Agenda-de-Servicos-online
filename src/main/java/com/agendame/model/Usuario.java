@@ -41,7 +41,7 @@ public class Usuario implements Serializable {
     private List<Grupo> grupos = new ArrayList<>();
 
     @Id //Chave primária
-    @Column(name = "id")
+    @Column(name = "id_usuario")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
     public Long getId() {
         return id;

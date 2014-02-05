@@ -39,7 +39,7 @@ public class Horario implements Serializable {
     private Agenda agenda;
     
     @Id //Chave primaria
-    @Column(name = "id")
+    @Column(name = "id_horario")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //valor é gerado automaticamente
     public Long getId() {
         return id;
@@ -75,7 +75,7 @@ public class Horario implements Serializable {
 
     @NotNull //Não pode ser nulo
     @ManyToOne
-    @JoinColumn(name = "agenda_id")
+    @JoinColumn(name = "id_agenda")
     public Agenda getAgenda() {
         return agenda;
     }
