@@ -17,6 +17,7 @@ import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 import org.primefaces.event.ScheduleEntryMoveEvent;
 import org.primefaces.event.ScheduleEntryResizeEvent;
 import org.primefaces.event.SelectEvent;
@@ -46,7 +47,7 @@ public class AgendaBean implements Serializable {
 
     private Agenda agenda;
     private Servico servicoSelecionado;
-
+    private Date DataHoje;
     private List<Servico> servicosRaizes;
     private List<Agenda> agendasRaizes;
 
@@ -76,18 +77,14 @@ public class AgendaBean implements Serializable {
                 DefaultScheduleEvent evento = new DefaultScheduleEvent();
                 evento.setStyleClass(servicoSelecionado.getNome());
                 evento.setAllDay(a.isDiaTodo());
-                evento.setEndDate(a.getDataFim());
                 evento.setStartDate(a.getDataInicio());
-                evento.setTitle(a.getDescricao());
+                evento.setEndDate(a.getDataFim());
+                evento.setTitle(a.getObservacao());
                 evento.setData(a.getId());
-                evento.setEditable(true); 
+                evento.setEditable(true);
                 eventoModel.addEvent(evento);
             }
         }
-    }
-
-    public boolean isEditando() {
-        return this.agenda.getId() != null;
     }
 
     private void limpar() {
@@ -95,7 +92,7 @@ public class AgendaBean implements Serializable {
         this.servicoSelecionado = new Servico();
     }
 
-    public void isNovo(SelectEvent selectEvent) {
+    public void onDateSelect(SelectEvent selectEvent) {
 
         ScheduleEvent evento = new DefaultScheduleEvent("",
                 (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
@@ -106,7 +103,7 @@ public class AgendaBean implements Serializable {
         agenda.setDataFim(evento.getEndDate());
     }
 
-    public void isSelecionado(SelectEvent selectEvent) {
+    public void onEventSelect(SelectEvent selectEvent) {
 
         ScheduleEvent evento = (ScheduleEvent) selectEvent.getObject();
 
@@ -118,38 +115,38 @@ public class AgendaBean implements Serializable {
         }
     }
 
-    public void isMovido(ScheduleEntryMoveEvent event) {
+    public void onEventMove(ScheduleEntryMoveEvent evento) {
 
         for (Agenda a : agendasRaizes) {
-            if (a.getId() == (Long) event.getScheduleEvent().getData()) {
+            if (a.getId() == (Long) evento.getScheduleEvent().getData()) {
                 agenda = a;
                 break;
             }
         }
     }
 
-    public void isRedimensionado(ScheduleEntryResizeEvent event) {
+    public void onEventResize(ScheduleEntryResizeEvent evento) {
 
         for (Agenda a : agendasRaizes) {
-            if (a.getId() == (Long) event.getScheduleEvent().getData()) {
+            if (a.getId() == (Long) evento.getScheduleEvent().getData()) {
                 agenda = a;
                 break;
             }
         }
     }
 
+    public Date getDataHoje() {
+        return new Date();
+    }
+
+    @NotNull
     public List<Servico> getServicosRaizes() {
         return servicosRaizes;
     }
 
+    @NotNull
     public List<Agenda> getAgendasRaizes() {
         return agendasRaizes;
-    }
-
-    public void adicionaEnderecoAgenda() {
-        this.agenda.getServicos().add(this.servicoSelecionado);
-        servicoSelecionado.setAgenda(agenda);
-        this.servicoSelecionado = new Servico();
     }
 
     public ScheduleModel getEventoModel() {

@@ -21,7 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull; 
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -36,7 +36,7 @@ public class Agenda implements Serializable {
     private Long id;
     private Date dataInicio;
     private Date dataFim;
-    private String descricao;
+    private String observacao;
     private boolean diaTodo;
     private List<Horario> horarios = new ArrayList<>();
     private List<Servico> servicos = new ArrayList<>();
@@ -56,12 +56,12 @@ public class Agenda implements Serializable {
 
     @NotNull
     @Column(name = "descrisao_agenda")
-    public String getDescricao() {
-        return descricao;
+    public String getObservacao() {
+        return observacao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setObservacao(String observacao) {
+        this.observacao = observacao;
     }
 
     @Column(name = "diaTodo_agenda", nullable = false)
@@ -72,9 +72,9 @@ public class Agenda implements Serializable {
     public void setDiaTodo(boolean diaTodo) {
         this.diaTodo = diaTodo;
     }
-    
+
     @NotNull
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dataInicio_agenda")
     public Date getDataInicio() {
         return dataInicio;
@@ -85,7 +85,7 @@ public class Agenda implements Serializable {
     }
 
     @NotNull
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "dataFim_agenda")
     public Date getDataFim() {
         return dataFim;
@@ -117,11 +117,11 @@ public class Agenda implements Serializable {
 
     @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um usuario)
     @JoinColumn(name = "usuario_id")
-    public Usuario getUsuario() {
+    public Usuario getProfissional() {
         return profissional;
     }
 
-    public void setUsuario(Usuario profissional) {
+    public void setProfissional(Usuario profissional) {
         this.profissional = profissional;
     }
 

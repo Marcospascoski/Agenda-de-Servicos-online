@@ -7,19 +7,19 @@
 
     <h:form id="form">  
 
-        <p:messages id="mensagens" showDetail="true" />
+        <p:messages id="mensagens" autoUpdate="" closable="true" />
 
         <p:schedule widgetVar="agenda" value="#{AgendaBean.eventoModel}" style="margin-top: 20px" view="agendaWeek"
-                    aspectRatio="3" slotMinutes="60" draggable="false" timeZone="UTC" axisFormat="HH:mm" locale="pt">
+                    aspectRatio="3" slotMinutes="30" draggable="false" timeZone="UTC" axisFormat="HH:mm" locale="pt">
 
             <!-- aqui são os eventos -->
-            <p:ajax event="dateSelect" listener="#{AgendaBean.isNovo}" 
+            <p:ajax event="dateSelect" listener="#{AgendaBean.onDateSelect}" 
                     update="detalheAgendamento" oncomplete="agendaDialog.show()"/>  
-            <p:ajax event="eventSelect" listener="#{AgendaBean.isSelecionado}" 
+            <p:ajax event="eventSelect" listener="#{AgendaBean.onEventSelect}" 
                     update="detalheAgendamento" oncomplete="agendaDialog.show()"/>  
-            <p:ajax event="eventMove" listener="#{AgendaBean.isMovido}" 
+            <p:ajax event="eventMove" listener="#{AgendaBean.onEventMove}" 
                     update="mensagens" oncomplete="calendario.update()"/>  
-            <p:ajax event="eventResize" listener="#{AgendaBean.isRedimensionado}" 
+            <p:ajax event="eventResize" listener="#{AgendaBean.onEventResize}" 
                     update="mensagens" oncomplete="calendario.update()"/>  
 
         </p:schedule>
@@ -39,17 +39,19 @@
                                        itemValue="#{servico}" itemLabel="#{servico.nome}" />
                     </p:selectOneMenu>
 
-                    <p:outputLabel value="Descrição:" for="descricao" style="alignment-adjust: auto"/> 
-                    <p:inputText id="descricao" value="#{AgendaBean.agenda.descricao}" maxlength="60" style="width: 300px;"/>  
- 
-                     <h:outputLabel for="inicio" value="Início:" />  
-                     <p:calendar id="inicio" value="#{AgendaBean.agenda.dataInicio}" pattern="dd/MM/yyyy" locale="pt"/>
- 
-                     <p:outputLabel for="fim" value="Fim:" />  
-                     <p:calendar id="fim" value="#{AgendaBean.agenda.dataFim}" pattern="dd/MM/yyyy" locale="pt"/>
- 
-                     <p:outputLabel for="diaTodo" value="Dia todo?:" />  
-                     <p:selectBooleanCheckbox id="diaTodo" value="#{AgendaBean.agenda.diaTodo}" />
+                    <p:outputLabel value="Observação" for="descricao" style="alignment-adjust: auto"/> 
+                    <p:inputText id="descricao" value="#{AgendaBean.agenda.observacao}" maxlength="60" style="width: 300px;"/>  
+
+                    <h:outputLabel value="Data/Hora Inicial" for="inicio"  />  
+                    <p:calendar id="inicio" value="#{AgendaBean.agenda.dataInicio}" pattern="dd/MM/yyyy HH:mm" locale="pt" timeZone="UTC" readonlyInput="true" navigator="false"
+                                pages="1" mode="popup" mindate="#{AgendaBean.dataHoje}"/>
+
+                    <p:outputLabel  value="Data/Hora Final" for="fim" />  
+                    <p:calendar id="fim" value="#{AgendaBean.agenda.dataFim}"   pattern="dd/MM/yyyy HH:mm" locale="pt" timeZone="UTC" readonlyInput="true" navigator="false"
+                                pages="1" mode="popup" mindate="#{AgendaBean.dataHoje}"/>
+
+                    <p:outputLabel for="diaTodo" value="Dia todo?:" />  
+                    <p:selectBooleanCheckbox id="diaTodo" value="#{AgendaBean.agenda.diaTodo}" />
 
                 </p:panelGrid>  
 

@@ -9,6 +9,7 @@ import com.agendame.model.TipoPessoa;
 import com.agendame.model.Usuario;
 import java.util.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -53,14 +54,17 @@ public class Teste {
         System.out.println("Iniciando a criação das tabelas");
 
         Date date = new SimpleDateFormat("dd/MM/yyyy").parse("16/11/1984");
-
+        Date dateTempo = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse("16/11/1984 15:30:00");
+        long time = dateTempo.getTime();
+        Timestamp timestamp = new Timestamp(time);
+        
         cliente = new Cliente();
         cliente.setNome("Marcos Pascoski");
         cliente.setDocReceitaFederal("02569456160");
         cliente.setDataNascimento(date);
         cliente.setTelefone("6699193444");
         cliente.setTipo(TipoPessoa.FISICA);
-        
+
         usuarios = new ArrayList();
         usuarios.add(usuario);
 
@@ -72,7 +76,7 @@ public class Teste {
         usuario.setEmail("marcospascoski@gmail.com");
         usuario.setSenha("123456");
         usuario.setGrupos(grupos);
-        
+
         grupo = new Grupo();
         grupo.setNome("Administrador");
         grupo.setDescricao("Administrador da agenda");
@@ -89,33 +93,33 @@ public class Teste {
         endereco.setCliente(cliente);
 
         agenda = new Agenda();
-        agenda.setDataInicio(date);
-        agenda.setDataFim(date);
-        agenda.setDescricao("preciso colocar um novo hd no pc também");
-        agenda.setDiaTodo(false);
         agenda.setCliente(cliente);
-        
+        agenda.setDataInicio(timestamp);
+        agenda.setDataFim(timestamp);
+        agenda.setObservacao("preciso colocar um novo hd no pc também");
+        agenda.setDiaTodo(false);
+        agenda.setProfissional(usuario);
+
         servico = new Servico();
         servico.setNome("formatacaoc/backup");
         servico.setAgenda(agenda);
-        
+
         servicos = new ArrayList();
         servicos.add(servico);
-        
+
         horarios = new ArrayList();
         horarios.add(horario);
-       
+
         horario = new Horario();
-        horario.setHoraInicial(Time.valueOf("00:30:00"));
-        horario.setHoraFinal(Time.valueOf("00:30:00"));
+        horario.setHoraInicial(Time.valueOf("13:30:00"));
+        horario.setHoraFinal(Time.valueOf("14:00:00"));
         horario.setAgenda(agenda);
-        
+
         cliente.getEnderecos().add(endereco);
         grupo.getUsuarios().add(usuario);
         usuario.getGrupos().add(grupo);
         cliente.getAgendamentos().add(agenda);
         agenda.getHorarios().add(horario);
-        
 
         em.persist(cliente);
         em.persist(usuario);
