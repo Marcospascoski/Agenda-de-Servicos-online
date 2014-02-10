@@ -131,6 +131,7 @@ public class Teste {
 
         et.commit();
         System.out.println("Tabelas criadas com sucesso");
+        em.close();
     }
 
 }

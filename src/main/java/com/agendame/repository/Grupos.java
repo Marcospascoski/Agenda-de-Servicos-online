@@ -12,6 +12,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 
 /**
  *
@@ -38,6 +39,19 @@ public class Grupos implements Serializable{
     
     public Grupo porId(Long id) {
         return em.find(Grupo.class, id);
+    }
+    
+    public Grupo porNome(String nome) {
+        Grupo grupo = null;
+
+        try {
+            grupo = this.em.createQuery("from Grupo where lower(nome) = :nome", Grupo.class)
+                    .setParameter("nome", nome.toLowerCase()).getSingleResult();
+        } catch (NoResultException e) {
+            // nenhum usuário encontrado com o nome informado
+        }
+
+        return grupo;
     }
     
 }

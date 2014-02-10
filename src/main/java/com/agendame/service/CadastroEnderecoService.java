@@ -8,7 +8,6 @@ package com.agendame.service;
 
 import com.agendame.model.Endereco;
 import com.agendame.repository.Enderecos;
-import com.agendame.util.jpa.Transactional;
 import java.io.Serializable;
 import javax.inject.Inject;
 

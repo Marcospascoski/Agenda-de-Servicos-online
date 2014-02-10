@@ -7,7 +7,6 @@ package com.agendame.service;
 
 import com.agendame.model.Grupo;
 import com.agendame.repository.Grupos;
-import com.agendame.util.jpa.Transactional;
 import java.io.Serializable;
 import javax.inject.Inject;
 
@@ -23,6 +22,12 @@ public class CadastroGrupoService implements Serializable {
     private Grupos grupos;
 
     public Grupo salvar(Grupo grupo) {
+        Grupo grupoExistente = grupos.porNome(grupo.getNome());
+
+        if (grupoExistente != null && !grupoExistente.equals(grupo)) {
+            throw new NegocioException("Já existe um usuário com o E-mail informado.");
+        }
+        
         return grupos.guardar(grupo);
     }
 

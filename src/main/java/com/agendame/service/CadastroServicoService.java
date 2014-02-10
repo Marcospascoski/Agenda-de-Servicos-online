@@ -22,6 +22,11 @@ public class CadastroServicoService implements Serializable {
     private Servicos servicos;
 
     public Servico salvar(Servico servico) {
+        Servico servicoExistente = servicos.porNome(servico.getNome());
+        
+        if (servicoExistente != null && !servicoExistente.equals(servico)) {
+            throw new NegocioException("Ja existe um serviço com o nome informado.");
+        }
         return servicos.guardar(servico);
     }
 }

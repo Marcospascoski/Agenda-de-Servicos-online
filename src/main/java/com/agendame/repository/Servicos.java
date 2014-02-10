@@ -10,10 +10,12 @@ import com.agendame.model.Servico;
 import com.agendame.repository.filter.ServicoFilter;
 import com.agendame.service.NegocioException;
 import com.agendame.util.jpa.Transactional;
+import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -70,7 +72,16 @@ public class Servicos implements Serializable{
     }
     
     public Servico porNome(String nome){
-        return  em.find(Servico.class, nome);
+        Servico servico = null;
+
+        try {
+            servico = this.em.createQuery("from Servico where lower(nome) = :nome", Servico.class)
+                    .setParameter("nome", nome.toLowerCase()).getSingleResult();
+        } catch (NoResultException e) {
+            //Nenhum servico encontrado com o nome informado
+        }
+
+        return servico;
     }
     
 }

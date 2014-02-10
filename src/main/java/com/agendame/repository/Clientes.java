@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
@@ -36,7 +37,7 @@ public class Clientes implements Serializable {
     public Cliente guardar(Cliente cliente) {
         return em.merge(cliente);
     }
-    
+
     @Transactional
     public void remover(Cliente cliente) {
         try {
@@ -66,6 +67,19 @@ public class Clientes implements Serializable {
 
     public Cliente porId(Long id) {
         return em.find(Cliente.class, id);
+    }
+
+    public Cliente porDocReceitaFederal(String docReceitaFederal) {
+        Cliente cliente = null;
+
+        try {
+            cliente = this.em.createQuery("from Cliente where docReceitaFederal = :docReceitaFederal", Cliente.class)
+                    .setParameter("docReceitaFederal", docReceitaFederal).getSingleResult();
+        } catch (NoResultException e) {
+            // nenhum usuário encontrado com o e-mail informado
+        }
+
+        return cliente;
     }
 
 }
