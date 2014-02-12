@@ -38,7 +38,7 @@
             </p:panelGrid>
 
             <p:dataTable id="clientesTable" value="#{pesquisaClientesBean.clienteFiltrados}" var="cliente" style="margin-top: 20px" 
-                         emptyMessage="Nenhum Cliente encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+                         emptyMessage="Nenhum Cliente encontrado" rows="10" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 
 
                 <p:column headerText="Nome">
@@ -78,10 +78,9 @@
             <p:confirmDialog header="Exclusão de usuario" message="Tem certeza que deseja excluir este cliente
                              #{pesquisaClientesBean.clienteSelecionado.nome}?"
                              widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
-                <p:button value="Não" onclick="confirmacaoExclusao.hide();
-                        return false;"/>
+                <p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;"/>
                 <p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();" immediate="true"
-                                 action="#{pesquisaUsuariosBean.excluir}" process="@this"
+                                 action="#{pesquisaClientesBean.excluir}" process="@this"
                                  update=":frmPesquisa:clientesTable" />
             </p:confirmDialog>
 

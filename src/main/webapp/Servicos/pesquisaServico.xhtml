@@ -35,7 +35,7 @@
             </p:panelGrid>
 
             <p:dataTable id="servicosTable" value="#{pesquisaServicosBean.servicoFiltrados}" var="servico" style="margin-top: 20px" 
-                         emptyMessage="Nenhum serviço encontrado" rows="20" paginator="true" paginatorAlwaysVisible="false"  paginatorPosition="bottom">
+                         emptyMessage="Nenhum serviço encontrado" rows="10" paginator="true" paginatorAlwaysVisible="false"  paginatorPosition="bottom">
 
                 <p:column headerText="Código" style="width: 100px;">
                     <h:outputText value="#{servico.id}"/>
@@ -50,23 +50,22 @@
                         <f:param name="servico" value="#{servico.id}" />
                     </p:button>
 
-                    <p:commandButton ajax="true" icon="ui-icon-closethick" title="Excluir" oncomplete="confirmacaoExclusao.show()"
-                                     immediate="true" process="@this" update=":frmPesquisa:confirmacaoExclusaoDialog">
-                        <f:setPropertyActionListener value="#{servico}" target="#{pesquisaServicosBean.servicoSelecionado}"/>
+                    <p:commandButton icon="ui-icon-closethick" title="Excluir" oncomplete="confirmacaoExclusao.show();" process="@this"
+                                     update=":frmPesquisa:confirmacaoExclusaoDialog">
+                        <f:setPropertyActionListener target="#{pesquisaServicosBean.servicoSelecionado}" value="#{servico}" />
                     </p:commandButton>
                 </p:column>
-
             </p:dataTable>
 
-            <p:confirmDialog header="Exclusão de usuario" message="Tem certeza que deseja excluir este usuario
-                             #{pesquisaUsuariosBean.usuarioSelecionado.nome}?"
+            <p:confirmDialog header="Exclusão de usuario"
+                             message="Tem certeza que deseja excluir este servico #{pesquisaServicosBean.servicoSelecionado.nome}?"
                              widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
-                <p:button value="Não" onclick="confirmacaoExclusao.hide();
-                        return false;"/>
-                <p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();" immediate="true"
-                                 action="#{pesquisaUsuariosBean.excluir}" process="@this"
+                <p:button value="Não" onclick="confirmacaoExclusao.hide(); return false;" />
+                    <p:commandButton value="Sim" oncomplete="confirmacaoExclusao.hide();"
+                                     action="#{pesquisaServicosBean.excluir}" process="@this"
                                  update=":frmPesquisa:servicosTable" />
             </p:confirmDialog>
+
 
 
 

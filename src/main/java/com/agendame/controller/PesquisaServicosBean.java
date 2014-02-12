@@ -32,7 +32,7 @@ public class PesquisaServicosBean implements Serializable {
     private ServicoFilter filtro;
 
     private List<Servico> servicoFiltrados;
-    
+
     private Servico servicoSelecionado;
 
     public PesquisaServicosBean() {
@@ -41,14 +41,12 @@ public class PesquisaServicosBean implements Serializable {
     }
 
     public void excluir() {
-            servicos.remover(servicoSelecionado);
-            servicoFiltrados.remove(servicoSelecionado);
+        servicos.remover(servicoSelecionado);
+        servicoFiltrados.remove(servicoSelecionado);
 
-            FacesUtil.addInfoMessage("Servico " + servicoSelecionado.getNome()
-                    + " excluído com sucesso.");
-        }
-
-    
+        FacesUtil.addInfoMessage("Servico " + servicoSelecionado.getNome()
+                + " excluído com sucesso.");
+    }
 
     public void pesquisar() {
         servicoFiltrados = servicos.filtrados(filtro);

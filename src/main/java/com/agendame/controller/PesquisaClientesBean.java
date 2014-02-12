@@ -32,7 +32,7 @@ public class PesquisaClientesBean implements Serializable {
     private ClienteFilter filtro;
 
     private List<Cliente> clienteFiltrados;
-    
+
     private Cliente clienteSelecionado;
 
     public PesquisaClientesBean() {
@@ -41,12 +41,12 @@ public class PesquisaClientesBean implements Serializable {
     }
 
     public void excluir() {
-            clientes.remover(clienteSelecionado);
-            clienteFiltrados.remove(clienteSelecionado);
+        clientes.remover(clienteSelecionado);
+        clienteFiltrados.remove(clienteSelecionado);
 
-            FacesUtil.addInfoMessage("Cliente " + clienteSelecionado.getNome()
-                    + " excluído com sucesso.");
-        }
+        FacesUtil.addInfoMessage("Cliente " + clienteSelecionado.getNome()
+                + " excluído com sucesso.");
+    }
 
     public void pesquisar() {
         clienteFiltrados = clientes.filtrados(filtro);

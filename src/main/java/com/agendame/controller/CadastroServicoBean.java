@@ -9,9 +9,11 @@ import com.agendame.model.Agenda;
 import com.agendame.model.Servico;
 import com.agendame.repository.Agendas;
 import com.agendame.repository.Servicos;
+import com.agendame.repository.filter.ServicoFilter;
 import com.agendame.service.CadastroServicoService;
 import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -34,7 +36,7 @@ public class CadastroServicoBean implements Serializable {
     private Servicos servicos;
 
     private Servico servico;
-    
+
     private Servico servicoSelecionado;
 
     private List<Servico> servicosRaizes;
@@ -55,13 +57,6 @@ public class CadastroServicoBean implements Serializable {
         limpar();
         FacesUtil.addInfoMessage("Serviço Salvo com Sucesso");
     }
-    
-    public void excluir() {
-        servicosRaizes.remove(servicoSelecionado);
-        FacesUtil.addInfoMessage("Servico " + servico.getNome().toString()
-                + " excluído com sucesso.");
-    }
-    
 
     public boolean isEditando() {
         return this.servico.getId() != null;
@@ -91,5 +86,12 @@ public class CadastroServicoBean implements Serializable {
         this.cadastroServicoService = cadastroServicoService;
     }
 
-    
+    public Servico getServicoSelecionado() {
+        return servicoSelecionado;
+    }
+
+    public void setServicoSelecionado(Servico servicoSelecionado) {
+        this.servicoSelecionado = servicoSelecionado;
+    }
+
 }

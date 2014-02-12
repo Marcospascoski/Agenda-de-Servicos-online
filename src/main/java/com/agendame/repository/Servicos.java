@@ -43,7 +43,7 @@ public class Servicos implements Serializable{
     @Transactional
     public void remover(Servico servico) {
         try {
-            servico = porNome(servico.getNome());
+            servico = porId(servico.getId());
             em.remove(servico);
             em.flush();
         } catch (PersistenceException e) {
@@ -75,8 +75,8 @@ public class Servicos implements Serializable{
         Servico servico = null;
 
         try {
-            servico = this.em.createQuery("from Servico where lower(nome) = :nome", Servico.class)
-                    .setParameter("nome", nome.toLowerCase()).getSingleResult();
+            servico = this.em.createQuery("from Servico where nome = :nome", Servico.class)
+                    .setParameter("nome", nome).getSingleResult();
         } catch (NoResultException e) {
             //Nenhum servico encontrado com o nome informado
         }
