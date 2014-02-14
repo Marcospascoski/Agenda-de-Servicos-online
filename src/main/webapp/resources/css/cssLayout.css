@@ -68,11 +68,12 @@ footer{
 }
 
 .grid-login{
-    background-color: #f2f2f2;
+    background-color: #036fab;
     border-radius:  8px;
     border: 1px solid #ccc;
     margin-top: 8px;
     padding: 10px;
+    color: #ffffff;
 }
 
 .rotulo{
@@ -88,7 +89,7 @@ footer{
 }
 
 .fontebutlogin{
-    font-size: 26px;
+    font-size: 15px;
     font-weight:bold;
 }
 

@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="default.css"/>
+        <h:outputStylesheet library="css" name="cssLayout.css"/>
+        <title><ui:insert name="Titulo">AgendaMe - Agenda de Serviços online</ui:insert></title>
+    </h:head>
+
+    <h:body>
+
+        <f:metadata>
+            <f:viewParam name="dummy" />
+            <f:event listener="#{loginBean.preRender}" type="preRenderView" />
+        </f:metadata>
+
+        <div id="login-dailog">
+            <h1>Entrar na AgendaME</h1>
+
+            <h:form id="frm" prependId="false">
+
+                <p:growl id="messages"  />
+
+                <h:panelGrid columns="2" styleClass="grid-login">
+                    <f:facet name="header">Fazer Login</f:facet>
+                    <p:outputLabel value="E-mail" for="j_username"/>
+                    <p:inputText size="30" id="j_username" value="#{loginBean.email}" />
+
+                    <p:outputLabel value="Senha" for="j_password"/>
+                    <p:password size="30" id="j_password" />
+
+                    <f:facet name="footer">
+                        <p:commandButton value="Login" action="#{loginBean.login}" ajax="false" styleClass="fontebutlogin" />
+                    </f:facet>
+                </h:panelGrid>
+            </h:form>
+        </div>
+
+    </h:body>
+</html>
+

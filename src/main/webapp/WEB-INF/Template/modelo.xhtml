@@ -35,7 +35,7 @@
 
             <div style="float: right; margin-right: 110px;">
                 <span style="float: left; height: 30px; line-height: 30px; margin-right: 60px">
-                    Olá Usuario!
+                    Bem-vindo #{seguranca.nomeUsuario}!
                 </span>
 
                 <h:form style=" display: inline-block">
@@ -52,7 +52,7 @@
                         </p:submenu>
 
                         <p:submenu label="Opções">
-                            <p:menuitem value="Configuração" icon="ui-icon-gear" outcome="/Agenda/configuracaoAgenda"/>
+                            <p:menuitem value="Configuração" icon="ui-icon-gear" outcome="/Agendamentos/configuracaoAgenda"/>
                             <p:separator/>
                             <p:menuitem value="Sair" icon="ui-icon-power" url="/j_spring_security_logout"/>
                         </p:submenu>
