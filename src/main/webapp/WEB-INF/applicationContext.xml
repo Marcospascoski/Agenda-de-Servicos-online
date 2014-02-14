@@ -14,7 +14,7 @@
     
     <http auto-config="false" use-expressions="true">
         <intercept-url pattern="/home.xhtml" access="isAuthenticated()" />
-        <intercept-url pattern="/Agendamentos/**" access="hasAnyRole('ADMINISTRADORES', 'PROFISSIONAL', 'CLIENTES')" />
+        <intercept-url pattern="/Agendamentos/**" access="hasAnyRole('ADMINISTRADORES', 'PROFISSIONAIS', 'CLIENTES')" />
         <intercept-url pattern="/Clientes/**" access="hasAnyRole('ADMINISTRADORES')" />
         <intercept-url pattern="/Servicos/**" access="hasAnyRole('ADMINISTRADORES')" />
         <intercept-url pattern="/Usuarios/**" access="hasAnyRole('ADMINISTRADORES')" />
