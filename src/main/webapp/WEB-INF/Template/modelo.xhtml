@@ -41,7 +41,7 @@
                 <h:form style=" display: inline-block">
                     <p:menubar styleClass="menu-sistema">
 
-                        <p:menuitem value="Agendamento" outcome="/Agenda/agendamento"/>
+                        <p:menuitem value="Agendamentos" outcome="/Agendamentos/cadastroAgendamento"/>
 
                         <p:submenu label="Cadastros">
                             <p:menuitem value="Clientes" icon="ui-icon-person" outcome="/Clientes/cadastroCliente"/>
@@ -54,7 +54,7 @@
                         <p:submenu label="Opções">
                             <p:menuitem value="Configuração" icon="ui-icon-gear" outcome="/Agenda/configuracaoAgenda"/>
                             <p:separator/>
-                            <p:menuitem value="Sair" icon="ui-icon-power"/>
+                            <p:menuitem value="Sair" icon="ui-icon-power" url="/j_spring_security_logout"/>
                         </p:submenu>
                     </p:menubar>
                 </h:form>
