@@ -8,16 +8,36 @@
            
     <beans:bean id="appUserDetailsService" class="com.agendame.security.AppUserDetailsService" />
      
+    <beans:bean id="exceptionTranslationFilter" class="org.springframework.security.web.access.ExceptionTranslationFilter">
+        <beans:property name="accessDeniedHandler" ref="jsfAccessDeniedHandler"/>
+        <beans:property name="authenticationEntryPoint" ref="authenticationEntryPoint"/>
+    </beans:bean>
+	
+    <beans:bean id="jsfAccessDeniedHandler" class="com.agendame.security.JsfAccessDeniedHandler">
+        <beans:property name="loginPath" value="/acessoNegado.xhtml" />
+        <beans:property name="contextRelative" value="true" />
+    </beans:bean>
+	
+    <beans:bean id="authenticationEntryPoint" class="com.agendame.security.JsfLoginUrlAuthenticationEntryPoint">
+        <beans:property name="loginFormUrl" value="/login.xhtml"/>
+        <beans:property name="redirectStrategy" ref="jsfRedirectStrategy" />
+    </beans:bean>
+	
+    <beans:bean id="jsfRedirectStrategy" class="com.agendame.security.JsfRedirectStrategy"/>
+    
     <http pattern="/login.xhtml" security="none" />
     <http pattern="/erro.xhtml" security="none" />
     <http pattern="/javax.faces.resource/**" security="none" />
     
     <http auto-config="false" use-expressions="true">
+        <custom-filter ref="exceptionTranslationFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+        
         <intercept-url pattern="/home.xhtml" access="isAuthenticated()" />
-        <intercept-url pattern="/Agendamentos/**" access="hasAnyRole('ADMINISTRADORES', 'PROFISSIONAIS', 'CLIENTES')" />
-        <intercept-url pattern="/Clientes/**" access="hasAnyRole('ADMINISTRADORES')" />
-        <intercept-url pattern="/Servicos/**" access="hasAnyRole('ADMINISTRADORES')" />
-        <intercept-url pattern="/Usuarios/**" access="hasAnyRole('ADMINISTRADORES')" />
+        <intercept-url pattern="/acessoNegado.xhtml" access="isAuthenticated()" />
+        <intercept-url pattern="/Agendamentos/cadastroAgendamento.xhtml" access="hasAnyRole('ADMINISTRADORES', 'PROFISSIONAIS', 'CLIENTES')" />
+        <intercept-url pattern="/Clientes/**" access="hasAnyRole('ADMINISTRADORES', 'PROFISSIONAIS')" />
+        <intercept-url pattern="/Servicos/**" access="hasAnyRole('ADMINISTRADORES', 'PROFISSIONAIS')" />
+        <intercept-url pattern="/Usuarios/**" access="hasAnyRole('ADMINISTRADORES', 'PROFISSIONAIS')" />
         <intercept-url pattern="/**" access="denyAll" />
                 
         <form-login login-page="/login.xhtml" authentication-failure-url="/login.xhtml?invalid=true" 

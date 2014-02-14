@@ -73,7 +73,8 @@ public class Clientes implements Serializable {
         Cliente cliente = null;
 
         try {
-            cliente = this.em.createQuery("from Cliente where docReceitaFederal = :docReceitaFederal", Cliente.class)
+            cliente = this.em.createQuery("from Cliente"
+                    + " where docReceitaFederal = :docReceitaFederal", Cliente.class)
                     .setParameter("docReceitaFederal", docReceitaFederal).getSingleResult();
         } catch (NoResultException e) {
             // nenhum usuário encontrado com o e-mail informado
@@ -82,4 +83,10 @@ public class Clientes implements Serializable {
         return cliente;
     }
 
+    public List<Cliente> porNome(String nome) {
+		return this.em.createQuery("from Cliente " +
+				"where upper(nome) like :nome", Cliente.class)
+				.setParameter("nome", nome.toUpperCase() + "%")
+				.getResultList();
+	}
 }

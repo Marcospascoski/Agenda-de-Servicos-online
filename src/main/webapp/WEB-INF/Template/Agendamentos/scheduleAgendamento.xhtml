@@ -9,17 +9,17 @@
 
         <p:messages id="mensagens" autoUpdate="" closable="true" />
 
-        <p:schedule widgetVar="agenda" value="#{AgendaBean.eventoModel}" style="margin-top: 20px" view="agendaWeek"
+        <p:schedule widgetVar="agenda" value="#{cadastroAgendamentoBean.eventoModel}" style="margin-top: 20px" view="agendaWeek"
                     aspectRatio="3" slotMinutes="30" draggable="false" timeZone="UTC" axisFormat="HH:mm" locale="pt">
 
             <!-- aqui são os eventos -->
-            <p:ajax event="dateSelect" listener="#{AgendaBean.onDateSelect}" 
+            <p:ajax event="dateSelect" listener="#{cadastroAgendamentoBean.onDateSelect}" 
                     update="detalheAgendamento" oncomplete="agendaDialog.show()"/>  
-            <p:ajax event="eventSelect" listener="#{AgendaBean.onEventSelect}" 
+            <p:ajax event="eventSelect" listener="#{cadastroAgendamentoBean.onEventSelect}" 
                     update="detalheAgendamento" oncomplete="agendaDialog.show()"/>  
-            <p:ajax event="eventMove" listener="#{AgendaBean.onEventMove}" 
+            <p:ajax event="eventMove" listener="#{cadastroAgendamentoBean.onEventMove}" 
                     update="mensagens" oncomplete="calendario.update()"/>  
-            <p:ajax event="eventResize" listener="#{AgendaBean.onEventResize}" 
+            <p:ajax event="eventResize" listener="#{cadastroAgendamentoBean.onEventResize}" 
                     update="mensagens" oncomplete="calendario.update()"/>  
 
         </p:schedule>
@@ -32,32 +32,46 @@
 
                 <p:panelGrid columns="2" styleClass="semBorda">  
 
+
+                    <p:outputLabel value="Profissinal" for="profissional"/>
+                    <p:selectOneMenu id="profissional" value="#{cadastroAgendamentoBean.agenda.profissional}" >
+                        <f:selectItem itemLabel="Selecione" />
+                        <f:selectItems value="#{cadastroAgendamentoBean.profissionais}" var="profissional"
+                                       itemValue="#{profissional}" itemLabel="#{profissional.nome}" />
+                    </p:selectOneMenu>
+
+                    <p:outputLabel value="Cliente" for="cliente"/>
+                    <p:autoComplete id="cliente" size="40" dropdown="true" 
+                                    value="#{cadastroAgendamentoBean.agenda.cliente}" completeMethod="#{cadastroAgendamentoBean.completarCliente}"
+                                    var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true"/>
+
+
                     <p:outputLabel value="Serviço" for="servico" /> 
-                    <p:selectOneMenu id="servico" value="#{AgendaBean.servicoSelecionado}">
+                    <p:selectOneMenu id="servico" value="#{cadastroAgendamentoBean.servicoSelecionado}">
                         <f:selectItem itemLabel="Selecione o serviço" />
-                        <f:selectItems value="#{AgendaBean.servicosRaizes}" var="servico"
+                        <f:selectItems value="#{cadastroAgendamentoBean.servicosRaizes}" var="servico"
                                        itemValue="#{servico}" itemLabel="#{servico.nome}" />
                     </p:selectOneMenu>
 
                     <p:outputLabel value="Observação" for="descricao" style="alignment-adjust: auto"/> 
-                    <p:inputText id="descricao" value="#{AgendaBean.agenda.observacao}" maxlength="60" style="width: 300px;"/>  
+                    <p:inputText id="descricao" value="#{cadastroAgendamentoBean.agenda.observacao}" maxlength="60" style="width: 300px;"/>  
 
                     <h:outputLabel value="Data/Hora Inicial" for="inicio"  />  
-                    <p:calendar id="inicio" value="#{AgendaBean.agenda.dataInicio}" pattern="dd/MM/yyyy HH:mm" locale="pt" timeZone="UTC" readonlyInput="true" navigator="false"
-                                pages="1" mode="popup" mindate="#{AgendaBean.dataHoje}"/>
+                    <p:calendar id="inicio" value="#{cadastroAgendamentoBean.agenda.dataInicio}" pattern="dd/MM/yyyy HH:mm" locale="pt" timeZone="UTC" readonlyInput="true" navigator="false"
+                                pages="1" mode="popup" mindate="#{cadastroAgendamentoBean.dataHoje}"/>
 
                     <p:outputLabel  value="Data/Hora Final" for="fim" />  
-                    <p:calendar id="fim" value="#{AgendaBean.agenda.dataFim}"   pattern="dd/MM/yyyy HH:mm" locale="pt" timeZone="UTC" readonlyInput="true" navigator="false"
-                                pages="1" mode="popup" mindate="#{AgendaBean.dataHoje}"/>
+                    <p:calendar id="fim" value="#{cadastroAgendamentoBean.agenda.dataFim}"   pattern="dd/MM/yyyy HH:mm" locale="pt" timeZone="UTC" readonlyInput="true" navigator="false"
+                                pages="1" mode="popup" mindate="#{cadastroAgendamentoBean.dataHoje}"/>
 
                     <p:outputLabel for="diaTodo" value="Dia todo?:" />  
-                    <p:selectBooleanCheckbox id="diaTodo" value="#{AgendaBean.agenda.diaTodo}" />
+                    <p:selectBooleanCheckbox id="diaTodo" value="#{cadastroAgendamentoBean.agenda.diaTodo}" />
 
                 </p:panelGrid>  
 
                 <p:separator/>
 
-                <p:commandButton value="Agendar" action="#{AgendaBean.salvar}" oncomplete="calendario.update() agendaDialog.hide();" update="mensagens @form"  />  
+                <p:commandButton value="Agendar" action="#{cadastroAgendamentoBean.salvar}" oncomplete="calendario.update() agendaDialog.hide();" update="mensagens @form"  />  
 
             </p:outputPanel>
 
