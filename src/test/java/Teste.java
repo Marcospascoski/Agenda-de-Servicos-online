@@ -32,7 +32,9 @@ public class Teste {
 
     private static Cliente cliente;
     private static Usuario usuario;
-    private static Grupo grupo;
+    private static Grupo grupo1;
+    private static Grupo grupo2;
+    private static Grupo grupo3;
     private static Endereco endereco;
     private static Servico servico;
     private static Horario horario;
@@ -69,7 +71,9 @@ public class Teste {
         usuarios.add(usuario);
 
         grupos = new ArrayList();
-        grupos.add(grupo);
+        grupos.add(grupo1);
+        grupos.add(grupo2);
+        grupos.add(grupo3);
 
         usuario = new Usuario();
         usuario.setNome("Marcos");
@@ -77,10 +81,18 @@ public class Teste {
         usuario.setSenha("123456");
         usuario.setGrupos(grupos);
 
-        grupo = new Grupo();
-        grupo.setNome("Administrador");
-        grupo.setDescricao("Administrador da agenda");
-        grupo.setUsuarios(usuarios);
+        grupo1 = new Grupo();
+        grupo2 = new Grupo();
+        grupo3 = new Grupo();
+        grupo1.setNome("Administradores");
+        grupo2.setNome("Profissionais");
+        grupo3.setNome("Clientes");
+        grupo1.setDescricao("Administradores da agenda");
+        grupo2.setDescricao("Prodissionais da agenda");
+        grupo3.setDescricao("Clientes da agenda");
+        grupo1.setUsuarios(usuarios);
+        grupo2.setUsuarios(usuarios);
+        grupo3.setUsuarios(usuarios);
 
         endereco = new Endereco();
         endereco.setLogradouro("Rua Marilia");
@@ -116,14 +128,20 @@ public class Teste {
         horario.setAgenda(agenda);
 
         cliente.getEnderecos().add(endereco);
-        grupo.getUsuarios().add(usuario);
-        usuario.getGrupos().add(grupo);
+        grupo1.getUsuarios().add(usuario);
+        grupo2.getUsuarios().add(usuario);
+        grupo3.getUsuarios().add(usuario);
+        usuario.getGrupos().add(grupo1);
+        usuario.getGrupos().add(grupo2);
+        usuario.getGrupos().add(grupo3);
         cliente.getAgendamentos().add(agenda);
         agenda.getHorarios().add(horario);
 
         em.persist(cliente);
         em.persist(usuario);
-        em.persist(grupo);
+        em.persist(grupo1);
+        em.persist(grupo2);
+        em.persist(grupo3);
         em.persist(endereco);
         em.persist(horario);
         em.persist(servico);
