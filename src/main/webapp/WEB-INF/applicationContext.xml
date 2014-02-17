@@ -35,6 +35,7 @@
         <intercept-url pattern="/home.xhtml" access="isAuthenticated()" />
         <intercept-url pattern="/acessoNegado.xhtml" access="isAuthenticated()" />
         <intercept-url pattern="/Agendamentos/cadastroAgendamento.xhtml" access="hasAnyRole('ADMINISTRADORES', 'PROFISSIONAIS', 'CLIENTES')" />
+        <intercept-url pattern="/Agendamentos/configuracaoAgenda.xhtml" access="hasAnyRole('ADMINISTRADORES')" />
         <intercept-url pattern="/Clientes/**" access="hasAnyRole('ADMINISTRADORES', 'PROFISSIONAIS')" />
         <intercept-url pattern="/Servicos/**" access="hasAnyRole('ADMINISTRADORES', 'PROFISSIONAIS')" />
         <intercept-url pattern="/Usuarios/**" access="hasAnyRole('ADMINISTRADORES', 'PROFISSIONAIS')" />

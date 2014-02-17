@@ -21,6 +21,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.swing.text.MaskFormatter;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -86,6 +87,7 @@ public class CadastroClienteBean implements Serializable {
         return TipoPessoa.values();
     }
 
+    @NotNull
     public void adicionaEnderecoCliente() {
         this.cliente.getEnderecos().add(this.endereco);
         endereco.setCliente(cliente);

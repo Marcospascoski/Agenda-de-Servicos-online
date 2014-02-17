@@ -56,8 +56,6 @@ public class CadastroAgendamentoBean implements Serializable {
     private ScheduleModel eventoModel;
     private Date DataHoje;
 
-    @Produces
-    @AgendaEdicao
     private Agenda agenda;
     private Servico servicoSelecionado;
 

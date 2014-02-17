@@ -34,16 +34,16 @@
 
 
                     <p:outputLabel value="Profissinal" for="profissional"/>
-                    <p:selectOneMenu id="profissional" value="#{cadastroAgendamentoBean.agenda.profissional}" >
+                    <p:selectOneMenu id="profissional" value="#{cadastroAgendamentoBean.agenda.profissional}" disabled="#{not seguranca.agendaSelecioneProfissional}" >
                         <f:selectItem itemLabel="Selecione" />
                         <f:selectItems value="#{cadastroAgendamentoBean.profissionais}" var="profissional"
                                        itemValue="#{profissional}" itemLabel="#{profissional.nome}" />
                     </p:selectOneMenu>
 
-                    <p:outputLabel value="Cliente" for="cliente"/>
+                    <p:outputLabel value="Cliente" for="cliente" />
                     <p:autoComplete id="cliente" size="40" dropdown="true" 
                                     value="#{cadastroAgendamentoBean.agenda.cliente}" completeMethod="#{cadastroAgendamentoBean.completarCliente}"
-                                    var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true"/>
+                                    var="cliente" itemLabel="#{cliente.nome}" itemValue="#{cliente}" forceSelection="true" disabled="#{not seguranca.agendaSelecioneCliente}"/>
 
 
                     <p:outputLabel value="Serviço" for="servico" /> 

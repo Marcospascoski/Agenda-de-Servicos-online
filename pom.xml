@@ -113,7 +113,6 @@
             <artifactId>spring-security-config</artifactId>
             <version>3.1.4.RELEASE</version>
         </dependency>
-        
         <!-- Java EE 6-->
         <dependency>
             <groupId>javax</groupId>
@@ -139,7 +138,7 @@
     </build>
 
     <repositories>
-        <!-- RepositÃ³rio do Primefaces -->    
+        <!-- Repositório do Primefaces -->    
         <repository>
             <url>http://repository.primefaces.org/</url>
             <id>PrimeFaces-maven-lib</id>

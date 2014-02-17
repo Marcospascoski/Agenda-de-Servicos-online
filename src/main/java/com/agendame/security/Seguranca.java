@@ -1,7 +1,9 @@
 package com.agendame.security;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -9,6 +11,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 @Named
 @RequestScoped
 public class Seguranca {
+
+    @Inject
+    private ExternalContext externalContext;
 
     public String getNomeUsuario() {
         String nome = null;
@@ -32,6 +37,22 @@ public class Seguranca {
         }
 
         return usuario;
+    }
+
+    public boolean isCadastroPermitido() {
+        return externalContext.isUserInRole("ADMINISTRADORES") || externalContext.isUserInRole("PROFISSIONAIS");
+    }
+    
+    public  boolean isConfigAgendaPermitido(){
+         return externalContext.isUserInRole("ADMINISTRADORES");
+    }
+    
+    public boolean isAgendaSelecioneProfissional(){
+        return externalContext.isUserInRole("ADMINISTRADORES") || externalContext.isUserInRole("CLIENTES");
+    }
+    
+    public boolean isAgendaSelecioneCliente(){
+        return externalContext.isUserInRole("ADMINISTRADORES") || externalContext.isUserInRole("PROFISSIONAIS");
     }
 
 }

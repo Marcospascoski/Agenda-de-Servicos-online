@@ -44,15 +44,15 @@
                         <p:menuitem value="Agendamentos" outcome="/Agendamentos/cadastroAgendamento"/>
 
                         <p:submenu label="Cadastros">
-                            <p:menuitem value="Clientes" icon="ui-icon-person" outcome="/Clientes/cadastroCliente" disabled=""/>
+                            <p:menuitem value="Clientes" icon="ui-icon-person" outcome="/Clientes/cadastroCliente" disabled="#{not seguranca.cadastroPermitido}"/>
                             <p:separator/>
-                            <p:menuitem value="Usuários" icon="ui-icon-person" outcome="/Usuarios/cadastroUsuario"/>
+                            <p:menuitem value="Usuários" icon="ui-icon-person" outcome="/Usuarios/cadastroUsuario" disabled="#{not seguranca.cadastroPermitido}"/>
                             <p:separator/>
-                            <p:menuitem value="Serviços" icon="ui-icon-flag" outcome="/Servicos/cadastroServico"/>
+                            <p:menuitem value="Serviços" icon="ui-icon-flag" outcome="/Servicos/cadastroServico" disabled="#{not seguranca.cadastroPermitido}"/>
                         </p:submenu>
 
                         <p:submenu label="Opções">
-                            <p:menuitem value="Configuração" icon="ui-icon-gear" outcome="/Agendamentos/configuracaoAgenda"/>
+                            <p:menuitem value="Configuração" icon="ui-icon-gear" outcome="/Agendamentos/configuracaoAgenda" disabled="#{not seguranca.configAgendaPermitido}"/>
                             <p:separator/>
                             <p:menuitem value="Sair" icon="ui-icon-power" url="/j_spring_security_logout"/>
                         </p:submenu>

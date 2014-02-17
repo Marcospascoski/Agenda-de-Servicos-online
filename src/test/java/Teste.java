@@ -72,8 +72,8 @@ public class Teste {
         grupos.add(grupo);
         
         usuario = new Usuario();
-        usuario.setNome("Marcos1");
-        usuario.setEmail("marcospascoski1@gmail.com");
+        usuario.setNome("Marcos");
+        usuario.setEmail("marcospascoski@gmail.com");
         usuario.setSenha("123456");
         usuario.setGrupos(grupos);
 
