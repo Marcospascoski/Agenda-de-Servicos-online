@@ -61,10 +61,14 @@ footer{
     margin: 0px 170px 0px 170px;
 }
 
+#logo-login{
+    margin-top: 100px; 
+}
+
 #login-dailog{
     width: 290px;
     margin: auto;
-    margin-top: 150px;
+    margin-top: 20px;
 }
 
 .grid-login{

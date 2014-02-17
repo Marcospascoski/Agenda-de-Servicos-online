@@ -20,8 +20,15 @@
             <f:event listener="#{loginBean.preRender}" type="preRenderView" />
         </f:metadata>
 
+        <div id="logo-login">
+            <h:link outcome="/home">
+                <h:graphicImage library="images" name="logoLogin.png" style="display: block; margin-left: auto; margin-right: auto"/>
+            </h:link>
+        </div>
+
         <div id="login-dailog">
-            <h1>Sistema na AgendaMe</h1>
+
+            <h1>Logar</h1>
 
             <h:form id="frm" prependId="false">
 

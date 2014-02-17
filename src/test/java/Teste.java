@@ -32,16 +32,14 @@ public class Teste {
 
     private static Cliente cliente;
     private static Usuario usuario;
-    private static Grupo grupo1;
-    private static Grupo grupo2;
-    private static Grupo grupo3;
+    private static Grupo grupo;
     private static Endereco endereco;
     private static Servico servico;
     private static Horario horario;
     private static List<Servico> servicos;
     private static List<Horario> horarios;
     private static List<Grupo> grupos;
-    private static List<Usuario> usuarios;
+    private static List<Usuario> usuarios;;
     private static Agenda agenda;
 
     public static void main(String[] args) throws ParseException {
@@ -62,38 +60,28 @@ public class Teste {
         
         cliente = new Cliente();
         cliente.setNome("Marcos Pascoski");
-        cliente.setDocReceitaFederal("02569456160");
+        cliente.setDocReceitaFederal("789.456.123-78");
         cliente.setDataNascimento(date);
-        cliente.setTelefone("6699193444");
-        cliente.setTipo(TipoPessoa.FISICA);
-
+        cliente.setTelefone("(66)9919-3444");
+        cliente.setTipo(TipoPessoa.JURIDICA);
+        
         usuarios = new ArrayList();
         usuarios.add(usuario);
 
         grupos = new ArrayList();
-        grupos.add(grupo1);
-        grupos.add(grupo2);
-        grupos.add(grupo3);
-
+        grupos.add(grupo);
+        
         usuario = new Usuario();
-        usuario.setNome("Marcos");
-        usuario.setEmail("marcospascoski@gmail.com");
+        usuario.setNome("Marcos1");
+        usuario.setEmail("marcospascoski1@gmail.com");
         usuario.setSenha("123456");
         usuario.setGrupos(grupos);
 
-        grupo1 = new Grupo();
-        grupo2 = new Grupo();
-        grupo3 = new Grupo();
-        grupo1.setNome("Administradores");
-        grupo2.setNome("Profissionais");
-        grupo3.setNome("Clientes");
-        grupo1.setDescricao("Administradores da agenda");
-        grupo2.setDescricao("Prodissionais da agenda");
-        grupo3.setDescricao("Clientes da agenda");
-        grupo1.setUsuarios(usuarios);
-        grupo2.setUsuarios(usuarios);
-        grupo3.setUsuarios(usuarios);
-
+        grupo = new Grupo();
+        grupo.setNome("Administradores");
+        grupo.setDescricao("Administradores da agenda");
+        grupo.setUsuarios(usuarios);
+        
         endereco = new Endereco();
         endereco.setLogradouro("Rua Marilia");
         endereco.setNumero("70");
@@ -127,21 +115,15 @@ public class Teste {
         horario.setHoraFinal(Time.valueOf("14:00:00"));
         horario.setAgenda(agenda);
 
-        cliente.getEnderecos().add(endereco);
-        grupo1.getUsuarios().add(usuario);
-        grupo2.getUsuarios().add(usuario);
-        grupo3.getUsuarios().add(usuario);
-        usuario.getGrupos().add(grupo1);
-        usuario.getGrupos().add(grupo2);
-        usuario.getGrupos().add(grupo3);
+        cliente.getEnderecos().add(endereco);;
+        grupo.getUsuarios().add(usuario);
+        usuario.getGrupos().add(grupo);
         cliente.getAgendamentos().add(agenda);
         agenda.getHorarios().add(horario);
 
         em.persist(cliente);
         em.persist(usuario);
-        em.persist(grupo1);
-        em.persist(grupo2);
-        em.persist(grupo3);
+        em.persist(grupo);
         em.persist(endereco);
         em.persist(horario);
         em.persist(servico);
