@@ -72,6 +72,7 @@ public class CadastroUsuarioBean implements Serializable {
         gruposRaizes = null;
     }
 
+    
     @NotNull
     public Grupo getGrupoSelecionado() {
         return grupoSelecionado;

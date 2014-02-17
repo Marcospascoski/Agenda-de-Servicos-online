@@ -18,11 +18,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PreRemove;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotBlank; 
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -87,7 +88,9 @@ public class Usuario implements Serializable {
     }
 
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "usuario_has_grupos", joinColumns = {@JoinColumn(name = "usuario_id")}, inverseJoinColumns = {@JoinColumn(name = "grupo_id")})
+    @JoinTable(name = "usuario_has_grupos", joinColumns = {
+        @JoinColumn(name = "usuario_id")}, inverseJoinColumns = {
+        @JoinColumn(name = "grupo_id")})
     public List<Grupo> getGrupos() {
         return grupos;
     }
@@ -116,6 +119,11 @@ public class Usuario implements Serializable {
             return false;
         }
         return true;
+    }
+
+    @PreRemove
+    private void removerGrupos() {
+        getGrupos().clear();
     }
 
 }
