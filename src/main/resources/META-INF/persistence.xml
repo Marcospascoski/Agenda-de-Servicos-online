@@ -6,7 +6,6 @@
     <class>com.agendame.model.Cliente</class>
     <class>com.agendame.model.Endereco</class>
     <class>com.agendame.model.Grupo</class>
-    <class>com.agendame.model.Horario</class>
     <class>com.agendame.model.Servico</class>
     <class>com.agendame.model.Usuario</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>

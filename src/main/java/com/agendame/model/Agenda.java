@@ -38,8 +38,7 @@ public class Agenda implements Serializable {
     private Date dataFim;
     private String observacao;
     private boolean diaTodo;
-    private List<Horario> horarios = new ArrayList<>();
-    private List<Servico> servicos = new ArrayList<>();
+    private Servico servico;
     private Usuario profissional;
     private Cliente cliente;
 
@@ -95,24 +94,15 @@ public class Agenda implements Serializable {
         this.dataFim = dataFim;
     }
 
-    @NotNull //Não pode ser nulo
-    @OneToMany(mappedBy = "agenda", targetEntity = Horario.class, cascade = CascadeType.ALL)
-    public List<Horario> getHorarios() {
-        return horarios;
+    //@NotNull //Não pode ser nulo
+    @ManyToOne
+    @JoinColumn(name = "servico_id")
+    public Servico getServico() {
+        return servico;
     }
 
-    public void setHorarios(List<Horario> horarios) {
-        this.horarios = horarios;
-    }
-
-    @NotNull //Não pode ser nulo
-    @OneToMany(mappedBy = "agenda", targetEntity = Servico.class, cascade = CascadeType.ALL)
-    public List<Servico> getServicos() {
-        return servicos;
-    }
-
-    public void setServicos(List<Servico> servicos) {
-        this.servicos = servicos;
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 
     @ManyToOne // relacionamento muitos para um (tabela possui muitos agendamentos, e cada agendamento possui um usuario)

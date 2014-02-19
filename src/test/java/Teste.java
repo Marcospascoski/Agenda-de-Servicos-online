@@ -3,12 +3,10 @@ import com.agendame.model.Agenda;
 import com.agendame.model.Cliente;
 import com.agendame.model.Endereco;
 import com.agendame.model.Grupo;
-import com.agendame.model.Horario;
 import com.agendame.model.Servico;
 import com.agendame.model.TipoPessoa;
 import com.agendame.model.Usuario;
 import java.util.Date;
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,11 +33,10 @@ public class Teste {
     private static Grupo grupo;
     private static Endereco endereco;
     private static Servico servico;
-    private static Horario horario;
     private static List<Servico> servicos;
-    private static List<Horario> horarios;
     private static List<Grupo> grupos;
-    private static List<Usuario> usuarios;;
+    private static List<Usuario> usuarios;
+    ;
     private static Agenda agenda;
 
     public static void main(String[] args) throws ParseException {
@@ -57,20 +54,20 @@ public class Teste {
         Date dateTempo = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse("16/11/1984 15:30:00");
         long time = dateTempo.getTime();
         Timestamp timestamp = new Timestamp(time);
-        
+
         cliente = new Cliente();
         cliente.setNome("Marcos Pascoski");
         cliente.setDocReceitaFederal("789.456.123-78");
         cliente.setDataNascimento(date);
         cliente.setTelefone("(66)9919-3444");
         cliente.setTipo(TipoPessoa.JURIDICA);
-        
+
         usuarios = new ArrayList();
         usuarios.add(usuario);
 
         grupos = new ArrayList();
         grupos.add(grupo);
-        
+
         usuario = new Usuario();
         usuario.setNome("Marcos");
         usuario.setEmail("marcospascoski@gmail.com");
@@ -81,7 +78,7 @@ public class Teste {
         grupo.setNome("Administradores");
         grupo.setDescricao("Administradores da agenda");
         grupo.setUsuarios(usuarios);
-        
+
         endereco = new Endereco();
         endereco.setLogradouro("Rua Marilia");
         endereco.setNumero("70");
@@ -92,6 +89,12 @@ public class Teste {
         endereco.setUf("MT");
         endereco.setCliente(cliente);
 
+        servico = new Servico();
+        servico.setNome("formatacaoc/backup");
+
+        servicos = new ArrayList();
+        servicos.add(servico);
+
         agenda = new Agenda();
         agenda.setCliente(cliente);
         agenda.setDataInicio(timestamp);
@@ -99,33 +102,18 @@ public class Teste {
         agenda.setObservacao("preciso colocar um novo hd no pc também");
         agenda.setDiaTodo(false);
         agenda.setProfissional(usuario);
+        agenda.setServico(servico);
 
-        servico = new Servico();
-        servico.setNome("formatacaoc/backup");
-        servico.setAgenda(agenda);
-
-        servicos = new ArrayList();
-        servicos.add(servico);
-
-        horarios = new ArrayList();
-        horarios.add(horario);
-
-        horario = new Horario();
-        horario.setHoraInicial(Time.valueOf("13:30:00"));
-        horario.setHoraFinal(Time.valueOf("14:00:00"));
-        horario.setAgenda(agenda);
-
-        cliente.getEnderecos().add(endereco);;
+        cliente.getEnderecos().add(endereco);
         grupo.getUsuarios().add(usuario);
         usuario.getGrupos().add(grupo);
         cliente.getAgendamentos().add(agenda);
-        agenda.getHorarios().add(horario);
+        servico.getAgendas().add(agenda);
 
         em.persist(cliente);
         em.persist(usuario);
         em.persist(grupo);
         em.persist(endereco);
-        em.persist(horario);
         em.persist(servico);
         em.persist(agenda);
 

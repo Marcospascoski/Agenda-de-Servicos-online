@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.agendame.repository;
 
 import com.agendame.model.Servico;
 import com.agendame.repository.filter.ServicoFilter;
 import com.agendame.service.NegocioException;
 import com.agendame.util.jpa.Transactional;
-import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Inject;
@@ -28,18 +26,18 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Marcos-TSI
  */
-public class Servicos implements Serializable{
-    
+public class Servicos implements Serializable {
+
     private static final long serialVersionUID = 1L;
-    
+
     @Inject
     private EntityManager em;
-    
+
     @Transactional
-    public Servico guardar(Servico servico){
-         return em.merge(servico);
+    public Servico guardar(Servico servico) {
+        return em.merge(servico);
     }
-    
+
     @Transactional
     public void remover(Servico servico) {
         try {
@@ -50,12 +48,12 @@ public class Servicos implements Serializable{
             throw new NegocioException("Servico não pode ser excluído.");
         }
     }
-    
-    public List<Servico> raizes(){
-        return em.createQuery("from Servico", Servico.class).getResultList();    
+
+    public List<Servico> raizes() {
+        return em.createQuery("from Servico", Servico.class).getResultList();
     }
-    
-        @SuppressWarnings("unchecked")
+
+    @SuppressWarnings("unchecked")
     public List<Servico> filtrados(ServicoFilter filtro) {
         Session session = em.unwrap(Session.class);
         Criteria criteria = session.createCriteria(Servico.class);
@@ -70,8 +68,8 @@ public class Servicos implements Serializable{
     public Servico porId(Long id) {
         return em.find(Servico.class, id);
     }
-    
-    public Servico porNome(String nome){
+
+    public Servico porNome(String nome) {
         Servico servico = null;
 
         try {
@@ -83,5 +81,5 @@ public class Servicos implements Serializable{
 
         return servico;
     }
-    
+
 }

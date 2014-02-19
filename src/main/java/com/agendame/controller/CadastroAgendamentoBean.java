@@ -18,7 +18,7 @@ import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.enterprise.inject.Produces;
+import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -54,9 +54,11 @@ public class CadastroAgendamentoBean implements Serializable {
     private AgendaService AgendaService;
 
     private ScheduleModel eventoModel;
-    private Date DataHoje;
+    private ScheduleEvent event = new DefaultScheduleEvent();
 
     private Agenda agenda;
+    private Usuario usuario;
+    private Servico servico;
     private Servico servicoSelecionado;
 
     private List<Usuario> profissionais;
@@ -67,10 +69,31 @@ public class CadastroAgendamentoBean implements Serializable {
         limpar();
     }
 
+    public void addEvent(ActionEvent actionEvent) {
+        salvar();
+    }
+
     public void salvar() {
-        this.AgendaService.salvar(this.agenda);
-        limpar();
-        FacesUtil.addInfoMessage("Agenda Salvo com Sucesso");
+        if (event.getId() == null) {
+            if (agenda.getDataInicio().getTime() <= agenda.getDataFim().getTime()) {
+                System.out.println("Novo Evento");
+                eventoModel.addEvent(event);
+                agenda.setServico(servico);
+                this.AgendaService.salvar(this.agenda);
+                limpar();
+                FacesUtil.addInfoMessage("Agendamento salvo com sucesso");
+            } else {
+                //a data de inicio nao pode ser maior que a data final
+            }
+        } else {
+            System.out.println("Atualiza evento");
+            eventoModel.updateEvent(event);
+            agenda.setServico(servico);
+            this.AgendaService.salvar(this.agenda);
+            limpar();
+            FacesUtil.addInfoMessage("Agendamento atulizado com sucesso");
+        }
+        inicializar();
     }
 
     public void inicializar() {
@@ -79,7 +102,7 @@ public class CadastroAgendamentoBean implements Serializable {
             this.agenda = new Agenda();
             this.profissionais = usuarios.profissionais();
             eventoModel = new DefaultScheduleModel();
-            servicosRaizes = servicos.raizes();
+            this.servicosRaizes = servicos.raizes();
 
             //recupera a lista de eventos
             agendasRaizes = agendas.raizes();
@@ -114,10 +137,10 @@ public class CadastroAgendamentoBean implements Serializable {
         //recupera a data em que o usuario clicou
         agenda.setDataInicio(evento.getStartDate());
         agenda.setDataFim(evento.getEndDate());
+
     }
 
     public void onEventSelect(SelectEvent selectEvent) {
-
         ScheduleEvent evento = (ScheduleEvent) selectEvent.getObject();
 
         for (Agenda a : agendasRaizes) {
@@ -136,6 +159,7 @@ public class CadastroAgendamentoBean implements Serializable {
                 break;
             }
         }
+        salvar();
     }
 
     public void onEventResize(ScheduleEntryResizeEvent evento) {
@@ -146,14 +170,11 @@ public class CadastroAgendamentoBean implements Serializable {
                 break;
             }
         }
+        salvar();
     }
 
     public List<Cliente> completarCliente(String nome) {
         return this.clientes.porNome(nome);
-    }
-
-    public Date getDataHoje() {
-        return new Date();
     }
 
     public List<Usuario> getProfissionais() {
@@ -184,7 +205,23 @@ public class CadastroAgendamentoBean implements Serializable {
 
     public void setAgenda(Agenda agenda) {
         this.agenda = agenda;
+    }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    @NotNull
+    public Servico getServico() {
+        return servico;
+    }
+
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 
     public Servico getServicoSelecionado() {

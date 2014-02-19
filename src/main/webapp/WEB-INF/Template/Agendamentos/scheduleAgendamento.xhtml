@@ -6,21 +6,22 @@
 
 
     <h:form id="form">  
-
-        <p:messages id="mensagens" autoUpdate="" closable="true" />
+        
+        <p:messages id="mensagens" autoUpdate="true" closable="true" />
 
         <p:schedule widgetVar="agenda" value="#{cadastroAgendamentoBean.eventoModel}" style="margin-top: 20px" view="agendaWeek"
-                    aspectRatio="3" slotMinutes="30" draggable="false" timeZone="UTC" axisFormat="HH:mm" locale="pt">
+                    aspectRatio="3" slotMinutes="30" draggable="true" timeZone="UTC" axisFormat="HH:mm"
+                    firstHour="7" minTime="7am" maxTime="21pm"  timeFormat = "dd/MM HH:mm" locale="pt">
 
             <!-- aqui são os eventos -->
             <p:ajax event="dateSelect" listener="#{cadastroAgendamentoBean.onDateSelect}" 
                     update="detalheAgendamento" oncomplete="agendaDialog.show()"/>  
             <p:ajax event="eventSelect" listener="#{cadastroAgendamentoBean.onEventSelect}" 
-                    update="detalheAgendamento" oncomplete="agendaDialog.show()"/>  
+                    update="detalheAgendamento" oncomplete="agendaDialog.show()" disabled="#{not seguranca.agendaAjaxEventSelect}"/>  
             <p:ajax event="eventMove" listener="#{cadastroAgendamentoBean.onEventMove}" 
-                    update="mensagens" oncomplete="calendario.update()"/>  
+                    update="mensagens" oncomplete="calendario.update()" disabled="#{not seguranca.agendaAjaxMove}"/>  
             <p:ajax event="eventResize" listener="#{cadastroAgendamentoBean.onEventResize}" 
-                    update="mensagens" oncomplete="calendario.update()"/>  
+                    update="mensagens" oncomplete="calendario.update()" disabled="#{not seguranca.agendaAjaxResize}"/>  
 
         </p:schedule>
 
@@ -37,7 +38,7 @@
                     <p:selectOneMenu id="profissional" value="#{cadastroAgendamentoBean.agenda.profissional}" disabled="#{not seguranca.agendaSelecioneProfissional}" >
                         <f:selectItem itemLabel="Selecione" />
                         <f:selectItems value="#{cadastroAgendamentoBean.profissionais}" var="profissional"
-                                       itemValue="#{profissional}" itemLabel="#{profissional.nome}" />
+                                       itemValue="#{profissional}" itemLabel="#{profissional.nome}"/>
                     </p:selectOneMenu>
 
                     <p:outputLabel value="Cliente" for="cliente" />
@@ -58,11 +59,11 @@
 
                     <h:outputLabel value="Data/Hora Inicial" for="inicio"  />  
                     <p:calendar id="inicio" value="#{cadastroAgendamentoBean.agenda.dataInicio}" pattern="dd/MM/yyyy HH:mm" locale="pt" timeZone="UTC" readonlyInput="true" navigator="false"
-                                pages="1" mode="popup" mindate="#{cadastroAgendamentoBean.dataHoje}"/>
+                                pages="1" mode="popup"/>
 
                     <p:outputLabel  value="Data/Hora Final" for="fim" />  
                     <p:calendar id="fim" value="#{cadastroAgendamentoBean.agenda.dataFim}"   pattern="dd/MM/yyyy HH:mm" locale="pt" timeZone="UTC" readonlyInput="true" navigator="false"
-                                pages="1" mode="popup" mindate="#{cadastroAgendamentoBean.dataHoje}"/>
+                                pages="1" mode="popup" />
 
                     <p:outputLabel for="diaTodo" value="Dia todo?:" />  
                     <p:selectBooleanCheckbox id="diaTodo" value="#{cadastroAgendamentoBean.agenda.diaTodo}" />
@@ -76,6 +77,25 @@
             </p:outputPanel>
 
         </p:dialog>
+
+
+        <!-- <p:dialog widgetVar="agendaButDialog" 
+                   header="Você Deseja?"  width="220px" 
+                   resizable="false" modal="true">  
+ 
+             <p:outputPanel id="detalheButAgendamento">
+ 
+                 <p:panelGrid columns="1" styleClass="semBorda"> 
+                     <p:button value="Inciar o Atendimento" style="width:170px; text-align:left"/>  
+                     <p:button value="Encerrar Atendimento" style="width:170px; text-align:left"/>  
+                     <p:button value="Alterar Agendamento" style="width:170px; text-align:left"/>  
+                     <p:button value="Excluir Agendamento" style="width:170px; text-align:left"/>  
+                 </p:panelGrid>
+             </p:outputPanel>
+ 
+         </p:dialog>-->
+
+
 
 
     </h:form>  

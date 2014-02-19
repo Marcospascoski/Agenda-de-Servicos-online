@@ -42,17 +42,31 @@ public class Seguranca {
     public boolean isCadastroPermitido() {
         return externalContext.isUserInRole("ADMINISTRADORES") || externalContext.isUserInRole("PROFISSIONAIS");
     }
-    
-    public  boolean isConfigAgendaPermitido(){
-         return externalContext.isUserInRole("ADMINISTRADORES");
+
+    public boolean isConfigAgendaPermitido() {
+        return externalContext.isUserInRole("ADMINISTRADORES");
     }
-    
-    public boolean isAgendaSelecioneProfissional(){
+
+    public boolean isAgendaSelecioneProfissional() {
         return externalContext.isUserInRole("ADMINISTRADORES") || externalContext.isUserInRole("CLIENTES");
     }
-    
-    public boolean isAgendaSelecioneCliente(){
+
+    public boolean isAgendaSelecioneCliente() {
         return externalContext.isUserInRole("ADMINISTRADORES") || externalContext.isUserInRole("PROFISSIONAIS");
     }
+
+    public boolean isAgendaAjaxMove() {
+        return externalContext.isUserInRole("ADMINISTRADORES") || externalContext.isUserInRole("PROFISSIONAIS");
+    }
+
+    public boolean isAgendaAjaxResize() {
+        return externalContext.isUserInRole("ADMINISTRADORES") || externalContext.isUserInRole("PROFISSIONAIS");
+    }
+    
+    public boolean isAgendaAjaxEventSelect() {
+        return externalContext.isUserInRole("ADMINISTRADORES") || externalContext.isUserInRole("PROFISSIONAIS");
+    }
+    
+    
 
 }

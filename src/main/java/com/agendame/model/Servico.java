@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,7 +37,7 @@ public class Servico implements Serializable {
 
     private Long id;
     private String nome;
-    private Agenda agenda;
+    private List<Agenda> agendas = new ArrayList<>();
 
     @Id //Chave primária
     @Column(name = "id")
@@ -60,15 +61,14 @@ public class Servico implements Serializable {
         this.nome = nome;
     }
 
-    //@NotNull //Não pode ser nulo
-    @ManyToOne
-    @JoinColumn(name = "agenda_id")
-    public Agenda getAgenda() {
-        return agenda;
+    @NotNull //Não pode ser nulo
+    @OneToMany(mappedBy = "servico", targetEntity = Agenda.class, cascade = CascadeType.ALL)
+    public List<Agenda> getAgendas() {
+        return agendas;
     }
 
-    public void setAgenda(Agenda agenda) {
-        this.agenda = agenda;
+    public void setAgendas(List<Agenda> agendas) {
+        this.agendas = agendas;
     }
 
     @Override
