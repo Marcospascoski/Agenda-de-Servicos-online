@@ -48,6 +48,7 @@ public class CadastroUsuarioBean implements Serializable {
 
     public void salvar() {
         System.out.println("Grupo selecionado:" + grupoSelecionado.getDescricao());
+        adicionaGrupo();
         this.cadastroUsuarioService.salvar(this.usuario);
         
         limpar();

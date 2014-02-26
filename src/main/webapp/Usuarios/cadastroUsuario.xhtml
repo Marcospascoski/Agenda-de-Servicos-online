@@ -49,20 +49,19 @@
                 <p:outputLabel value="Senha" for="senha" />
                 <p:password id="senha" value="#{cadastroUsuarioBean.usuario.senha}" 
                             feedback="true" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"
-                            promptLabel="Informe uma senha" />
+                            promptLabel="Informe uma senha" 
+                            match="confirmacaoSenha" size="26"/>
 
-                
-            </p:panelGrid>
+                <p:outputLabel value="Confirme a senha" for="confirmacaoSenha" />
+                <p:password id="confirmacaoSenha" required="true" size="26"/>
 
-            <p:panelGrid columns="2" style="margin-top: 20px" styleClass="semBorda">
-                <p:selectOneMenu id="grupo" value="#{cadastroUsuarioBean.grupoSelecionado}">
+                <p:outputLabel value="Grupo" for="grupo" />
+                <p:selectOneMenu id="grupo" value="#{cadastroUsuarioBean.grupoSelecionado}" style="margin-top: 5px">
                     <f:selectItem itemLabel="Selecione o grupo" />
                     <f:selectItems value="#{cadastroUsuarioBean.gruposRaizes}" var="grupo"
                                    itemValue="#{grupo}" itemLabel="#{grupo.descricao}" />
                 </p:selectOneMenu>
 
-                <p:commandButton value="Adicionar Grupo" id="buttonGrupo" icon="ui-icon-plus" style="height: 27px; margin-left: -3px"
-                                 action="#{cadastroUsuarioBean.adicionaGrupo}"/>
             </p:panelGrid>
 
             <p:dataTable value="#{cadastroUsuarioBean.gruposRaizes}" var="grupo" style="margin-top: 3px" 
@@ -73,16 +72,16 @@
                 <p:column headerText="Grupo" style="text-align: left">
                     <h:outputText value="#{grupo.nome}"/>
                 </p:column>
-                
+
                 <p:column headerText="Descrição" style="text-align: left">
                     <h:outputText value="#{grupo.descricao}"/>
                 </p:column>
 
             </p:dataTable>
-            
-            
-            
-            
+
+
+
+
         </h:form>
 
     </ui:define>
