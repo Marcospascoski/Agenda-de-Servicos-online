@@ -6,12 +6,12 @@
 
 
     <h:form id="form">  
-        
+
         <p:messages id="mensagens" autoUpdate="true" closable="true" />
 
         <p:schedule widgetVar="agenda" value="#{cadastroAgendamentoBean.eventoModel}" style="margin-top: 20px" view="agendaWeek"
                     aspectRatio="3" slotMinutes="30" draggable="true" timeZone="UTC" axisFormat="HH:mm"
-                    firstHour="7" minTime="7am" maxTime="21pm"  timeFormat = "dd/MM HH:mm" locale="pt">
+                    firstHour="7" minTime="7am" maxTime="21pm"  timeFormat ="dd/MM HH:mm " locale="pt">
 
             <!-- aqui são os eventos -->
             <p:ajax event="dateSelect" listener="#{cadastroAgendamentoBean.onDateSelect}" 
@@ -48,7 +48,7 @@
 
 
                     <p:outputLabel value="Serviço" for="servico" /> 
-                    <p:selectOneMenu id="servico" value="#{cadastroAgendamentoBean.servicoSelecionado}">
+                    <p:selectOneMenu id="servico" value="#{cadastroAgendamentoBean.agenda.servico}">
                         <f:selectItem itemLabel="Selecione o serviço" />
                         <f:selectItems value="#{cadastroAgendamentoBean.servicosRaizes}" var="servico"
                                        itemValue="#{servico}" itemLabel="#{servico.nome}" />

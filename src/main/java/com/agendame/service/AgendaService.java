@@ -26,6 +26,11 @@ public class AgendaService implements Serializable{
     private Agendas agendas;
     
     public Agenda salvar(Agenda agenda) {
+        
+        if (agenda.getDataFim().getTime() <= agenda.getDataInicio().getTime()) {
+            throw new NegocioException("Data Final tem que ser maior que a data Inicial");
+        }
+        
         return agendas.guardar(agenda);
     }
     

@@ -108,8 +108,7 @@ public class Teste {
         grupo.getUsuarios().add(usuario);
         usuario.getGrupos().add(grupo);
         cliente.getAgendamentos().add(agenda);
-        servico.getAgendas().add(agenda);
-
+        
         em.persist(cliente);
         em.persist(usuario);
         em.persist(grupo);
