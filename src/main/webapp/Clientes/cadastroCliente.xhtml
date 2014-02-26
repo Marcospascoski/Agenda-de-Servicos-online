@@ -101,10 +101,6 @@
                         <f:setPropertyActionListener target="#{cadastroClienteBean.endereco}" value="#{enderecos}"/>
                     </p:commandButton>
 
-                    <p:commandButton icon="ui-icon-closethick" title="excluir" oncomplete="confirmacaoExclusaoCliente.show()"
-                                     process="@this" update=":frmCliente:confirmacaoExclusaoDialog">
-                        <f:setPropertyActionListener target="#{cadastroClienteBean.enderecoSelecionado}" value="#{enderecos}"/>
-                    </p:commandButton>
                 </p:column>
 
             </p:dataTable>
