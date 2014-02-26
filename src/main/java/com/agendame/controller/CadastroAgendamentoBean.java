@@ -78,7 +78,7 @@ public class CadastroAgendamentoBean implements Serializable {
             eventoModel.updateEvent(event);
             this.AgendaService.salvar(this.agenda);
             limpar();
-            FacesUtil.addInfoMessage("Agendamento atulizado com sucesso");
+            FacesUtil.addInfoMessage("Agendamento atualizado com sucesso");
         } else {
             System.out.println("Novo Evento");
             eventoModel.addEvent(event);

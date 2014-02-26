@@ -9,6 +9,7 @@ package com.agendame.service;
 import com.agendame.model.Agenda;
 import com.agendame.repository.Agendas;
 import java.io.Serializable;
+import java.util.Calendar;
 import javax.inject.Inject;
 
 
@@ -26,6 +27,7 @@ public class AgendaService implements Serializable{
     private Agendas agendas;
     
     public Agenda salvar(Agenda agenda) {
+        Calendar data = Calendar.getInstance();
         
         if (agenda.getDataFim().getTime() <= agenda.getDataInicio().getTime()) {
             throw new NegocioException("Data Final tem que ser maior que a data Inicial");
