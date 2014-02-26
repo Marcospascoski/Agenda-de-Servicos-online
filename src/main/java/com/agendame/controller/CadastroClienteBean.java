@@ -10,18 +10,13 @@ import com.agendame.model.Endereco;
 import com.agendame.model.TipoPessoa;
 import com.agendame.repository.Enderecos;
 import com.agendame.service.CadastroClienteService;
-import com.agendame.service.NegocioException;
 import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
-import java.text.ParseException;
 import java.util.List;
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
-import javax.swing.text.MaskFormatter;
-import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -87,28 +82,11 @@ public class CadastroClienteBean implements Serializable {
         return TipoPessoa.values();
     }
 
-    @NotNull
     public void adicionaEnderecoCliente() {
         this.cliente.getEnderecos().add(this.endereco);
         endereco.setCliente(cliente);
         this.endereco = new Endereco();
     }
-
-    public void trocaMaskara(ValueChangeEvent evt){  
-        itemSelecionado.setValue(evt.getNewValue()); 
-        System.out.println(evt.getNewValue());
-        if(itemSelecionado.getValue() != null){ 
-            System.out.println(evt.getNewValue());
-            String tipo = itemSelecionado.getValue().toString();
-            TipoPessoa tipoPessoa = TipoPessoa.valueOf(tipo);
-            if (tipoPessoa.equals(tipoPessoa.JURIDICA.getDescricao())){    
-                retornaMaskara = "99.999.999/9999-99";     
-            } else {    
-                retornaMaskara = "999.999.999-99";    
-            }    
-        }   
-    }        
-    
     
     public String getRetornaMaskara() {
         return retornaMaskara;

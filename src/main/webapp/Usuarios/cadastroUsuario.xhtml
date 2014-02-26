@@ -50,10 +50,10 @@
                 <p:password id="senha" value="#{cadastroUsuarioBean.usuario.senha}" 
                             feedback="true" weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"
                             promptLabel="Informe uma senha" 
-                            match="confirmacaoSenha" size="26"/>
+                            match="confirmacaoSenha" style="width: 197px"/>
 
                 <p:outputLabel value="Confirme a senha" for="confirmacaoSenha" />
-                <p:password id="confirmacaoSenha" required="true" size="26"/>
+                <p:password id="confirmacaoSenha" required="true" style="width: 197px"/>
 
                 <p:outputLabel value="Grupo" for="grupo" />
                 <p:selectOneMenu id="grupo" value="#{cadastroUsuarioBean.grupoSelecionado}" style="margin-top: 5px">
