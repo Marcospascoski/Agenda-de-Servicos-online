@@ -52,7 +52,7 @@ public class CadastroUsuarioBean implements Serializable {
         this.cadastroUsuarioService.salvar(this.usuario);
         
         limpar();
-        FacesUtil.addInfoMessage("Usuario Salvo com Sucesso");
+        FacesUtil.addInfoMessage("Usuário Salvo com Sucesso");
     }
 
     public void inicializar() {
