@@ -10,7 +10,7 @@
         <p:messages id="mensagens" autoUpdate="true" closable="true" />
 
         <p:schedule widgetVar="agenda" value="#{cadastroAgendamentoBean.eventoModel}" style="margin-top: 20px" view="agendaWeek"
-                    aspectRatio="3" slotMinutes="30" draggable="true" timeZone="UTC" axisFormat="HH:mm"
+                    aspectRatio="3" slotMinutes="30" draggable="true" timeZone="GMT-3" axisFormat="HH:mm"
                     firstHour="7" minTime="7am" maxTime="21pm"  timeFormat ="dd/MM HH:mm " locale="pt">
 
             <!-- aqui são os eventos -->
@@ -58,11 +58,11 @@
                     <p:inputText id="descricao" value="#{cadastroAgendamentoBean.agenda.observacao}" maxlength="60" style="width: 300px;"/>  
 
                     <h:outputLabel value="Data/Hora Inicial" for="inicio"  />  
-                    <p:calendar id="inicio" value="#{cadastroAgendamentoBean.agenda.dataInicio}" pattern="dd/MM/yyyy HH:mm" locale="pt" timeZone="UTC" readonlyInput="true" navigator="false"
+                    <p:calendar id="inicio" value="#{cadastroAgendamentoBean.agenda.dataInicio}" pattern="dd/MM/yyyy HH:mm" locale="pt" timeZone="GMT-3" readonlyInput="true" navigator="false"
                                 pages="1" mode="popup"/>
 
                     <p:outputLabel  value="Data/Hora Final" for="fim" />  
-                    <p:calendar id="fim" value="#{cadastroAgendamentoBean.agenda.dataFim}"   pattern="dd/MM/yyyy HH:mm" locale="pt" timeZone="UTC" readonlyInput="true" navigator="false"
+                    <p:calendar id="fim" value="#{cadastroAgendamentoBean.agenda.dataFim}"   pattern="dd/MM/yyyy HH:mm" locale="pt" timeZone="GMT-3" readonlyInput="true" navigator="false"
                                 pages="1" mode="popup" />
 
                     <p:outputLabel for="diaTodo" value="Dia todo?:" />  
