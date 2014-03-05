@@ -70,13 +70,11 @@ public class CadastroAgendamentoBean implements Serializable {
 
     public void salvar() {
         if (agenda.getId() != null) {
-            System.out.println("Atualiza evento");
             eventoModel.updateEvent(event);
             this.AgendaService.salvar(this.agenda);
             limpar();
             FacesUtil.addInfoMessage("Agendamento atualizado com sucesso");
         } else {
-            System.out.println("Novo Evento");
             eventoModel.addEvent(event);
             AgendaService.salvar(this.agenda);
             limpar();
