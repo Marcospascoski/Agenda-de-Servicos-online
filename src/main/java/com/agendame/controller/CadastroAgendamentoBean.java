@@ -18,7 +18,6 @@ import com.agendame.util.jsf.FacesUtil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.faces.event.ActionEvent;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -68,9 +67,6 @@ public class CadastroAgendamentoBean implements Serializable {
         limpar();
     }
 
-    public void addEvent(ActionEvent actionEvent) {
-        salvar();
-    }
 
     public void salvar() {
         if (agenda.getId() != null) {
