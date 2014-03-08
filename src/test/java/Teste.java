@@ -36,7 +36,6 @@ public class Teste {
     private static List<Servico> servicos;
     private static List<Grupo> grupos;
     private static List<Usuario> usuarios;
-    ;
     private static Agenda agenda;
 
     public static void main(String[] args) throws ParseException {
