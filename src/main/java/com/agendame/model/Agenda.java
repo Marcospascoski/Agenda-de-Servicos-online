@@ -54,7 +54,7 @@ public class Agenda implements Serializable {
     }
 
     @NotNull
-    @Column(name = "descrisao_agenda")
+    @Column(name = "descricao")
     public String getObservacao() {
         return observacao;
     }
@@ -63,7 +63,7 @@ public class Agenda implements Serializable {
         this.observacao = observacao;
     }
 
-    @Column(name = "diaTodo_agenda", nullable = false)
+    @Column(name = "dia_todo", nullable = false)
     public boolean isDiaTodo() {
         return diaTodo;
     }
@@ -74,7 +74,7 @@ public class Agenda implements Serializable {
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "dataInicio_agenda")
+    @Column(name = "data_inicio")
     public Date getDataInicio() {
         return dataInicio;
     }
@@ -85,7 +85,7 @@ public class Agenda implements Serializable {
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "dataFim_agenda")
+    @Column(name = "data_fim")
     public Date getDataFim() {
         return dataFim;
     }

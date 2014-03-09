@@ -81,7 +81,7 @@ public class Cliente implements Serializable {
 
     @NotBlank
     @Size(max = 18, min = 11) //Tamanho Máximo de 18 caracteres
-    @Column(nullable = false, length = 18)// não pode ser nulo, aceita até 18 caracteres
+    @Column(nullable = false, name = "doc_receita_federal", length = 18)// não pode ser nulo, aceita até 18 caracteres
     public String getDocReceitaFederal() {
         return docReceitaFederal;
     }
